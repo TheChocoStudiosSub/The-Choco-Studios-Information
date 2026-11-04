@@ -103,11 +103,11 @@ const requiredFiles = [
 ];
 
 const productPageFiles = [
+  "products/tcs-linkguard.html",
   "products/choco-ai.html",
   "products/choco-ai-help-center.html",
   "products/kasirkita.html",
   "products/chocoscan.html",
-  "products/tcs-umkm-stock-sales-tracker.html",
   "products/chocobot-guardian.html",
   "products/privacy-guardian.html"
 ];
