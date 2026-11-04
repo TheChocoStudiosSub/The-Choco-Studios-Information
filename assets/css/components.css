@@ -137,3 +137,14 @@ h3 { margin: 0; font-size: 15px; letter-spacing: -.3px; line-height: 1.4; }
     will-change: auto;
   }
 }
+
+/* Distinct product marks for TCS ecosystem entries */
+.product-logo{display:grid;place-items:center;width:54px;height:54px;flex:0 0 54px;border:1px solid rgba(151,174,255,.22);border-radius:15px;background:linear-gradient(145deg,#1b2942,#241f3c);color:#b9cbff}
+.product-logo svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.product-logo svg .solid{fill:currentColor;stroke:none}
+.product-logo-help{color:#a8eee5;background:linear-gradient(145deg,#142f31,#1d2a43)}
+.product-logo-cash{color:#ffd0a1;background:linear-gradient(145deg,#38251f,#322138)}
+.product-logo-scan{color:#a8f0dd;background:linear-gradient(145deg,#14322c,#1d2e43)}
+.product-logo-stock{color:#c7edaa;background:linear-gradient(145deg,#1c3325,#203c39)}
+.product-logo-bot{color:#d0c3ff;background:linear-gradient(145deg,#252044,#202b48)}
+.product-logo-privacy{color:#f0dcae;background:linear-gradient(145deg,#382f20,#292444)}
