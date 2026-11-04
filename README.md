@@ -28,7 +28,7 @@ Panduan kontribusi: https://the-choco-studios-official.vercel.app/bergabung/
 ## Hosting
 
 - Situs resmi: https://the-choco-studios-official.vercel.app/
-- Pusat informasi: https://the-choco-studios-information.vercel.app/
+- Pusat informasi: https://tcs-information-hub.vercel.app/
 - Help Center: https://choco-ai-help-center.vercel.app/
 - Choco AI: https://choco-ai-independent-seven.vercel.app/
 
