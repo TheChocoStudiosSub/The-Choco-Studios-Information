@@ -148,3 +148,5 @@ h3 { margin: 0; font-size: 15px; letter-spacing: -.3px; line-height: 1.4; }
 .product-logo-stock{color:#c7edaa;background:linear-gradient(145deg,#1c3325,#203c39)}
 .product-logo-bot{color:#d0c3ff;background:linear-gradient(145deg,#252044,#202b48)}
 .product-logo-privacy{color:#f0dcae;background:linear-gradient(145deg,#382f20,#292444)}
+
+.product-logo-linkguard{background:linear-gradient(145deg,#102638,#08131f);border-color:rgba(216,173,85,.42)}
