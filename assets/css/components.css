@@ -104,3 +104,36 @@ h3 { margin: 0; font-size: 15px; letter-spacing: -.3px; line-height: 1.4; }
 .footer-group a { color: #929eb4; font-size: 11px; }
 .footer-group a:hover { color: #edf1fa; }
 .footer-bottom { color: #7f8ba3; font-size: 10px; line-height: 1.7; }
+
+
+/* Editorial motion: restrained movement, never blocks content. */
+.motion-reveal {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition:
+    opacity 720ms cubic-bezier(.2,.7,.2,1) var(--reveal-delay, 0ms),
+    transform 720ms cubic-bezier(.2,.7,.2,1) var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.motion-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.hero-content, .hero-route-panel {
+  animation: tcs-hero-enter 900ms cubic-bezier(.2,.7,.2,1) both;
+}
+.hero-route-panel { animation-delay: 110ms; }
+.founder-profile-link { margin-top: 12px; }
+@keyframes tcs-hero-enter {
+  from { opacity: 0; transform: translate3d(0, 20px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion-reveal, .hero-content, .hero-route-panel {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+    will-change: auto;
+  }
+}
