@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b14">
+  <meta name="description" content="TCS LinkGuard adalah pemeriksa manual tautan dan kualitas halaman website dari The Choco Studios. Pelajari fitur, batas pemindaian, privasi, arsitektur, dan status pra-produksi.">
+  <meta name="author" content="Hasby Prasetya Saprudin">
+  <link rel="canonical" href="https://the-choco-studio-information.netlify.app/products/tcs-linkguard.html">
+  <meta property="og:site_name" content="The Choco Studios">
+  <meta property="og:title" content="TCS LinkGuard — TCS Developer Tools">
+  <meta property="og:description" content="Pemeriksa manual tautan dan kualitas halaman website. Status demo fungsional dan pra-produksi.">
+  <meta property="og:image" content="https://the-choco-studios-official.vercel.app/logos/tcs-linkguard.svg">
+  <meta property="og:image:alt" content="Logo resmi TCS LinkGuard">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="id_ID">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TCS LinkGuard — TCS Developer Tools">
+  <meta name="twitter:description" content="Pemeriksa manual tautan dan kualitas halaman website. Status demo fungsional dan pra-produksi.">
+  <meta name="twitter:image" content="https://the-choco-studios-official.vercel.app/logos/tcs-linkguard.svg">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/product-pages.css">
+  <title>TCS LinkGuard — TCS Developer Tools | The Choco Studios</title>
+</head>
+<body class="product-detail-page">
+  <a class="skip-link" href="#main">Lewati ke konten utama</a>
+  <header class="detail-header">
+    <div class="detail-header-inner">
+      <a class="detail-brand" href="../index.html" aria-label="The Choco Studios, beranda">
+        <span class="detail-brand-mark">TCS</span>
+        <span>The Choco Studios</span>
+      </a>
+      <nav class="detail-nav" aria-label="Navigasi">
+        <a href="../index.html">Beranda TCS</a>
+        <a href="../index.html#products">Produk &amp; karya</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="detail-main">
+    <nav class="detail-breadcrumbs" aria-label="Breadcrumb">
+      <a href="../index.html">Beranda</a><span aria-hidden="true">/</span><a href="../index.html#products">Produk &amp; karya</a><span aria-hidden="true">/</span><span aria-current="page">TCS LinkGuard</span>
+    </nav>
+    <section class="detail-hero" aria-labelledby="product-title">
+      <div>
+        <img class="detail-product-logo" src="https://the-choco-studios-official.vercel.app/logos/tcs-linkguard.svg" alt="Logo resmi TCS LinkGuard" width="96" height="76">
+        <p class="detail-eyebrow">TCS Developer Tools · Pemeriksaan kualitas website</p>
+        <h1 id="product-title">TCS LinkGuard</h1>
+        <p class="detail-lead">Alat pemeriksa manual untuk membantu pemilik website, pengembang, dan tim kecil menemukan tautan atau sumber daya yang bermasalah serta sinyal dasar kualitas halaman sebelum ditemukan pengunjung.</p>
+        <div class="detail-status-line">
+          <span class="detail-status-badge is-development">Demo fungsional · Pra-produksi</span>
+          <span class="detail-release-note">Belum diposisikan sebagai layanan monitoring otomatis.</span>
+        </div>
+      </div>
+      <aside class="detail-status-card" aria-label="Ringkasan status produk">
+        <p class="card-label">Status publik</p>
+        <strong>Pra-produksi</strong>
+        <p>Antarmuka dan pemindai manual telah dikembangkan. Pengujian end-to-end, hasil pemindaian pada berbagai website, serta kesiapan rilis publik masih perlu diverifikasi.</p>
+      </aside>
+    </section>
+    <section class="detail-section" id="overview" aria-labelledby="overview-title">
+      <p class="detail-kicker">Gambaran produk</p>
+      <h2 id="overview-title">Pemeriksaan website yang terarah</h2>
+      <p>LinkGuard menjalankan pemindaian manual dengan cakupan terbatas. Produk ini mengumpulkan temuan tentang tautan, gambar, pengalihan, sitemap, dan beberapa sinyal kualitas halaman agar pemilik website dapat meninjau masalah yang perlu diperbaiki.</p>
+      <div class="detail-columns">
+        <article class="detail-info-card"><h3>Kesehatan tautan dan sumber daya</h3><p>Memeriksa tautan internal dan eksternal, gambar, rantai redirect, respons HTTP, serta halaman same-origin yang ditemukan melalui sitemap yang tercantum di robots.txt.</p></article>
+        <article class="detail-info-card"><h3>Sinyal kualitas halaman</h3><p>Menandai judul halaman atau meta description yang hilang, halaman tanpa H1, gambar tanpa atribut alt, tautan tanpa label yang dapat dikenali, dan judul duplikat dalam satu pemindaian.</p></article>
+      </div>
+    </section>
+    <section class="detail-section" aria-labelledby="limits-title">
+      <p class="detail-kicker">Cakupan dan batasan</p>
+      <h2 id="limits-title">Batas pemindaian saat ini</h2>
+      <ul class="detail-list">
+        <li>Maksimal 12 halaman HTML per pemindaian.</li>
+        <li>Maksimal 48 target tautan dan gambar unik per pemindaian.</li>
+        <li>Kedalaman crawler maksimal 2 tingkat.</li>
+        <li>Batas waktu permintaan sekitar 5 detik per target dan anggaran eksekusi sekitar 42 detik.</li>
+        <li>Pembatasan penggunaan awal: 3 pemindaian per alamat IP dalam 10 menit.</li>
+        <li>LinkGuard tidak melakukan autentikasi, melewati CAPTCHA, paywall, atau kontrol akses, dan tidak menjalankan JavaScript halaman.</li>
+      </ul>
+      <div class="detail-note">Temuan kualitas halaman bukan skor SEO dan tidak menjamin peringkat mesin pencari. LinkGuard juga bukan pemindai keamanan atau sertifikasi keamanan. Hanya pindai website yang dimiliki atau yang secara eksplisit memberi izin.</div>
+    </section>
+    <section class="detail-section" aria-labelledby="privacy-title">
+      <p class="detail-kicker">Privasi dan laporan</p>
+      <h2 id="privacy-title">Riwayat tetap di browser</h2>
+      <ul class="detail-list">
+        <li>Temuan tautan dan gambar dapat diekspor sebagai CSV.</li>
+        <li>Hasil pemindaian lengkap, termasuk temuan kualitas halaman, dapat diekspor sebagai JSON.</li>
+        <li>Riwayat pemindaian terbaru disimpan secara lokal pada browser yang digunakan.</li>
+        <li>Pemindai manual tidak menyimpan laporan pemindaian sebagai arsip server-side.</li>
+        <li>Rate limiter menyimpan hash satu arah dari alamat IP untuk pencegahan penyalahgunaan.</li>
+      </ul>
+    </section>
+    <section class="detail-section" aria-labelledby="architecture-title">
+      <p class="detail-kicker">Arsitektur</p>
+      <h2 id="architecture-title">Dibangun sebagai alat web ringan</h2>
+      <div class="detail-columns">
+        <article class="detail-info-card"><h3>Antarmuka</h3><p>HTML, CSS, dan JavaScript statis yang disajikan melalui Vercel.</p></article>
+        <article class="detail-info-card"><h3>API pemindaian</h3><p>Supabase Edge Function dengan pembatasan permintaan, batas ukuran respons, timeout, validasi redirect, pemeriksaan DNS, dan aturan robots.txt.</p></article>
+      </div>
+    </section>
+    <section class="detail-section" aria-labelledby="governance-title">
+      <p class="detail-kicker">Lisensi dan tata kelola</p>
+      <h2 id="governance-title">Kode terbuka, identitas TCS tetap dilindungi</h2>
+      <p>Kode sumber TCS LinkGuard menggunakan lisensi Apache License 2.0. Lisensi kode tidak memberikan hak atas nama, logo, identitas visual, atau klaim status resmi The Choco Studios maupun TCS LinkGuard.</p>
+      <p>Kontribusi ditinjau sebelum digabungkan ke proyek resmi. Rilis dan pengumuman resmi diterbitkan melalui kanal yang dikendalikan The Choco Studios. Turunan harus menyatakan asalnya secara akurat dan tidak boleh menyamar sebagai rilis resmi TCS.</p>
+      <div class="detail-note">Fitur monitoring terjadwal, riwayat lintas perangkat, ruang kerja tim, dan laporan email otomatis belum dinyatakan tersedia sampai selesai dikembangkan dan diuji.</div>
+    </section>
+  </main>
+  <footer class="detail-footer">
+    <div class="detail-footer-inner">
+      <span>© The Choco Studios · TCS Developer Tools</span>
+      <span><a href="../index.html#catalog">Katalog karya</a> · <a href="mailto:thechocostudio@gmail.com?subject=Informasi%20TCS%20LinkGuard">Kontak TCS</a></span>
+    </div>
+  </footer>
+</body>
+</html>
