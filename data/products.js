@@ -1,18 +1,75 @@
 export const products = [
-  {"name":"Choco AI","category":"Asisten AI","symbol":"C","status":"Tersedia","description":"Asisten AI berbasis browser untuk percakapan, template pertanyaan, pengaturan, dan personalisasi. Versi web saat ini dapat diakses melalui Vercel.","productUrl":"https://choco-ai-independent-seven.vercel.app/","actionLabel":"Buka Choco AI","detailsUrl":"products/choco-ai.html"},
-  {"name":"Choco AI Help Center","category":"Pusat bantuan","symbol":"H","status":"Tersedia","description":"Pusat informasi dan panduan penggunaan produk Choco AI. Sara AI membantu pengunjung menemukan penjelasan berdasarkan artikel bantuan yang tersedia.","productUrl":"https://choco-ai-help-center.netlify.app/","actionLabel":"Buka Help Center","detailsUrl":"products/choco-ai-help-center.html"},
-  {"name":"KasirKita","category":"Aplikasi kasir","symbol":"K","status":"Dalam pengembangan","description":"Aplikasi kasir desktop Windows yang direncanakan membantu usaha kecil mencatat produk, stok, transaksi tunai, dan laporan penjualan.","detailsUrl":"products/kasirkita.html"},
-  {"name":"Chocobot Guardian","category":"Proyek perlindungan bot","symbol":"CG","status":"Dalam pengembangan","description":"Proyek yang mengawali perjalanan TCS pada 12 Desember 2023. Belum dirilis dan masih dikembangkan.","detailsUrl":"products/chocobot-guardian.html"},
-  {"name":"Privacy Guardian","category":"Proyek privasi Windows","symbol":"P","status":"Detail menyusul","description":"Konsep aplikasi desktop Windows untuk membantu pengguna memahami Privacy Policy, Terms of Service, Cookie Policy, dan dokumen kebijakan terkait.","detailsUrl":"products/privacy-guardian.html"},
-  {"name":"ChocoScan","category":"Alat pemeriksaan tautan","symbol":"CS","status":"Dalam pengembangan","description":"Produk yang dirancang membantu pengguna melakukan pemeriksaan awal terhadap tautan dan memahami indikasi risiko. Status fitur dan rilis mengikuti pengumuman resmi TCS.","detailsUrl":"products/chocoscan.html"},
-  {"name":"TCS UMKM Stock & Sales Tracker","category":"Manajemen UMKM","symbol":"ST","status":"Dalam pengembangan","description":"Konsep alat pencatatan stok dan penjualan untuk membantu usaha mikro, kecil, dan menengah memantau persediaan serta merangkum aktivitas penjualan.","detailsUrl":"products/tcs-umkm-stock-sales-tracker.html"},
-  {"name":"TCS Business Document Kit","category":"Dokumen bisnis","symbol":"BD","status":"Dalam pengembangan","description":"Paket dokumen dan template bisnis yang dirancang untuk membantu pengguna menyiapkan dokumen usaha dengan struktur yang lebih rapi dan konsisten.","detailsUrl":"products/tcs-business-document-kit.html"},
-  {"name":"TCS Professional CV Kit","category":"Karier dan CV","symbol":"CV","status":"Dalam pengembangan","description":"Paket template CV profesional untuk membantu pencari kerja menyusun informasi pengalaman, pendidikan, dan keterampilan secara jelas.","detailsUrl":"products/tcs-professional-cv-kit.html"},
-  {"name":"TCS Social Media Business Kit","category":"Konten bisnis","symbol":"SM","status":"Dalam pengembangan","description":"Paket materi dan template media sosial yang dirancang untuk mendukung kebutuhan promosi dan komunikasi bisnis.","detailsUrl":"products/tcs-social-media-business-kit.html"},
-  {"name":"TCS Business Presentation Kit","category":"Presentasi bisnis","symbol":"BP","status":"Dalam pengembangan","description":"Paket template presentasi untuk membantu penyusunan profil usaha, proposal, laporan, dan materi bisnis secara profesional.","detailsUrl":"products/tcs-business-presentation-kit.html"},
-  {"name":"TCS Finance Cashflow Pro","category":"Keuangan usaha","symbol":"FC","status":"Dalam pengembangan","description":"Konsep alat pencatatan arus kas untuk membantu usaha merangkum pemasukan, pengeluaran, dan gambaran keuangan secara terstruktur.","detailsUrl":"products/tcs-finance-cashflow-pro.html"},
-  {"name":"TCS UMKM Website Kit","category":"Website UMKM","symbol":"WK","status":"Dalam pengembangan","description":"Paket awal website yang dirancang untuk membantu UMKM membangun kehadiran online dengan struktur halaman bisnis yang mudah disesuaikan.","detailsUrl":"products/tcs-umkm-website-kit.html"},
-  {"name":"TCS Admin Dashboard UI Kit","category":"UI/UX","symbol":"UI","status":"Dalam pengembangan","description":"Kumpulan rancangan antarmuka dashboard admin yang ditujukan sebagai fondasi visual untuk proyek aplikasi dan panel pengelolaan.","detailsUrl":"products/tcs-admin-dashboard-ui-kit.html"},
-  {"name":"TCS Business Management System","category":"Manajemen bisnis","symbol":"BM","status":"Dalam pengembangan","description":"Konsep sistem pengelolaan bisnis untuk merangkum kebutuhan operasional usaha dalam satu alur kerja yang lebih terorganisasi.","detailsUrl":"products/tcs-business-management-system.html"},
-  {"name":"TCS Complete UMKM Suite","category":"Paket UMKM","symbol":"SU","status":"Dalam pengembangan","description":"Konsep paket terpadu untuk kebutuhan digital UMKM, dengan arah pengembangan yang menghubungkan beberapa alat pendukung usaha.","detailsUrl":"products/tcs-complete-umkm-suite.html"}
+  {
+    "name": "Choco AI",
+    "category": "Asisten AI",
+    "symbol": "C",
+    "logo": "ai",
+    "status": "Tersedia",
+    "description": "Asisten AI berbasis web yang menjadi representasi digital Choco dan bagian dari ekosistem layanan digital TCS.",
+    "productUrl": "https://choco-ai-independent-seven.vercel.app/",
+    "actionLabel": "Buka Choco AI",
+    "detailsUrl": "products/choco-ai.html"
+  },
+  {
+    "name": "Choco AI Help Center",
+    "category": "Pusat bantuan digital",
+    "symbol": "H",
+    "logo": "help",
+    "status": "Tersedia",
+    "description": "Pusat informasi dan panduan produk TCS dengan Sara sebagai asisten bantuan untuk membantu pengguna menemukan informasi.",
+    "productUrl": "https://choco-ai-help-center.netlify.app/",
+    "actionLabel": "Buka Help Center",
+    "detailsUrl": "products/choco-ai-help-center.html"
+  },
+  {
+    "name": "KasirKita",
+    "category": "Aplikasi kasir",
+    "symbol": "K",
+    "logo": "cash",
+    "status": "Dalam pengembangan",
+    "description": "Aplikasi kasir yang dirancang untuk membantu usaha mengelola produk, persediaan, transaksi, dan laporan penjualan.",
+    "productUrl": "https://github.com/chocoanakbaik/KasirKita",
+    "actionLabel": "Lihat proyek",
+    "detailsUrl": "products/kasirkita.html"
+  },
+  {
+    "name": "ChocoScan",
+    "category": "Pemeriksaan tautan",
+    "symbol": "CS",
+    "logo": "scan",
+    "status": "Dalam pengembangan",
+    "description": "Alat pemeriksaan awal tautan untuk membantu pengguna memahami indikator risiko pada alamat web.",
+    "productUrl": "https://github.com/chocoanakbaik/ChocoScan",
+    "actionLabel": "Lihat proyek",
+    "detailsUrl": "products/chocoscan.html"
+  },
+  {
+    "name": "TCS UMKM Stock & Sales Tracker",
+    "category": "Manajemen stok dan penjualan",
+    "symbol": "ST",
+    "logo": "stock",
+    "status": "Tersedia",
+    "description": "Aplikasi desktop untuk pencatatan persediaan dan penjualan UMKM dengan penyimpanan lokal.",
+    "productUrl": "https://github.com/TheChocoStudiosSub/TCS-UMKM-Stock-Sales-Tracker",
+    "actionLabel": "Lihat aplikasi",
+    "detailsUrl": "products/tcs-umkm-stock-sales-tracker.html"
+  },
+  {
+    "name": "Chocobot Guardian",
+    "category": "Proyek perlindungan bot",
+    "symbol": "CG",
+    "logo": "bot",
+    "status": "Proyek TCS",
+    "description": "Proyek awal yang menjadi bagian dari sejarah dan perjalanan pengembangan The Choco Studios. Belum ditawarkan sebagai produk penjualan.",
+    "detailsUrl": "products/chocobot-guardian.html"
+  },
+  {
+    "name": "Privacy Guardian",
+    "category": "Proyek privasi digital",
+    "symbol": "PG",
+    "logo": "privacy",
+    "status": "Proyek TCS",
+    "description": "Inisiatif pengembangan yang berfokus pada pemahaman dokumen kebijakan dan privasi digital. Belum ditawarkan sebagai produk penjualan.",
+    "detailsUrl": "products/privacy-guardian.html"
+  }
 ];
