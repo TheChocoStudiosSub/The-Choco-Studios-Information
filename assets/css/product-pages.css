@@ -211,3 +211,5 @@
 @media (prefers-reduced-motion: reduce) {
   .detail-header-link, .detail-button { transition: none; }
 }
+
+.detail-product-logo{display:block;width:76px;height:76px;object-fit:contain;margin:0 0 18px;border:1px solid rgba(151,174,255,.22);border-radius:20px;background:linear-gradient(145deg,#1b2942,#241f3c);padding:7px}
