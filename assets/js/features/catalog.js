@@ -20,11 +20,18 @@ export function renderCatalog(products) {
     const top = document.createElement("div");
     top.className = "product-top";
 
-    const symbol = document.createElement("span");
+    const symbol = document.createElement("img");
     symbol.className = `product-logo product-logo-${product.logo || "default"}`;
-    symbol.setAttribute("role", "img");
-    symbol.setAttribute("aria-label", `Logo ${product.name}`);
-    symbol.innerHTML = logoMarkup[product.logo] || `<span aria-hidden="true">${product.symbol || "TCS"}</span>`;
+    symbol.alt = `Logo ${product.name}`;
+    symbol.width = 54;
+    symbol.height = 54;
+    symbol.loading = "lazy";
+    symbol.decoding = "async";
+    symbol.src = product.logoUrl || "";
+    if (!product.logoUrl) {
+      symbol.hidden = true;
+      symbol.alt = "";
+    }
 
     const identity = document.createElement("div");
     identity.className = "product-identity";
