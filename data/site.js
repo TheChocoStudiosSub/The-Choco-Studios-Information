@@ -1,30 +1,26 @@
 export const site = {
-  brand: "The Choco Studios",
-  shortName: "TCS",
-  tagline: "Ekosistem Kreatif Independen Multisektor",
-  description: "The Choco Studios (TCS) adalah ekosistem kreatif independen multisektor yang didirikan oleh Hasby Prasetya Saprudin. TCS mengembangkan berbagai merek, produk, layanan, proyek, dan inisiatif kreatif lintas bidang dengan mengutamakan inovasi, kualitas, independensi, serta kolaborasi berkelanjutan.",
-  email: "thechocostudio@gmail.com",
-  phoneDisplay: "085150835618",
-  phoneUrl: "tel:+6285150835618",
-  linkedinUrl: "https://www.linkedin.com/in/hasby-prasetya-tcs/",
-  founderLinkedinUrl: "https://www.linkedin.com/in/hasby-prasetya-tcs/",
-  chocoAiUrl: "https://choco-ai-independent-seven.vercel.app/",
-  helpCenterUrl: "https://choco-ai-help-center.netlify.app/",
-  contactFormUrl: "https://forms.gle/LUtY9cyFQKVizA1A6",
-  languages: {
-    primary: "Bahasa Indonesia",
-    secondary: "Bahasa Inggris",
-    future: "Dukungan berbagai bahasa akan dikembangkan secara bertahap."
-  },
-  vision: "Menjadi studio kreatif multisektor global yang terus berkembang melalui karya tanpa batas, dengan menjunjung tinggi kepuasan pelanggan serta kepatuhan hukum di setiap belahan dunia.",
-  missions: [
-    { title: "Inovasi Multi-Bidang", text: "Menghasilkan karya kreatif yang inovatif, adaptif, dan relevan di berbagai sektor industri." },
-    { title: "Prioritas Pelanggan", text: "Menyediakan layanan terbaik demi mewujudkan kepuasan dan kepercayaan pelanggan yang berkelanjutan." },
-    { title: "Integritas & Kepatuhan Global", text: "Menjalankan operasional bisnis dengan menghormati kode etik, regulasi lokal, serta hukum internasional yang berlaku." },
-    { title: "Pertumbuhan Berkelanjutan", text: "Terus belajar dan berkembang guna menghadapi perubahan tren industri kreatif global." }
+  brand:"The Choco Studios",
+  shortName:"TCS",
+  tagline:"Studio Kreatif Independen Multisektor",
+  description:"The Choco Studios (TCS) adalah studio kreatif independen multisektor yang didirikan, dimiliki, dan dikelola oleh Hasby Prasetya Saprudin. Fokus utama TCS adalah open-source, pengembangan teknologi, dan integrasi inisiatif kreatif lintas bidang.",
+  email:"thechocostudio@gmail.com",
+  phoneDisplay:"085150835618",
+  phoneUrl:"tel:+6285150835618",
+  linkedinUrl:"https://www.linkedin.com/in/hasby-prasetya-tcs/",
+  founderLinkedinUrl:"https://www.linkedin.com/in/hasby-prasetya-tcs/",
+  chocoAiUrl:"https://choco-ai-independent-seven.vercel.app/",
+  helpCenterUrl:"https://choco-ai-help-center.netlify.app/",
+  contactFormUrl:"https://forms.gle/LUtY9cyFQKVizA1A6",
+  languages:{primary:"Bahasa Indonesia",secondary:"Bahasa Inggris",future:"Dukungan bahasa tambahan akan dikembangkan secara bertahap."},
+  vision:"Mengembangkan perangkat lunak terbuka, teknologi terapan, dan inisiatif kreatif lintas bidang dengan menjaga independensi, kualitas, dan integritas.",
+  missions:[
+    {title:"Open-source",text:"Membangun, mendokumentasikan, dan memelihara proyek perangkat lunak terbuka dengan lisensi yang jelas."},
+    {title:"Kolaborasi terstruktur",text:"Menerima kontribusi pada proyek yang ditetapkan terbuka melalui proses review dan standar keamanan."},
+    {title:"Ekosistem multisektor",text:"Mengintegrasikan inisiatif kreatif lintas bidang tanpa menghapus identitas masing-masing."},
+    {title:"Independensi dan integritas",text:"Menjaga pengelolaan TCS tetap independen serta memisahkan lisensi kode dari perlindungan merek."}
   ],
-  founded: "12 Desember 2023",
-  founder: "Hasby Prasetya Saprudin",
-  values: ["Kepuasan pelanggan", "Keamanan dan privasi pengguna", "Kepercayaan pelanggan"],
-  market: "Fokus awal Indonesia dengan tujuan memperluas jangkauan internasional."
+  founded:"12 Desember 2023",
+  founder:"Hasby Prasetya Saprudin",
+  values:["Independensi","Kualitas dan keamanan","Privasi","Kepercayaan","Atribusi kontributor"],
+  market:"Berangkat dari Indonesia dengan orientasi pengembangan dan jangkauan internasional."
 };
