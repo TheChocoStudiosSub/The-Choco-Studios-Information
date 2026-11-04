@@ -1,138 +1,46 @@
 # The Choco Studios Information
 
-Situs informasi publik The Choco Studios (TCS), dibuat dengan HTML, CSS, dan JavaScript modular tanpa framework. Build Node.js kecil menyiapkan bundel deploy terpisah agar file dokumentasi internal tidak ikut diterbitkan di Netlify.
+Pusat informasi publik The Choco Studios (TCS). Situs ini menjelaskan identitas TCS, arah open-source, komponen ekosistem lintas bidang, tata kelola kontribusi, dan kanal resmi.
 
-## Struktur proyek
+## Identitas TCS
 
-```text
-.
-├── index.html
-├── 404.html
-├── favicon.svg
-├── robots.txt
-├── sitemap.xml
-├── _headers
-├── netlify.toml
-├── .gitignore
-├── package.json
-├── .github/
-│   └── workflows/
-│       └── validate-site.yml
-├── components/
-│   ├── header.html
-│   ├── hero.html
-│   ├── overview.html
-│   ├── about.html
-│   ├── products.html
-│   ├── projects.html
-│   ├── technology.html
-│   ├── safety.html
-│   ├── updates.html
-│   ├── contact.html
-│   └── footer.html
-├── assets/
-│   ├── css/
-│   │   ├── tokens.css
-│   │   ├── base.css
-│   │   ├── layout.css
-│   │   ├── components.css
-│   │   ├── diagnostics.css
-│   │   ├── product-pages.css
-│   │   └── responsive.css
-│   └── js/
-│       ├── diagnostics.js
-│       ├── main.js
-│       ├── menu.js
-│       └── features/
-│           ├── active-navigation.js
-│           ├── catalog.js
-│           ├── links.js
-│           ├── missions.js
-│           ├── navigation.js
-│           └── site-content.js
-├── products/
-│   ├── choco-ai.html
-│   ├── kasirkita.html
-│   ├── chocobot-guardian.html
-│   └── privacy-guardian.html
-├── data/
-│   ├── site.js
-│   ├── navigation.js
-│   └── products.js
-├── docs/
-│   ├── content-plan.md
-│   ├── questionnaire.md
-│   └── questions/
-│       ├── README.md
-│       ├── identity-branding.md
-│       ├── products-projects.md
-│       ├── data-privacy-security.md
-│       ├── support-contact.md
-│       ├── design-accessibility.md
-│       ├── legal-licensing.md
-│       └── updates-maintenance.md
-└── scripts/
-    ├── build-site.mjs
-    └── validate-site.mjs
-```
+The Choco Studios adalah studio kreatif independen multisektor yang didirikan, dimiliki, dan dikelola secara mandiri oleh Hasby Prasetya Saprudin. TCS bukan kolektif yang menaungi seluruh kreator independen dan bukan marketplace atau platform umum untuk memamerkan karya pihak lain.
 
-## Pembagian tanggung jawab
+Fokus strategis TCS adalah open-source, pengembangan teknologi, dokumentasi, pemeliharaan proyek, dan kolaborasi yang terstruktur. TCS tetap dapat mengembangkan aplikasi, tetapi produksi aplikasi bukan lagi pusat utama strategi.
 
-- `index.html`: metadata halaman, canonical URL, verifikasi Google Search Console, Open Graph/Twitter untuk pratinjau tautan, favicon, stylesheet, landmark utama, dan titik pemasangan komponen.
-- `sitemap.xml`: daftar URL publik kanonis yang layak ditemukan mesin pencari.
-- `robots.txt`: aturan perayapan dasar untuk halaman publik dan alamat sitemap.
-- `favicon.svg`: identitas grafis TCS pada tab browser dan daftar bookmark.
-- `404.html`: halaman tidak ditemukan yang berdiri sendiri, dengan navigasi kembali ke beranda dan kanal pelaporan tautan rusak; tidak bergantung pada JavaScript aplikasi.
-- `_headers`: header keamanan dasar untuk deploy Netlify, termasuk MIME sniffing, kebijakan referrer, pencegahan framing, serta pembatasan izin browser.
-- `netlify.toml`: menjalankan `npm run build` dan menetapkan `dist/` sebagai direktori publik.
-- `.gitignore`: mengecualikan output build lokal `dist/` dan keadaan kerja Netlify.
-- `components/`: tiap bagian halaman berada di berkas terpisah; header hanya menyediakan tempat untuk menu dan tombolnya.
-- `assets/css/tokens.css`: warna, ukuran konten, dan token desain.
-- `assets/css/base.css`: aturan dasar, tipografi, fokus keyboard, dan tautan lewati ke konten utama.
-- `assets/css/layout.css`: struktur header, navigasi, hero, section, grid, dan footer.
-- `assets/css/components.css`: gaya tombol, kartu, label, dan komponen visual.
-- `assets/css/responsive.css`: breakpoint layar dan reduced motion; menu tetap dapat diakses pada rentang tablet.
-- `assets/js/main.js`: memuat komponen dan menghubungkan fitur dengan data.
-- `assets/js/diagnostics.js`: menangkap error JavaScript global, Promise yang gagal, aset yang gagal dimuat, dan kegagalan permintaan komponen; menampilkan kategori, sumber, waktu, pesan, status HTTP, baris/kolom, serta stack bila tersedia.
-- `assets/css/diagnostics.css`: gaya panel diagnostik yang muncul ketika ada masalah.
-- `assets/css/product-pages.css`: gaya responsif bersama untuk halaman detail produk agar tetap konsisten dengan identitas visual TCS.
-- `assets/js/menu.js`: buka/tutup menu, penutupan lewat tautan atau Escape, dan sinkronisasi saat ukuran layar berubah.
-- `assets/js/features/`: pengelolaan navigasi aktif, katalog produk beserta tautan detailnya, tautan situs, daftar misi, dan pengisian konten dari `data/site.js`.
-- `components/contact.html` dan `data/site.js`: menampilkan kanal kontak resmi, termasuk profil LinkedIn terbaru yang dikonfirmasi.
-- `products/`: halaman informasi terpisah untuk Choco AI, KasirKita, Chocobot Guardian, dan Privacy Guardian. Setiap halaman memiliki metadata dasar, breadcrumb, dan status yang dibatasi pada informasi terkonfirmasi.
-- `data/site.js`: identitas, visi, misi, kontak, bahasa, dan pasar.
-- `data/navigation.js`: satu sumber data untuk label, target, dan kelompok menu.
-- `data/products.js`: katalog produk, kategori, status, simbol, deskripsi, dan path halaman detail masing-masing produk.
-- `docs/content-plan.md`: backlog konten dan aturan verifikasi.
-- `docs/questions/`: bank pertanyaan terkonfirmasi, pertanyaan tertunda, serta pertanyaan masa depan per bidang.
-- `docs/questionnaire.md`: indeks ke bank pertanyaan.
-- `scripts/build-site.mjs`: membuat `dist/` dengan menyalin hanya aset publik, komponen, data katalog, halaman produk, favicon, halaman 404, robots.txt, sitemap.xml, dan headers. Dokumen internal, validator, serta konfigurasi build tidak ikut diterbitkan.
-- `scripts/validate-site.mjs`: pemeriksaan file wajib, titik pemasangan komponen, ID/anchor dan referensi ARIA, aset lokal, halaman detail tiap produk, impor dan sintaks JavaScript, bentuk data situs/produk, konfigurasi Netlify, URL konfigurasi, serta tautan relatif dokumentasi.
-- `.github/workflows/validate-site.yml`: menjalankan pemeriksaan statis di GitHub Actions pada push ke `main` dan pull request.
+Sheeblink adalah inisiatif produk handmade yang telah diintegrasikan ke dalam ekosistem TCS sebagai perluasan aktivitas ke bidang non-teknologi, dengan tetap menjaga identitas kreatifnya.
 
-## SEO dan penemuan crawler
+## Komponen utama yang ditampilkan
 
-Halaman utama menggunakan judul dan deskripsi yang menjelaskan nama lengkap studio serta pendirinya, canonical URL ke alamat publik Netlify, dan metadata Open Graph/Twitter. `robots.txt` mengizinkan crawler umum mengakses halaman publik dan menunjuk ke sitemap. Sitemap mencantumkan beranda dan halaman detail untuk karya TCS yang saat ini ditampilkan sebagai portofolio publik. Katalog publik menggunakan daftar terverifikasi yang lebih ringkas; daftar lama 16 entri tidak lagi diperlakukan sebagai direktori resmi. Deskripsi katalog membedakan layanan yang tersedia dari proyek yang masih dikembangkan. Sitemap dan robots.txt disalin ke folder `dist/` oleh build produksi.
+- TCS LinkGuard: proyek awal TCS, sebelumnya bernama Chocobot Guardian; pemeriksa manual tautan dan kualitas halaman website, status demo fungsional/pra-produksi.
+- Choco AI: asisten AI utama dan representasi digital Choco; arah pengembangan jangka panjangnya adalah asisten virtual serbaguna lintas kebutuhan TCS.
+- Choco AI Help Center / Sara: pusat bantuan dengan asisten dukungan yang terpisah dari Choco AI.
+- Sheeblink: inisiatif kreatif handmade yang terintegrasi dalam ekosistem TCS.
 
-Sitemap membantu mesin pencari menemukan URL, tetapi tidak menjamin semua URL akan diindeks atau mendapat peringkat tertentu. Setelah deploy, periksa alamat `/robots.txt` dan `/sitemap.xml` melalui browser, lalu kirim sitemap di Google Search Console saat properti terverifikasi. Untuk pengindeksan manual, gunakan Request Indexing secara wajar; kuota inspeksi URL terpisah dari pengiriman sitemap.
+Daftar aplikasi lama dan katalog 16 aplikasi tidak lagi menjadi direktori publik. Catatan historis dapat tetap berada di repositori untuk audit, tetapi tidak dipresentasikan sebagai portofolio aktif.
 
-## Menjalankan dan memvalidasi
+## Kontribusi dan open-source
 
-Untuk menyajikan situs secara lokal, gunakan server statis. Situs memakai ES modules dan memuat komponen dengan `fetch()`, jadi membuka `index.html` langsung melalui skema `file://` tidak didukung.
+Kontribusi publik hanya diterima pada repositori yang secara eksplisit ditetapkan terbuka. Lisensi, panduan kontribusi, standar keamanan, dan proses review ditentukan per proyek. Hak atas kode dan kontribusi dibedakan dari hak merek, logo, identitas visual, serta kewenangan rilis resmi TCS.
 
-Pemeriksaan integritas dan build produksi tanpa dependensi pihak ketiga:
+Panduan publik: https://the-choco-studios-official.vercel.app/bergabung/
+
+## Teknologi dan pengembangan
+
+Situs ini menggunakan HTML, CSS, dan JavaScript modular tanpa framework UI. Komponen halaman dimuat secara terpisah, sementara data identitas, navigasi, dan direktori komponen ekosistem disimpan pada folder data. Build Node.js menghasilkan folder `dist/` dan hanya menerbitkan aset publik yang diperlukan.
+
+## Validasi
+
+Gunakan Node.js 20 atau lebih baru:
 
 ```bash
 npm run validate
 npm run build
 ```
 
-Build menghasilkan folder `dist/` untuk deploy. Folder tersebut hanya berisi file yang memang dibutuhkan situs publik. Jangan ubah konfigurasi Netlify menjadi menerbitkan folder root, karena root repo juga berisi dokumentasi kerja dan bank pertanyaan internal.
+Validasi statis tidak menggantikan pengujian browser atau verifikasi layanan eksternal. Periksa hasil build, tautan, navigasi, responsivitas, dan deploy setelah perubahan.
 
-Pemeriksaan ini membantu menemukan berkas hilang, tautan internal yang rusak, ID duplikat, referensi aksesibilitas yang tidak cocok, data produk yang tidak lengkap, impor yang rusak, atau kesalahan sintaks JavaScript. Pemeriksaan ini bersifat statis: tidak membuka browser, tidak menguji tampilan responsif secara visual, dan tidak memverifikasi apakah layanan atau tautan eksternal benar-benar aktif.
+## Kontak
 
-Saat situs berjalan, panel diagnostik mengidentifikasi error JavaScript client dan Promise yang gagal, kegagalan aset, HTTP 404/401/403/408/429/5xx, serta kegagalan koneksi tanpa respons. Panel menyertakan waktu, ID laporan, konteks, pesan teknis, saran pemeriksaan, dan jejak JavaScript bila tersedia; tombol **Salin laporan** memudahkan pengguna mengirim detailnya secara manual. Detail ditampilkan di browser dan konsol pengembang, bukan dikirim ke server. Karena situs ini statis, panel tidak dapat membaca log server/Netlify atau memastikan penyebab koneksi tanpa respons; pemeriksaan sisi hosting tetap dilakukan dari dashboard dan log penyedia.
-
-## Aturan konten dan verifikasi
-
-Jangan mengarang status produk, klaim keamanan, tanggal rilis, tautan, atau informasi legal. Sebelum publikasi, pastikan komponen dan file data sinkron, tautan masih aktif, dan navigasi bekerja di ponsel maupun tablet.
+thechocostudio@gmail.com
+https://www.linkedin.com/in/hasby-prasetya-tcs/
