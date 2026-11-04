@@ -193,7 +193,7 @@ for (const document of productPages) {
       !content.includes('id="main"')) {
     fail("Metadata, stylesheet, favicon, atau aksesibilitas dasar tidak lengkap: " + document.file);
   }
-  if (/<script\b/i.test(content)) fail("Halaman detail produk seharusnya dapat dibaca tanpa JavaScript: " + document.file);
+  if (/<script\b(?![^>]*type=["\']application\/ld\+json["\'])/i.test(content)) fail("Halaman detail produk seharusnya tidak bergantung pada JavaScript eksekutabel: " + document.file);
   const pageIds = new Set();
   for (const match of content.matchAll(/\bid="([^"]+)"/g)) {
     if (pageIds.has(match[1])) fail("ID HTML duplikat pada " + document.file + ": #" + match[1]);
