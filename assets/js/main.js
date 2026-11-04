@@ -23,6 +23,31 @@ const components = [
   { mount: "site-footer", file: "components/footer.html" }
 ];
 
+function initEditorialMotion() {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const targets = document.querySelectorAll(
+    ".hero-content, .hero-route-panel, .section-head, .intro-fact, .about-fact-card, .about-purpose-card, .about-bottom-card, .overview-card, .product-card, .project-row, .technology-card, .safety-card, .contact-card"
+  );
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    targets.forEach(element => element.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, currentObserver) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      currentObserver.unobserve(entry.target);
+    });
+  }, { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+
+  targets.forEach((element, index) => {
+    element.classList.add("motion-reveal");
+    element.style.setProperty("--reveal-delay", `${Math.min(index % 5, 4) * 65}ms`);
+    observer.observe(element);
+  });
+}
+
 function createLoadError(message, details = {}) {
   const error = new Error(message, details.cause ? { cause: details.cause } : undefined);
   error.tcsFailureKind = details.kind || "client";
@@ -118,6 +143,7 @@ try {
   renderCatalog(products);
   renderMissions(site.missions);
   applySiteLinks(site);
+  initEditorialMotion();
 
   // Navigasi ke anchor dari halaman detail harus menunggu komponen berisi target selesai dimuat.
   const initialHash = window.location.hash.slice(1);
