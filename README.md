@@ -1,35 +1,40 @@
 # The Choco Studios Information
 
-Pusat informasi publik The Choco Studios (TCS). Situs ini menjelaskan identitas TCS, arah open-source, komponen ekosistem lintas bidang, tata kelola kontribusi, dan kanal resmi.
+Pusat informasi publik The Choco Studios (TCS), diselaraskan dengan arah open-source dan ekosistem multisektor terbaru.
 
 ## Identitas TCS
 
-The Choco Studios adalah studio kreatif independen multisektor yang didirikan, dimiliki, dan dikelola secara mandiri oleh Hasby Prasetya Saprudin. TCS bukan kolektif yang menaungi seluruh kreator independen dan bukan marketplace atau platform umum untuk memamerkan karya pihak lain.
+The Choco Studios (TCS) adalah studio kreatif independen multisektor yang didirikan, dimiliki, dan dikelola secara mandiri oleh Hasby Prasetya Saprudin. TCS bukan kolektif yang menaungi seluruh kreator independen, bukan marketplace, dan bukan platform umum untuk memamerkan karya pihak lain.
 
-Fokus strategis TCS adalah open-source, pengembangan teknologi, dokumentasi, pemeliharaan proyek, dan kolaborasi yang terstruktur. TCS tetap dapat mengembangkan aplikasi, tetapi produksi aplikasi bukan lagi pusat utama strategi.
+Fokus utama TCS adalah open-source, pengembangan teknologi, dokumentasi, pemeliharaan proyek, dan kolaborasi terstruktur. Aplikasi tetap dapat dikembangkan, tetapi produksi aplikasi bukan lagi pusat utama strategi.
 
-Sheeblink adalah inisiatif produk handmade yang telah diintegrasikan ke dalam ekosistem TCS sebagai perluasan aktivitas ke bidang non-teknologi, dengan tetap menjaga identitas kreatifnya.
+Sheeblink adalah inisiatif handmade yang telah diintegrasikan ke dalam ekosistem TCS sebagai perluasan aktivitas ke bidang non-teknologi, dengan tetap menjaga identitas kreatifnya. Proyek awal TCS yang dahulu bernama Chocobot Guardian kini bernama TCS LinkGuard.
 
-## Komponen utama yang ditampilkan
+## Komponen utama
 
-- TCS LinkGuard: proyek awal TCS, sebelumnya bernama Chocobot Guardian; pemeriksa manual tautan dan kualitas halaman website, status demo fungsional/pra-produksi.
-- Choco AI: asisten AI utama dan representasi digital Choco; arah pengembangan jangka panjangnya adalah asisten virtual serbaguna lintas kebutuhan TCS.
-- Choco AI Help Center / Sara: pusat bantuan dengan asisten dukungan yang terpisah dari Choco AI.
-- Sheeblink: inisiatif kreatif handmade yang terintegrasi dalam ekosistem TCS.
+- TCS LinkGuard: proyek awal TCS, sebelumnya bernama Chocobot Guardian; pemeriksa manual tautan dan kualitas halaman website, berstatus demo fungsional/pra-produksi.
+- Choco AI: asisten AI utama dan representasi digital Choco, diarahkan menjadi asisten virtual serbaguna lintas kebutuhan TCS.
+- Choco AI Help Center / Sara: pusat bantuan TCS dengan Sara sebagai asisten dukungan yang terpisah dari Choco AI.
+- Sheeblink: inisiatif kreatif handmade yang terintegrasi ke dalam ekosistem TCS.
 
-Daftar aplikasi lama dan katalog 16 aplikasi tidak lagi menjadi direktori publik. Catatan historis dapat tetap berada di repositori untuk audit, tetapi tidak dipresentasikan sebagai portofolio aktif.
+Katalog lama berisi 16 aplikasi tidak lagi menjadi direktori publik. Catatan historis dapat tetap berada di repositori untuk audit, tetapi tidak dipresentasikan sebagai portofolio aktif.
 
 ## Kontribusi dan open-source
 
-Kontribusi publik hanya diterima pada repositori yang secara eksplisit ditetapkan terbuka. Lisensi, panduan kontribusi, standar keamanan, dan proses review ditentukan per proyek. Hak atas kode dan kontribusi dibedakan dari hak merek, logo, identitas visual, serta kewenangan rilis resmi TCS.
+Kontribusi publik hanya diterima pada repositori yang secara eksplisit ditetapkan terbuka. Lisensi, panduan kontribusi, standar keamanan, dan proses review ditentukan per proyek. Lisensi kode tidak otomatis memberi hak atas merek, logo, identitas visual, atau kewenangan rilis resmi TCS.
 
-Panduan publik: https://the-choco-studios-official.vercel.app/bergabung/
+Panduan kontribusi: https://the-choco-studios-official.vercel.app/bergabung/
 
-## Teknologi dan pengembangan
+## Hosting
 
-Situs ini menggunakan HTML, CSS, dan JavaScript modular tanpa framework UI. Komponen halaman dimuat secara terpisah, sementara data identitas, navigasi, dan direktori komponen ekosistem disimpan pada folder data. Build Node.js menghasilkan folder `dist/` dan hanya menerbitkan aset publik yang diperlukan.
+- Situs resmi: https://the-choco-studios-official.vercel.app/
+- Pusat informasi: https://the-choco-studios-information.vercel.app/
+- Help Center: https://choco-ai-help-center.vercel.app/
+- Choco AI: https://choco-ai-independent-seven.vercel.app/
 
-## Validasi
+Situs informasi menggunakan HTML, CSS, dan JavaScript modular. Komponen halaman dimuat dari `components/`; data identitas, navigasi, dan komponen ekosistem disimpan pada `data/`; skrip build menghasilkan `dist/`.
+
+## Validasi dan build
 
 Gunakan Node.js 20 atau lebih baru:
 
@@ -38,7 +43,7 @@ npm run validate
 npm run build
 ```
 
-Validasi statis tidak menggantikan pengujian browser atau verifikasi layanan eksternal. Periksa hasil build, tautan, navigasi, responsivitas, dan deploy setelah perubahan.
+Setelah build, periksa halaman utama, seluruh komponen, tautan, pencarian navigasi, tampilan responsif, metadata, sitemap, dan hasil deployment.
 
 ## Kontak
 
