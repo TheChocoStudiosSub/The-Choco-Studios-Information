@@ -2,7 +2,7 @@ export const site = {
   brand:"The Choco Studios",
   shortName:"TCS",
   tagline:"Studio Kreatif Independen Multisektor",
-  description:"The Choco Studios (TCS) adalah studio kreatif independen multisektor yang didirikan, dimiliki, dan dikelola oleh Hasby Prasetya Saprudin. Fokus utama TCS adalah open-source, pengembangan teknologi, dan integrasi inisiatif kreatif lintas bidang.",
+  description:"The Choco Studios (TCS) adalah studio kreatif independen multisektor yang didirikan, dimiliki, dan dikelola secara mandiri oleh Hasby Prasetya Saprudin. Fokus utama TCS adalah open-source, teknologi terapan, dokumentasi, pemeliharaan proyek, dan kolaborasi lintas bidang.",
   email:"thechocostudio@gmail.com",
   phoneDisplay:"085150835618",
   phoneUrl:"tel:+6285150835618",
