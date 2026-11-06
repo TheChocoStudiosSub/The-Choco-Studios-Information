@@ -1,4 +1,5 @@
 import { initMenu } from "./menu.js";
+import { initStarfield } from "./features/starfield.js";
 import { applySiteContent } from "./features/site-content.js";
 import { renderCatalog } from "./features/catalog.js";
 import { renderMissions } from "./features/missions.js";
@@ -135,6 +136,7 @@ async function loadComponents() {
 }
 
 try {
+  initStarfield();
   await loadComponents();
   applySiteContent(site);
   renderNavigation(navigation);
