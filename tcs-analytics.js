@@ -25,10 +25,11 @@ function addNotice(){
 }
 send({event:"visit",path:location.pathname,referrer:document.referrer||""});
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",addNotice,{once:true});else addNotice();
-function continueDownload(url,target,productCode,productName,version,name,email,dialog){
+function continueDownload(url,target,productCode,productName,version,name,email,dialog,link){
  send({event:"download",productCode,productName,version,url,name,email});
  dialog?.close();dialog?.remove();
- if(target==="_blank")window.open(url,"_blank","noopener,noreferrer");else location.assign(url);
+ if(link){link.dataset.tcsTrackingHandled="1";link.click();delete link.dataset.tcsTrackingHandled;}
+ else if(target==="_blank")window.open(url,"_blank","noopener,noreferrer");else location.assign(url);
 }
 document.addEventListener("click",event=>{
  const link=event.target?.closest?.("a[data-tcs-download],a[download],a[href*='/releases/download/']");
@@ -45,10 +46,10 @@ document.addEventListener("click",event=>{
  form.addEventListener("submit",e=>{
   e.preventDefault();const name=form.elements.name.value.trim(),email=form.elements.email.value.trim().toLowerCase();
   if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){dialog.querySelector("[data-error]").textContent="Alamat email tidak valid.";return;}
-  continueDownload(url,link.target,code,label,version,name,email,dialog);
+  continueDownload(url,link.target,code,label,version,name,email,dialog,link);
  });
- dialog.querySelector("[data-skip]").addEventListener("click",()=>continueDownload(url,link.target,code,label,version,"","",dialog));
- dialog.addEventListener("cancel",e=>{e.preventDefault();continueDownload(url,link.target,code,label,version,"","",dialog);});
- if(typeof dialog.showModal==="function")dialog.showModal();else continueDownload(url,link.target,code,label,version,"","",dialog);
+ dialog.querySelector("[data-skip]").addEventListener("click",()=>continueDownload(url,link.target,code,label,version,"","",dialog,link));
+ dialog.addEventListener("cancel",e=>{e.preventDefault();continueDownload(url,link.target,code,label,version,"","",dialog,link);});
+ if(typeof dialog.showModal==="function")dialog.showModal();else continueDownload(url,link.target,code,label,version,"","",dialog,link);
 });
 })();
