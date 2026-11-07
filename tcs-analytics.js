@@ -1,6 +1,6 @@
 (() => {
 "use strict";
-const ENDPOINT="https://choco-ai-independent-seven.vercel.app/api/public/track";
+const ENDPOINT="https://choco-ai-independent-seven.vercel.app/api/license?feature=tcs-public";
 const SITE=document.currentScript?.dataset.site||"tcs-website";
 function sessionId(key){
  try{let value=sessionStorage.getItem(key);if(!value){value=crypto.randomUUID();sessionStorage.setItem(key,value);}return value;}
