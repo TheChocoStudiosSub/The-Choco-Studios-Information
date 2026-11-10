@@ -30,20 +30,18 @@ Panduan kontribusi: https://the-choco-studios-officials.vercel.app/bergabung/
 - Situs resmi: https://the-choco-studios-officials.vercel.app/
 - Profil pendiri: https://the-choco-studios-officials.vercel.app/about/hasby-prasetya-saprudin/
 - Profil Sheeblink: https://the-choco-studios-officials.vercel.app/ecosystem/sheeblink/
-- Pusat informasi: https://tcs-information-hub.vercel.app/
+- Pusat informasi: https://the-choco-studios-information.vercel.app/
 - Help Center: https://choco-ai-help-center.vercel.app/
 - Choco AI: https://choco-ai-independent-seven.vercel.app/
 
-Situs informasi menggunakan HTML, CSS, dan JavaScript modular. Komponen halaman dimuat dari `components/`; data identitas, navigasi, dan komponen ekosistem disimpan pada `data/`; skrip build menghasilkan `dist/`.
+Situs informasi menggunakan HTML, CSS, dan JavaScript modular. Komponen halaman dimuat dari components/; data identitas, navigasi, dan komponen ekosistem disimpan pada data/; skrip build menghasilkan dist/.
 
 ## Validasi dan build
 
 Gunakan Node.js 20 atau lebih baru:
 
-```bash
-npm run validate
-npm run build
-```
+    npm run validate
+    npm run build
 
 Setelah build, periksa halaman utama, seluruh komponen, tautan, pencarian navigasi, tampilan responsif, metadata, sitemap, dan hasil deployment.
 
