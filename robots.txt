@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tcs-information-hub.vercel.app/sitemap.xml
+Sitemap: https://the-choco-studios-information.vercel.app/sitemap.xml
