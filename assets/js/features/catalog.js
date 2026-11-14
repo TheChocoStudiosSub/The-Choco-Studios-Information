@@ -8,6 +8,21 @@ const logoMarkup = {
   privacy: '<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="12" y="28" width="40" height="29" rx="6"/><path d="M21 28v-8a11 11 0 0 1 22 0v8"/><circle cx="32" cy="41" r="3" class="solid"/><path d="M32 44v6"/></svg>'
 };
 
+function createFallbackLogo(product, className) {
+  const fallback = document.createElement("span");
+  fallback.className = className + " product-logo-fallback";
+  fallback.setAttribute("aria-hidden", "true");
+
+  const markup = logoMarkup[product.logo];
+  if (markup) {
+    fallback.innerHTML = markup;
+  } else {
+    const label = String(product.symbol || product.name?.trim()?.charAt(0) || "?");
+    fallback.textContent = label.slice(0, 2).toUpperCase();
+  }
+  return fallback;
+}
+
 export function renderCatalog(products) {
   const list = document.getElementById("product-list");
   if (!list) return;
@@ -20,17 +35,25 @@ export function renderCatalog(products) {
     const top = document.createElement("div");
     top.className = "product-top";
 
-    const symbol = document.createElement("img");
-    symbol.className = `product-logo product-logo-${product.logo || "default"}`;
-    symbol.alt = `Logo ${product.name}`;
-    symbol.width = 54;
-    symbol.height = 54;
-    symbol.loading = "lazy";
-    symbol.decoding = "async";
-    symbol.src = product.logoUrl || "";
-    if (!product.logoUrl) {
-      symbol.hidden = true;
-      symbol.alt = "";
+    const logoClass = `product-logo product-logo-${product.logo || "default"}`;
+    const logoUrl = typeof product.logoUrl === "string" ? product.logoUrl.trim() : "";
+    let symbol;
+
+    if (logoUrl) {
+      const image = document.createElement("img");
+      image.className = logoClass;
+      image.alt = `Logo ${product.name}`;
+      image.width = 54;
+      image.height = 54;
+      image.loading = "lazy";
+      image.decoding = "async";
+      image.src = logoUrl;
+      image.addEventListener("error", () => {
+        image.replaceWith(createFallbackLogo(product, logoClass));
+      }, { once: true });
+      symbol = image;
+    } else {
+      symbol = createFallbackLogo(product, logoClass);
     }
 
     const identity = document.createElement("div");
