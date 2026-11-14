@@ -3,7 +3,7 @@
   if(!loader)return;
   const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let seen=false;
-  try{seen=sessionStorage.getItem("tcs-information-preloader-v1")==="seen";}catch{}
+  try{seen=sessionStorage.getItem("tcs-information-preloader-v2")==="seen";}catch{}
   const remove=(skipped=false)=>{
     loader.remove();
     document.body.classList.remove("preloader-active");
@@ -11,7 +11,7 @@
     else document.body.classList.add("preloader-done");
   };
   if(seen||reduced){remove(true);return;}
-  try{sessionStorage.setItem("tcs-information-preloader-v1","seen");}catch{}
+  try{sessionStorage.setItem("tcs-information-preloader-v2","seen");}catch{}
   loader.classList.add("is-managed");
   let closed=false;
   let minimumElapsed=false;
