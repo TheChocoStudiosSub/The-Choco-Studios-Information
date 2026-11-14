@@ -181,6 +181,15 @@ if (!robots.includes("User-agent: *") || !robots.includes("Allow: /")) {
 if (!catalog.includes("product.detailsUrl") || !catalog.includes('textContent = "Lihat detail"')) {
   fail("Kartu produk belum menyediakan tautan ke halaman detail");
 }
+if (!catalog.includes("function createFallbackLogo") ||
+    !catalog.includes('typeof product.logoUrl === "string"') ||
+    catalog.includes('symbol.src = product.logoUrl || ""')) {
+  fail("Kartu katalog tidak boleh membuat IMG dengan src kosong; logo tanpa URL harus memakai fallback non-IMG");
+}
+if (!diagnostics.includes('target.getAttribute("srcset")') ||
+    !diagnostics.includes("if (!source && !sourceSet) return null")) {
+  fail("Diagnostik harus mengabaikan IMG tanpa src/srcset agar URL halaman tidak dicatat sebagai aset rusak");
+}
 for (const document of productPages) {
   const content = document.content;
   if (!/<html\s+lang="id"/i.test(content) ||
