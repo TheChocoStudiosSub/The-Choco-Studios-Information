@@ -29,6 +29,9 @@
 <link rel="stylesheet" href="assets/css/components.css">
 <link rel="stylesheet" href="assets/css/diagnostics.css">
 <link rel="stylesheet" href="assets/css/responsive.css">
+<link rel="preload" href="assets/fonts/cormorant-garamond-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/jost-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+
 <script type="application/ld+json">
 {
 "@context":"https://schema.org",
@@ -38,8 +41,43 @@
 {"@type":"WebSite","@id":"https://the-choco-studios-information.vercel.app/#website","url":"https://the-choco-studios-information.vercel.app/","name":"The Choco Studios — Pusat Informasi","publisher":{"@id":"https://the-choco-studios-official.vercel.app/#organization"},"inLanguage":"id-ID"}
 ]}
 </script>
+<style id="critical-preloader">
+#tcs-preloader{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;isolation:isolate;background:var(--bg,#050505);color:var(--text,#ece6d8)}
+#tcs-preloader .preloader-curtain{position:absolute;left:0;width:100%;height:50%;z-index:1;background:var(--bg,#050505);transition:transform 760ms cubic-bezier(.76,0,.24,1)}
+#tcs-preloader .preloader-curtain--top{top:0;border-bottom:1px solid var(--rule,rgba(200,169,106,.17))}
+#tcs-preloader .preloader-curtain--bottom{bottom:0;border-top:1px solid var(--rule,rgba(200,169,106,.17))}
+#tcs-preloader.is-opening .preloader-curtain--top{transform:translateY(-101%)}
+#tcs-preloader.is-opening .preloader-curtain--bottom{transform:translateY(101%)}
+#tcs-preloader .preloader-stage{position:relative;z-index:2;width:min(82vw,580px);display:grid;justify-items:center;text-align:center;pointer-events:none}
+#tcs-preloader .preloader-line{width:min(74vw,420px);height:1px;margin-bottom:35px;background:var(--accent,#c8a96a);transform:scaleX(0);transform-origin:center;animation:tcs-line-draw 1100ms cubic-bezier(.76,0,.24,1) 90ms forwards}
+#tcs-preloader .preloader-wordmark{opacity:0;color:var(--text,#ece6d8);font-family:var(--serif,Georgia,serif);font-size:clamp(24px,4vw,36px);font-weight:300;letter-spacing:.1em;animation:tcs-wordmark-in 850ms cubic-bezier(.76,0,.24,1) 410ms forwards}
+#tcs-preloader .preloader-monogram{margin-top:18px;opacity:0;color:var(--accent,#c8a96a);font-family:var(--sans,Arial,sans-serif);font-size:12px;letter-spacing:.38em;animation:tcs-monogram-in 500ms ease 1120ms forwards}
+#tcs-preloader .preloader-skip{position:absolute;z-index:3;right:25px;bottom:23px;padding:7px 0;border:0;background:transparent;color:var(--muted,#9a9484);font:13px var(--sans,Arial,sans-serif);cursor:pointer;pointer-events:auto}
+#tcs-preloader:not(.is-managed) .preloader-curtain--top{animation:tcs-fallback-top 760ms cubic-bezier(.76,0,.24,1) 1980ms forwards}
+#tcs-preloader:not(.is-managed) .preloader-curtain--bottom{animation:tcs-fallback-bottom 760ms cubic-bezier(.76,0,.24,1) 1980ms forwards}
+#tcs-preloader:not(.is-managed){animation:tcs-fallback-hide 1ms 2760ms forwards}
+@keyframes tcs-line-draw{to{transform:scaleX(1)}}
+@keyframes tcs-wordmark-in{from{opacity:0;letter-spacing:.1em}to{opacity:1;letter-spacing:.27em}}
+@keyframes tcs-monogram-in{to{opacity:1}}
+@keyframes tcs-fallback-top{to{transform:translateY(-101%)}}
+@keyframes tcs-fallback-bottom{to{transform:translateY(101%)}}
+@keyframes tcs-fallback-hide{to{visibility:hidden;pointer-events:none}}
+@media(prefers-reduced-motion:reduce){#tcs-preloader{animation:tcs-reduced-hide 300ms ease 0ms forwards!important}#tcs-preloader .preloader-curtain{transition:none}#tcs-preloader .preloader-line,#tcs-preloader .preloader-wordmark,#tcs-preloader .preloader-monogram{animation:none;opacity:1;transform:none}}
+@keyframes tcs-reduced-hide{to{opacity:0;visibility:hidden;pointer-events:none}}
+</style>
 </head>
-<body>
+<body class="preloader-active">
+<div id="tcs-preloader" role="status" aria-label="Membuka The Choco Studios">
+  <span class="preloader-curtain preloader-curtain--top" aria-hidden="true"></span>
+  <span class="preloader-curtain preloader-curtain--bottom" aria-hidden="true"></span>
+  <div class="preloader-stage">
+    <span class="preloader-line" aria-hidden="true"></span>
+    <span class="preloader-wordmark">THE CHOCO STUDIOS</span>
+    <span class="preloader-monogram">TCS</span>
+  </div>
+  <button class="preloader-skip" type="button" aria-label="Lewati animasi pembuka">Lewati</button>
+</div>
+
 <a class="skip-link" href="#site-main">Lewati ke konten utama</a>
 <div class="site-shell"><div id="site-header"></div>
 <aside class="instagram-notice" aria-labelledby="instagram-notice-title">
@@ -65,6 +103,7 @@
 </section>
 </div><div data-component="overview"></div><div data-component="products"></div><div data-component="about"></div><div data-component="projects"></div><div data-component="technology"></div><div data-component="safety"></div><div data-component="updates"></div><div data-component="contact"></div>
 </main><div id="site-footer"></div></div>
+<script type="module" src="assets/js/features/preloader.js"></script>
 <script src="assets/js/diagnostics.js" data-site="tcs-information" data-endpoint="https://tcs-choco-ai.vercel.app/api/license?feature=tcs-public"></script>
 <script defer src="tcs-analytics.js" data-site="tcs-information"></script>
 <script type="module" src="assets/js/main.js"></script>
