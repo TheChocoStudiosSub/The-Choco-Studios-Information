@@ -408,6 +408,14 @@
       return null;
     }
 
+    // An empty IMG src resolves to the current document URL in browsers.
+    // It is not a real asset request and must not be reported as a broken image.
+    if (tagName === "IMG") {
+      const source = String(target.getAttribute("src") || "").trim();
+      const sourceSet = String(target.getAttribute("srcset") || "").trim();
+      if (!source && !sourceSet) return null;
+    }
+
     const resource = target.currentSrc || target.src || (tagName === "LINK" ? target.href : "");
     if (!resource) return null;
 
