@@ -6,6 +6,7 @@ export const site = {
   email:"thechocostudio@gmail.com",
   phoneDisplay:"085150835618",
   phoneUrl:"tel:+6285150835618",
+  instagramUrl:"https://www.instagram.com/thechocostudios/",
   linkedinUrl:"https://www.linkedin.com/in/hasby-prasetya-tcs/",
   founderLinkedinUrl:"https://www.linkedin.com/in/hasby-prasetya-tcs/",
   chocoAiUrl:"https://choco-ai-independent-seven.vercel.app/",
