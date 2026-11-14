@@ -17,32 +17,32 @@
   let siteReady=false;
   let minimumTimer;
   let maximumTimer;
+  const openingDelay=800;
+  const timeout=760;
   const finish=()=>{
     if(closed)return;
     closed=true;
     clearTimeout(minimumTimer);
     clearTimeout(maximumTimer);
-    loader.classList.add("is-opening");
+    loader.classList.add("is-finishing");
     window.setTimeout(()=>{
-      loader.remove();
-      document.body.classList.remove("preloader-active");
-      document.body.classList.add("preloader-done");
-    },760);
+      if(!loader.isConnected)return;
+      loader.classList.add("is-opening");
+      window.setTimeout(remove,timeout);
+    },openingDelay);
   };
-  const checkReady=()=>{
-    if(minimumElapsed&&siteReady)finish();
+  const bypass=()=>{
+    if(closed)return;
+    closed=true;
+    clearTimeout(minimumTimer);
+    clearTimeout(maximumTimer);
+    remove();
   };
-  minimumTimer=window.setTimeout(()=>{
-    minimumElapsed=true;
-    checkReady();
-  },1900);
+  const checkReady=()=>{if(minimumElapsed&&siteReady)finish();};
+  minimumTimer=window.setTimeout(()=>{minimumElapsed=true;checkReady();},1900);
   maximumTimer=window.setTimeout(finish,1980);
-  document.addEventListener("tcs:site-ready",()=>{
-    siteReady=true;
-    checkReady();
-  },{once:true});
-  loader.addEventListener("click",finish);
-  document.addEventListener("keydown",event=>{
-    if(event.key==="Escape"&&!closed)finish();
-  });
+  document.addEventListener("tcs:site-ready",()=>{siteReady=true;checkReady();},{once:true});
+  const skip=loader.querySelector(".preloader-skip");
+  skip?.addEventListener("click",event=>{event.preventDefault();event.stopPropagation();bypass();});
+  document.addEventListener("keydown",event=>{if(event.key==="Escape")bypass();});
 })();

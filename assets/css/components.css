@@ -10,16 +10,16 @@
 .eyebrow{margin:0 0 28px;color:var(--accent);font-size:13px;letter-spacing:.06em}
 .hero-title-line{display:block;overflow:hidden;padding:0 0 .04em}
 .hero-title-line>span{display:block;transform:translateY(110%);animation:hero-line-enter 950ms var(--ease-luxury) both}
-.hero-title-line:nth-child(1)>span{animation-delay:1.95s}
-.hero-title-line:nth-child(2)>span{animation-delay:2.1s}
+.hero-title-line:nth-child(1)>span{animation-delay:2.7s}
+.hero-title-line:nth-child(2)>span{animation-delay:2.82s}
 .preloader-skip .hero-title-line>span{animation-delay:0ms}
 .hero-title-line.accent-line>span{color:var(--accent)}
-.hero-title-line.accent-line::after{content:"";display:block;height:1px;width:0;margin-top:12px;background:var(--accent);animation:hero-rule 780ms var(--ease-luxury) 2.55s forwards}
+.hero-title-line.accent-line::after{content:"";display:block;height:1px;width:0;margin-top:12px;background:var(--accent);animation:hero-rule 780ms var(--ease-luxury) 3.1s forwards}
 .preloader-skip .hero-title-line.accent-line::after{animation-delay:650ms}
 @keyframes hero-line-enter{to{transform:translateY(0)}}
 @keyframes hero-rule{to{width:min(100%,600px)}}
 .hero-title.shimmer-once{position:relative}
-.hero-title.shimmer-once::after{position:absolute;inset:0;z-index:1;background:linear-gradient(105deg,transparent 42%,rgba(227,203,148,.16) 50%,transparent 58%);content:"";pointer-events:none;transform:translateX(-120%);animation:single-shimmer 1.2s var(--ease-luxury) 2.85s 1 both}
+.hero-title.shimmer-once::after{position:absolute;inset:0;z-index:1;background:linear-gradient(105deg,transparent 42%,rgba(227,203,148,.16) 50%,transparent 58%);content:"";pointer-events:none;transform:translateX(-120%);animation:single-shimmer 1.2s var(--ease-luxury) 3.45s 1 both}
 .preloader-skip .hero-title.shimmer-once::after{animation-delay:950ms}
 @keyframes single-shimmer{to{transform:translateX(120%)}}
 .button{position:relative;display:inline-flex;min-height:52px;align-items:center;justify-content:center;padding:0 22px;border:1px solid var(--rule-strong);border-radius:0;background:transparent;color:var(--text);font-size:15px;font-weight:500;letter-spacing:.01em;transition:transform 250ms ease;transform:translate3d(var(--magnet-x,0px),var(--magnet-y,0px),0)}

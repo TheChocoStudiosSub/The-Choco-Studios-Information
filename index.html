@@ -43,26 +43,43 @@
 </script>
 <style id="critical-preloader">
 #tcs-preloader{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;isolation:isolate;background:var(--bg,#050505);color:var(--text,#ece6d8)}
-#tcs-preloader .preloader-curtain{position:absolute;left:0;width:100%;height:50%;z-index:1;background:var(--bg,#050505);transition:transform 760ms cubic-bezier(.76,0,.24,1)}
-#tcs-preloader .preloader-curtain--top{top:0;border-bottom:1px solid var(--rule,rgba(200,169,106,.17))}
-#tcs-preloader .preloader-curtain--bottom{bottom:0;border-top:1px solid var(--rule,rgba(200,169,106,.17))}
+#tcs-preloader .preloader-curtain{position:absolute;left:0;z-index:1;width:100%;height:50%;background:var(--bg,#050505);transition:transform 760ms cubic-bezier(.76,0,.24,1)}
+#tcs-preloader .preloader-curtain--top{top:0;border-bottom:1px solid var(--accent,#c8a96a)}
+#tcs-preloader .preloader-curtain--bottom{bottom:0;border-top:1px solid var(--accent,#c8a96a)}
 #tcs-preloader.is-opening .preloader-curtain--top{transform:translateY(-101%)}
 #tcs-preloader.is-opening .preloader-curtain--bottom{transform:translateY(101%)}
-#tcs-preloader .preloader-stage{position:relative;z-index:2;width:min(82vw,580px);display:grid;justify-items:center;text-align:center;pointer-events:none}
-#tcs-preloader .preloader-line{width:min(74vw,420px);height:1px;margin-bottom:35px;background:var(--accent,#c8a96a);transform:scaleX(0);transform-origin:center;animation:tcs-line-draw 1100ms cubic-bezier(.76,0,.24,1) 90ms forwards}
-#tcs-preloader .preloader-wordmark{opacity:0;color:var(--text,#ece6d8);font-family:var(--serif,Georgia,serif);font-size:clamp(24px,4vw,36px);font-weight:300;letter-spacing:.1em;animation:tcs-wordmark-in 850ms cubic-bezier(.76,0,.24,1) 410ms forwards}
-#tcs-preloader .preloader-monogram{margin-top:18px;opacity:0;color:var(--accent,#c8a96a);font-family:var(--sans,Arial,sans-serif);font-size:12px;letter-spacing:.38em;animation:tcs-monogram-in 500ms ease 1120ms forwards}
-#tcs-preloader .preloader-skip{position:absolute;z-index:3;right:25px;bottom:23px;padding:7px 0;border:0;background:transparent;color:var(--muted,#9a9484);font:13px var(--sans,Arial,sans-serif);cursor:pointer;pointer-events:auto}
-#tcs-preloader:not(.is-managed) .preloader-curtain--top{animation:tcs-fallback-top 760ms cubic-bezier(.76,0,.24,1) 1980ms forwards}
-#tcs-preloader:not(.is-managed) .preloader-curtain--bottom{animation:tcs-fallback-bottom 760ms cubic-bezier(.76,0,.24,1) 1980ms forwards}
-#tcs-preloader:not(.is-managed){animation:tcs-fallback-hide 1ms 2760ms forwards}
-@keyframes tcs-line-draw{to{transform:scaleX(1)}}
-@keyframes tcs-wordmark-in{from{opacity:0;letter-spacing:.1em}to{opacity:1;letter-spacing:.27em}}
+#tcs-preloader .preloader-line{position:fixed;top:50%;left:50%;z-index:2;width:min(74vw,420px);height:1px;background:var(--accent,#c8a96a);transform:translateX(-50%) scaleX(0);transform-origin:center;animation:tcs-line-draw 800ms cubic-bezier(.76,0,.24,1) 0ms forwards}
+#tcs-preloader .preloader-stage{position:relative;z-index:3;display:grid;justify-items:center;width:min(82vw,580px);text-align:center;pointer-events:none}
+#tcs-preloader .preloader-wordmark{opacity:0;color:var(--text,#ece6d8);font-family:var(--serif,Georgia,serif);font-size:clamp(24px,4vw,36px);font-weight:300;letter-spacing:.12em;animation:tcs-wordmark-in 700ms cubic-bezier(.2,.7,.2,1) 500ms forwards}
+#tcs-preloader .preloader-medal{display:grid;place-items:center;position:relative;width:82px;height:82px;margin-top:24px;opacity:0;transform:translateY(5px);animation:tcs-medal-in 600ms cubic-bezier(.2,.7,.2,1) 1000ms forwards}
+#tcs-preloader .preloader-medal svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+#tcs-preloader .preloader-medal circle,#tcs-preloader .preloader-medal path{fill:none;stroke:var(--accent,#c8a96a);stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420;animation:tcs-medal-draw 600ms cubic-bezier(.2,.7,.2,1) 1000ms forwards}
+#tcs-preloader .preloader-medal .medal-inner{stroke:var(--accent-bright,#e3cb94);stroke-dasharray:360;stroke-dashoffset:360}
+#tcs-preloader .preloader-monogram{position:relative;z-index:1;color:var(--accent-bright,#e3cb94);font-family:var(--sans,Arial,sans-serif);font-size:11px;letter-spacing:.18em;opacity:0;animation:tcs-monogram-in 420ms ease 1180ms forwards}
+#tcs-preloader .preloader-stage{transition:opacity 400ms ease,transform 400ms ease}
+#tcs-preloader.is-finishing .preloader-stage{opacity:0;transform:translateY(-8px)}
+#tcs-preloader .preloader-line{transition:width 400ms cubic-bezier(.76,0,.24,1) 800ms}
+#tcs-preloader.is-finishing .preloader-line{width:100vw}
+#tcs-preloader.is-opening .preloader-line{visibility:hidden}
+#tcs-preloader.is-opening .preloader-curtain--top,#tcs-preloader.is-opening .preloader-curtain--bottom{will-change:transform}
+#tcs-preloader .preloader-skip{position:absolute;z-index:4;right:25px;bottom:23px;padding:7px 0;border:0;background:transparent;color:var(--muted,#9a9484);font:13px var(--sans,Arial,sans-serif);cursor:pointer;pointer-events:auto}
+#tcs-preloader:not(.is-managed) .preloader-stage{animation:tcs-fallback-stage-out 400ms ease 1980ms forwards}
+#tcs-preloader:not(.is-managed) .preloader-line{animation:tcs-line-draw 800ms cubic-bezier(.76,0,.24,1) 0ms forwards,tcs-fallback-line-expand 400ms cubic-bezier(.76,0,.24,1) 2300ms forwards,tcs-fallback-line-hide 1ms linear 2760ms forwards}
+#tcs-preloader:not(.is-managed) .preloader-curtain--top{animation:tcs-fallback-top 760ms cubic-bezier(.76,0,.24,1) 2760ms forwards}
+#tcs-preloader:not(.is-managed) .preloader-curtain--bottom{animation:tcs-fallback-bottom 760ms cubic-bezier(.76,0,.24,1) 2760ms forwards}
+#tcs-preloader:not(.is-managed){animation:tcs-fallback-hide 1ms 3520ms forwards}
+@keyframes tcs-line-draw{to{transform:translateX(-50%) scaleX(1)}}
+@keyframes tcs-wordmark-in{from{opacity:0;letter-spacing:.12em}to{opacity:1;letter-spacing:.27em}}
+@keyframes tcs-medal-in{to{opacity:1;transform:translateY(0)}}
+@keyframes tcs-medal-draw{to{stroke-dashoffset:0}}
 @keyframes tcs-monogram-in{to{opacity:1}}
+@keyframes tcs-fallback-stage-out{to{opacity:0;transform:translateY(-8px)}}
+@keyframes tcs-fallback-line-expand{to{width:100vw}}
+@keyframes tcs-fallback-line-hide{to{visibility:hidden}}
 @keyframes tcs-fallback-top{to{transform:translateY(-101%)}}
 @keyframes tcs-fallback-bottom{to{transform:translateY(101%)}}
 @keyframes tcs-fallback-hide{to{visibility:hidden;pointer-events:none}}
-@media(prefers-reduced-motion:reduce){#tcs-preloader{animation:tcs-reduced-hide 300ms ease 0ms forwards!important}#tcs-preloader .preloader-curtain{transition:none}#tcs-preloader .preloader-line,#tcs-preloader .preloader-wordmark,#tcs-preloader .preloader-monogram{animation:none;opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){#tcs-preloader{animation:tcs-reduced-hide 200ms ease forwards!important}#tcs-preloader .preloader-curtain{transition:none}#tcs-preloader .preloader-line,#tcs-preloader .preloader-wordmark,#tcs-preloader .preloader-medal,#tcs-preloader .preloader-monogram,#tcs-preloader .preloader-medal circle,#tcs-preloader .preloader-medal path{animation:none!important;opacity:1;stroke-dashoffset:0;transform:none}#tcs-preloader .preloader-stage{transition:none!important}}
 @keyframes tcs-reduced-hide{to{opacity:0;visibility:hidden;pointer-events:none}}
 </style>
 </head>
@@ -70,10 +87,18 @@
 <div id="tcs-preloader" role="status" aria-label="Membuka The Choco Studios">
   <span class="preloader-curtain preloader-curtain--top" aria-hidden="true"></span>
   <span class="preloader-curtain preloader-curtain--bottom" aria-hidden="true"></span>
+  <span class="preloader-line" aria-hidden="true"></span>
   <div class="preloader-stage">
-    <span class="preloader-line" aria-hidden="true"></span>
     <span class="preloader-wordmark">THE CHOCO STUDIOS</span>
-    <span class="preloader-monogram">TCS</span>
+    <span class="preloader-medal" aria-hidden="true">
+      <svg viewBox="0 0 82 82" fill="none" focusable="false">
+        <circle cx="41" cy="41" r="31"/>
+        <circle class="medal-inner" cx="41" cy="41" r="25"/>
+        <path d="M41 3c4 7 10 9 17 5-1 8 2 13 10 16-7 4-9 10-5 17-8-1-13 2-16 10-4-7-10-9-17-5 1-8-2-13-10-16 7-4 9-10 5-17 8 1 13-2 16-10Z"/>
+        <path d="M10 41c6-2 9-6 9-12 6 4 11 4 16 0-1 7 1 11 6 12-5 2-7 6-6 12-5-4-10-4-16 0 0-6-3-10-9-12Z"/>
+      </svg>
+      <span class="preloader-monogram">TCS</span>
+    </span>
   </div>
   <button class="preloader-skip" type="button" aria-label="Lewati animasi pembuka">Lewati</button>
 </div>
