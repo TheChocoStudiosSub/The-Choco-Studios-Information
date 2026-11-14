@@ -276,13 +276,61 @@
 
   window.TCSDiagnostics = Object.freeze({ report });
 
+  function getFailedResource(target) {
+    if (!(target instanceof Element)) return null;
+
+    const tagName = target.tagName.toUpperCase();
+    const linkResourceRels = new Set([
+      "stylesheet",
+      "preload",
+      "modulepreload",
+      "icon",
+      "apple-touch-icon",
+      "mask-icon",
+      "manifest",
+      "prefetch"
+    ]);
+
+    if (tagName === "LINK") {
+      const rels = String(target.rel || "").toLowerCase().split(/\\s+/).filter(Boolean);
+      if (!rels.some(rel => linkResourceRels.has(rel))) return null;
+    } else if (![
+      "SCRIPT",
+      "IMG",
+      "IFRAME",
+      "SOURCE",
+      "VIDEO",
+      "AUDIO",
+      "OBJECT",
+      "EMBED",
+      "TRACK"
+    ].includes(tagName)) {
+      // A normal hyperlink or metadata link is not a failed page asset.
+      return null;
+    }
+
+    const resource = target.currentSrc || target.src || (tagName === "LINK" ? target.href : "");
+    if (!resource) return null;
+
+    return {
+      resource,
+      tagName,
+      rel: tagName === "LINK" ? String(target.rel || "") : ""
+    };
+  }
+
   window.addEventListener("error", event => {
-    if (event.target && event.target !== window && (event.target.src || event.target.href)) {
+    if (event.target instanceof Element) {
+      const failedResource = getFailedResource(event.target);
+      if (!failedResource) return;
+
       report({
         kind: "asset",
         source: "Pemuatan aset browser",
-        resource: event.target.src || event.target.href,
-        message: "Browser gagal memuat aset ini. Periksa permintaan di tab Network untuk mengetahui status HTTP."
+        resource: failedResource.resource,
+        message: "Browser gagal memuat elemen " + failedResource.tagName +
+          (failedResource.rel ? " (rel=" + failedResource.rel + ")" : "") +
+          ". Periksa permintaan di tab Network untuk mengetahui status HTTP."
       });
       return;
     }
