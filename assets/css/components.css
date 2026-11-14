@@ -210,3 +210,56 @@ h3 { margin: 0; font-size: 15px; letter-spacing: -.3px; line-height: 1.4; }
   .indexing-notice-inner { display: block; padding: 17px 0; }
   .indexing-notice-label { display: inline-block; margin-bottom: 8px; }
 }
+
+
+/* Official Instagram account transition notice */
+.instagram-notice {
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px solid rgba(216, 173, 85, .2);
+  background: linear-gradient(110deg, rgba(112, 83, 35, .16), rgba(125, 93, 170, .09));
+}
+.instagram-notice-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 22px;
+  width: min(var(--content), calc(100% - 40px));
+  margin: 0 auto;
+  padding: 20px 0;
+}
+.instagram-notice-label {
+  flex: 0 0 auto;
+  margin-top: 3px;
+  color: #e5c98e;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+.instagram-notice-copy { min-width: 0; }
+.instagram-notice-copy h2 {
+  margin: 0;
+  color: #f0e9d9;
+  font-size: 15px;
+  line-height: 1.45;
+  letter-spacing: -.2px;
+}
+.instagram-notice-copy p {
+  max-width: 850px;
+  margin: 6px 0 8px;
+  color: #b9b2a4;
+  font-size: 11px;
+  line-height: 1.8;
+}
+.instagram-notice-copy a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #e8d29f;
+  font-size: 11px;
+  font-weight: 750;
+}
+.instagram-notice-copy a:hover { color: #fff; }
+@media (max-width: 640px) {
+  .instagram-notice-inner { display: block; padding: 17px 0; }
+  .instagram-notice-label { display: inline-block; margin-bottom: 8px; }
+}
