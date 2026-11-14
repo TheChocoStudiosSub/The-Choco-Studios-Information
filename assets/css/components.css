@@ -93,11 +93,17 @@
 @keyframes placeholder-breathe{to{opacity:.35;transform:scaleX(.82)}}
 .contact-method{position:relative;display:grid;grid-template-columns:minmax(170px,.65fr) minmax(0,1fr) auto;align-items:center;gap:28px;min-width:0;padding:27px 0;border-top:1px solid var(--rule);transition:transform 380ms var(--ease-luxury)}
 .contact-method:last-child{border-bottom:1px solid var(--rule)}
-.contact-method:hover{transform:translate3d(6px,0,0);color:var(--accent-bright)}
+.contact-method:hover,.contact-method:focus-visible{transform:translate3d(6px,0,0)}
 .contact-method-icon{display:none!important}
 .contact-method-copy{display:contents}
 .contact-method-copy strong{font-family:var(--serif);font-size:clamp(27px,3vw,40px);font-weight:400}
 .contact-method-copy small{color:var(--muted);font-size:16px;overflow-wrap:anywhere}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+ .contact-method-copy strong,.contact-method-copy small{--contact-copy-color:var(--text);display:inline-block;background-image:linear-gradient(var(--accent-bright),var(--accent-bright)),linear-gradient(var(--accent-bright),var(--accent-bright)),linear-gradient(var(--contact-copy-color),var(--contact-copy-color));background-repeat:no-repeat;background-size:0% 100%,0% 100%,100% 100%;background-position:left center,right center,center;background-clip:text;-webkit-background-clip:text;color:transparent;-webkit-text-fill-color:transparent;transition:background-size 680ms cubic-bezier(.76,0,.24,1)}
+ .contact-method-copy small{--contact-copy-color:var(--muted)}
+ .contact-method:is(:hover,:focus-visible) .contact-method-copy strong,.contact-method:is(:hover,:focus-visible) .contact-method-copy small{background-size:50% 100%,50% 100%,100% 100%}
+}
+@media(prefers-reduced-motion:reduce){.contact-method-copy strong,.contact-method-copy small{transition:none!important}}
 .contact-method-arrow{color:var(--accent);font-size:18px}
 .contact-bottom .button{flex:0 0 auto}
 .updates-empty-mark{display:none}
