@@ -10,6 +10,102 @@
   let copyButton;
   let copyStatus;
   let totalEntries = 0;
+  const currentScript = document.currentScript;
+  const reportEndpoint = currentScript?.dataset.endpoint || "https://tcs-choco-ai.vercel.app/api/license?feature=tcs-public";
+  const reportSite = currentScript?.dataset.site || "tcs-information";
+  let visitorId;
+  let sessionId;
+
+  function storedId(key) {
+    try {
+      let value = sessionStorage.getItem(key);
+      if (!value) {
+        value = typeof crypto.randomUUID === "function"
+          ? crypto.randomUUID()
+          : "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {
+              const r = Math.random() * 16 | 0;
+              return (c === "x" ? r : (r & 3 | 8)).toString(16);
+            });
+        sessionStorage.setItem(key, value);
+      }
+      return value;
+    } catch {
+      return typeof crypto.randomUUID === "function" ? crypto.randomUUID() : String(Date.now());
+    }
+  }
+
+  function reportFingerprint(entry) {
+    const source = [
+      entry.classification.code,
+      entry.source,
+      entry.resource,
+      entry.status,
+      entry.message
+    ].join("|").toLowerCase();
+    let hash = 2166136261;
+    for (let i = 0; i < source.length; i++) hash = Math.imul(hash ^ source.charCodeAt(i), 16777619);
+    return (hash >>> 0).toString(16);
+  }
+
+  function isDuplicate(entry) {
+    const now = Date.now();
+    const fingerprint = reportFingerprint(entry);
+    let records = [];
+    try {
+      const stored = JSON.parse(sessionStorage.getItem("tcs_diagnostics_seen_v1") || "[]");
+      if (Array.isArray(stored)) records = stored.filter(row => Array.isArray(row) && typeof row[0] === "string" && Number.isFinite(row[1]) && now - row[1] < 1800000);
+      if (records.some(row => row[0] === fingerprint)) {
+        sessionStorage.setItem("tcs_diagnostics_seen_v1", JSON.stringify(records.slice(-60)));
+        return true;
+      }
+      records.push([fingerprint, now]);
+      sessionStorage.setItem("tcs_diagnostics_seen_v1", JSON.stringify(records.slice(-60)));
+    } catch {}
+    return false;
+  }
+
+  function sendRemote(entry) {
+    try {
+      visitorId ||= storedId("tcs_analytics_visitor_v1");
+      sessionId ||= storedId("tcs_analytics_session_v1");
+      const payload = {
+        action: "track",
+        event: "client_error",
+        siteKey: reportSite,
+        visitorId,
+        sessionId,
+        errorCode: entry.classification.code,
+        errorLayer: entry.classification.layer,
+        source: entry.source,
+        pagePath: location.pathname,
+        resourceUrl: entry.resource,
+        httpStatus: Number(entry.status) || null,
+        message: entry.message
+      };
+      fetch(reportEndpoint, {
+        method: "POST",
+        mode: "cors",
+        credentials: "omit",
+        keepalive: true,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }).catch(() => {});
+    } catch (error) {
+      console.warn("[TCS Diagnostics] Laporan tidak dapat dikirim:", error);
+    }
+  }
+
+  function getResourceStatus(resource) {
+    try {
+      const resources = performance.getEntriesByName(resource, "resource");
+      const item = resources[resources.length - 1];
+      const status = Number(item?.responseStatus);
+      return Number.isInteger(status) && status >= 100 && status <= 599 ? status : "";
+    } catch {
+      return "";
+    }
+  }
+
 
   function describeError(error) {
     if (error instanceof Error) {
@@ -256,6 +352,8 @@
       stack: input.stack || errorInfo.stack
     };
 
+    if (isDuplicate(entry)) return null;
+
     entries.push(entry);
     while (entries.length > maxEntries) entries.shift();
 
@@ -270,6 +368,7 @@
       message: entry.message,
       stack: entry.stack || undefined
     });
+    sendRemote(entry);
     renderEntries();
     return entry.id;
   }
@@ -292,7 +391,7 @@
     ]);
 
     if (tagName === "LINK") {
-      const rels = String(target.rel || "").toLowerCase().split(/\\s+/).filter(Boolean);
+      const rels = String(target.rel || "").toLowerCase().split(/\s+/).filter(Boolean);
       if (!rels.some(rel => linkResourceRels.has(rel))) return null;
     } else if (![
       "SCRIPT",
@@ -315,7 +414,8 @@
     return {
       resource,
       tagName,
-      rel: tagName === "LINK" ? String(target.rel || "") : ""
+      rel: tagName === "LINK" ? String(target.rel || "") : "",
+      status: getResourceStatus(resource)
     };
   }
 
@@ -328,6 +428,7 @@
         kind: "asset",
         source: "Pemuatan aset browser",
         resource: failedResource.resource,
+        status: failedResource.status,
         message: "Browser gagal memuat elemen " + failedResource.tagName +
           (failedResource.rel ? " (rel=" + failedResource.rel + ")" : "") +
           ". Periksa permintaan di tab Network untuk mengetahui status HTTP."
