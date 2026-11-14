@@ -76,6 +76,14 @@ export function initEditorialEffects(){
     }else revealTargets.forEach(element=>element.classList.add("is-visible"));
   }
   if(reduceMotion)return;
+  let ornamentFrame=0;
+  const scheduleOrnamentProgress=()=>{
+    if(ornamentFrame)return;
+    ornamentFrame=requestAnimationFrame(()=>{
+      ornamentFrame=0;
+      updateOrnamentProgress();
+    });
+  };
   const wordTargets=Array.from(document.querySelectorAll("[data-reveal='words']"));
   const updateWords=()=>{
     const height=window.innerHeight||document.documentElement.clientHeight;
@@ -119,6 +127,84 @@ export function initEditorialEffects(){
     window.addEventListener("scroll",scheduleDrift,{passive:true});
     window.addEventListener("resize",scheduleDrift,{passive:true});
     updateDrift();
+  }
+  const sprite="assets/ornaments/tcs-ornaments.svg#";
+  const makeOrnament=(symbol,viewBox,className,draw=true)=>{
+    const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
+    svg.setAttribute("viewBox",viewBox);
+    svg.setAttribute("aria-hidden","true");
+    svg.setAttribute("focusable","false");
+    svg.classList.add("ornament-linework",...className.split(" "));
+    if(draw)svg.dataset.ornamentDraw="";
+    const use=document.createElementNS("http://www.w3.org/2000/svg","use");
+    use.setAttribute("href",sprite+symbol);
+    svg.append(use);
+    return svg;
+  };
+  document.querySelectorAll(".section-rule").forEach(rule=>{
+    if(rule.querySelector("svg"))return;
+    rule.classList.add("ornament-divider");
+    rule.replaceChildren(makeOrnament("divider","0 0 1000 70","ornament-divider-art"));
+  });
+  document.querySelectorAll(".product-grid,.projects-grid").forEach(frame=>{
+    frame.classList.add("ornament-frame");
+    ["tl","tr","bl","br"].forEach(position=>{
+      frame.append(makeOrnament("corner","0 0 150 150","frame-corner frame-corner--"+position,false));
+    });
+  });
+  [
+    ["#about","left"],
+    ["#projects","right"],
+    ["#safety","left"]
+  ].forEach(([selector,side])=>{
+    const section=document.querySelector(selector);
+    if(!section||section.querySelector(".section-vine"))return;
+    const vine=makeOrnament("vine","0 0 200 720","section-vine section-vine--"+side,false);
+    vine.dataset.vine="";
+    section.prepend(vine);
+  });
+  const contactBottom=document.querySelector(".contact-bottom");
+  if(contactBottom&&!contactBottom.querySelector(".contact-ornament")){
+    contactBottom.append(makeOrnament("flower-sprig","0 0 220 120","contact-ornament",true));
+  }
+  const footer=document.querySelector(".site-footer");
+  const footerBottom=footer?.querySelector(".footer-bottom");
+  if(footer&&footerBottom&&!footer.querySelector(".footer-ornament")){
+    footer.insertBefore(makeOrnament("flower-sprig","0 0 220 120","footer-ornament",true),footerBottom);
+  }
+  const ornamentTargets=Array.from(document.querySelectorAll("[data-ornament-draw]"));
+  if(reduceMotion)root.classList.add("ornament-static");
+  else{
+    root.classList.add("ornament-ready");
+    if("IntersectionObserver" in window){
+      const ornamentObserver=new IntersectionObserver((entries,observer)=>{
+        entries.forEach(entry=>{
+          if(!entry.isIntersecting)return;
+          entry.target.classList.add("is-drawn");
+          observer.unobserve(entry.target);
+        });
+      },{rootMargin:"0px 0px -8% 0px",threshold:.04});
+      ornamentTargets.forEach(element=>ornamentObserver.observe(element));
+    }else ornamentTargets.forEach(element=>element.classList.add("is-drawn"));
+  }
+  const cloudItems=Array.from(document.querySelectorAll("[data-cloud-parallax]"));
+  const vineItems=Array.from(document.querySelectorAll("[data-vine]"));
+  const updateOrnamentProgress=()=>{
+    const height=window.innerHeight||document.documentElement.clientHeight;
+    for(const cloud of cloudItems){
+      const shift=Math.max(-24,Math.min(24,(window.scrollY||0)*-.018));
+      cloud.style.setProperty("--cloud-shift",shift.toFixed(2)+"px");
+    }
+    for(const vine of vineItems){
+      const rect=vine.getBoundingClientRect();
+      const progress=Math.max(0,Math.min(1,(height-rect.top)/(height+rect.height)));
+      vine.style.setProperty("--vine-progress",progress.toFixed(3));
+    }
+  };
+  if(cloudItems.length||vineItems.length){
+    window.addEventListener("scroll",scheduleOrnamentProgress,{passive:true});
+    window.addEventListener("resize",scheduleOrnamentProgress,{passive:true});
+    updateOrnamentProgress();
   }
   if(!finePointer)return;
   document.querySelectorAll(".spotlight-surface,.contact-method").forEach(element=>{

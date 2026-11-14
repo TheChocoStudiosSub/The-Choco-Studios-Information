@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" preserveAspectRatio="none" style="color:#c8a96a">
+  <rect x="1" y="1" width="1198" height="798" fill="none" stroke="currentColor" stroke-opacity=".22" stroke-width="1"/>
+  <use href="tcs-ornaments.svg#corner" x="0" y="0" width="132" height="132"/>
+  <g transform="translate(1200 0) scale(-1 1)"><use href="tcs-ornaments.svg#corner" x="0" y="0" width="132" height="132"/></g>
+  <g transform="translate(0 800) scale(1 -1)"><use href="tcs-ornaments.svg#corner" x="0" y="0" width="132" height="132"/></g>
+  <g transform="translate(1200 800) scale(-1 -1)"><use href="tcs-ornaments.svg#corner" x="0" y="0" width="132" height="132"/></g>
+</svg>

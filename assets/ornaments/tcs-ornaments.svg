@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" viewBox="0 0 1 1">
+<defs>
+  <symbol id="clouds" viewBox="0 0 960 280">
+    <g fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+      <path pathLength="1000" d="M-24 208C54 208 70 137 140 137c37 0 50 43 84 43 39 0 40-88 105-88 60 0 68 72 116 72 47 0 60-104 130-104 78 0 88 91 137 91 54 0 61-46 118-46 60 0 64 96 143 96"/>
+      <path pathLength="1000" d="M-18 230c78 0 105-67 164-67 38 0 56 43 89 43 43 0 52-85 99-85 48 0 72 70 113 70 51 0 74-104 132-104 61 0 85 92 134 92 56 0 75-47 123-47 56 0 76 91 136 91"/>
+      <path pathLength="1000" d="M119 138c8-20 25-30 45-26 19 4 29 18 29 36M300 92c9-22 28-34 50-29 20 5 31 20 31 42M540 59c12-24 32-36 55-30 20 5 31 22 32 45M803 105c8-18 22-27 40-24 18 3 27 16 28 34"/>
+    </g>
+  </symbol>
+  <symbol id="crane-pair" viewBox="0 0 420 180">
+    <g fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+      <g>
+        <path pathLength="1000" d="M34 111c25-35 55-56 92-52 25 3 43 22 59 26-20 15-39 20-61 9-26-13-51-5-72 19"/>
+        <path pathLength="1000" d="M124 94c-4-19-5-41 8-58 9-12 22-18 37-14-7 6-15 8-22 6l19-5"/>
+        <path pathLength="1000" d="M45 105c-15-10-25-22-32-38 21 9 41 18 56 30"/>
+        <path pathLength="1000" d="M130 93c22 10 37 21 53 34M125 94c14 19 23 37 25 54"/>
+        <path pathLength="1000" d="M72 91c20-18 38-26 58-29M80 99c17-10 35-15 53-15M91 106c14-4 26-5 39-4"/>
+      </g>
+      <g transform="translate(420 6) scale(-.72 .72)">
+        <path pathLength="1000" d="M34 111c25-35 55-56 92-52 25 3 43 22 59 26-20 15-39 20-61 9-26-13-51-5-72 19"/>
+        <path pathLength="1000" d="M124 94c-4-19-5-41 8-58 9-12 22-18 37-14-7 6-15 8-22 6l19-5"/>
+        <path pathLength="1000" d="M45 105c-15-10-25-22-32-38 21 9 41 18 56 30"/>
+        <path pathLength="1000" d="M130 93c22 10 37 21 53 34M125 94c14 19 23 37 25 54"/>
+        <path pathLength="1000" d="M72 91c20-18 38-26 58-29M80 99c17-10 35-15 53-15M91 106c14-4 26-5 39-4"/>
+      </g>
+    </g>
+  </symbol>
+  <symbol id="divider" viewBox="0 0 1000 70">
+    <g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+      <path pathLength="1000" d="M0 35h316c42 0 55-22 81-22 21 0 30 13 43 22 13 9 24 13 39 13"/>
+      <g transform="translate(1000 0) scale(-1 1)"><path pathLength="1000" d="M0 35h316c42 0 55-22 81-22 21 0 30 13 43 22 13 9 24 13 39 13"/></g>
+      <path pathLength="1000" d="M459 35c10-21 28-27 41-6 13-21 31-15 41 6-10 21-28 27-41 6-13 21-31 15-41-6Z"/>
+      <path pathLength="1000" d="M463 35c-17-15-34-14-48-2 11 17 28 19 48 2M537 35c17-15 34-14 48-2-11 17-28 19-48 2"/>
+      <path pathLength="1000" d="M500 12c-5 8-5 15 0 23 5-8 5-15 0-23ZM500 58c-5-8-5-15 0-23 5 8 5 15 0 23Z"/>
+    </g>
+  </symbol>
+  <symbol id="corner" viewBox="0 0 150 150">
+    <g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+      <path pathLength="1000" d="M7 143V83C7 42 32 8 73 8h70"/>
+      <path pathLength="1000" d="M22 143V86c0-30 22-57 52-57h69"/>
+      <path pathLength="1000" d="M7 92c18-2 32-13 36-29 4-14-3-27-15-28-12-1-19 10-14 19 4 7 13 7 17 2"/>
+      <path pathLength="1000" d="M22 112c22-1 43-13 51-32 6-15 0-30-13-33-12-3-23 6-19 17 3 8 13 10 18 4"/>
+      <path pathLength="1000" d="M79 8c1 18 12 31 29 35 14 3 26-5 26-17 0-11-10-18-19-13-7 4-7 13-1 17"/>
+      <path pathLength="1000" d="M74 29c-1 15 7 25 21 29 11 3 20-3 20-12 0-8-8-13-15-9-5 3-5 9 0 12"/>
+      <path pathLength="1000" d="M47 57c-8-18-3-33 12-43 8 17 5 31-12 43ZM58 72c13-15 29-18 44-7-14 16-28 19-44 7ZM38 84c-18-5-26-17-24-35 19 6 28 18 24 35Z"/>
+      <path pathLength="1000" d="M86 42c-2 14 5 25 19 30 9-10 9-21-2-31"/>
+    </g>
+  </symbol>
+  <symbol id="vine" viewBox="0 0 200 720">
+    <g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+      <path pathLength="1000" d="M92 708c-24-58 31-92 8-145-18-43-56-42-48-94 8-51 64-59 39-117-17-40-65-50-45-99 17-42 76-43 62-91-9-32-37-48-27-90"/>
+      <path pathLength="1000" d="M99 646c37-18 59-42 60-75-29 2-51 20-60 75ZM67 569c-30-12-45-34-42-62 30 5 48 24 42 62ZM86 465c-36 0-58-18-64-47 33-3 56 13 64 47ZM68 367c28-26 62-30 87-11-24 29-55 35-87 11ZM54 264c-30-10-45-32-42-60 30 4 49 23 42 60ZM77 168c27-25 58-29 81-10-22 28-52 34-81 10ZM89 81c-27-17-36-42-24-67 28 12 40 36 24 67Z"/>
+      <path pathLength="1000" d="M97 646c-34-22-54-48-53-78 28 5 47 28 53 78ZM72 548c28-27 58-37 85-24-19 31-49 42-85 24ZM61 420c-26-27-32-54-16-79 25 19 32 47 16 79ZM68 318c27-24 58-29 83-13-22 29-53 35-83 13ZM60 214c-24-21-29-48-13-71 22 20 27 46 13 71Z"/>
+    </g>
+  </symbol>
+  <symbol id="flower-sprig" viewBox="0 0 220 120">
+    <g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+      <path pathLength="1000" d="M110 112c-2-28-24-39-22-67M110 112c2-29 25-42 22-69M110 112c-13-25-48-26-61-48M110 112c13-25 48-26 61-48"/>
+      <path pathLength="1000" d="M88 72c-23-2-39-14-43-32 23-1 40 11 43 32ZM132 71c23-2 39-14 43-32-23-1-40 11-43 32ZM67 83c-21 7-39 3-53-13 21-9 40-5 53 13ZM153 83c21 7 39 3 53-13-21-9-40-5-53 13Z"/>
+      <path pathLength="1000" d="M84 45c-17-8-22-23-13-38 17 7 23 21 13 38ZM136 45c17-8 22-23 13-38-17 7-23 21-13 38Z"/>
+      <path pathLength="1000" d="M80 10c-10 6-10 17 0 23 10-6 10-17 0-23ZM140 10c-10 6-10 17 0 23 10-6 10-17 0-23Z"/>
+      <path pathLength="1000" d="M109 57c-12-8-12-21 0-30 12 9 12 22 0 30ZM109 57c12-8 12-21 0-30"/>
+    </g>
+  </symbol>
+</defs>
+</svg>
