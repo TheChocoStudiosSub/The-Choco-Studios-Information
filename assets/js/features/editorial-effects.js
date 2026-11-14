@@ -11,7 +11,7 @@ export function initEditorialEffects(){
     element.dataset.reveal="mask-lines";
     element.dataset.drift="";
     if(!element.querySelector(".reveal-line")){
-      const lines=element.innerHTML.split(/<br\\s*\\/?\\s*>/i);
+      const lines=element.innerHTML.split(/<br\s*\/?\s*>/i);
       element.innerHTML=lines.map(line=>'<span class="reveal-line"><span>'+line+'</span></span>').join("");
     }
   });
@@ -19,11 +19,11 @@ export function initEditorialEffects(){
   if(statement)statement.dataset.reveal="words";
   const revealTargets=Array.from(document.querySelectorAll("[data-reveal]"));
   document.querySelectorAll("[data-reveal='words']").forEach(element=>{
-    const fragments=element.textContent.match(/\\s+|[^\\s]+/g)||[];
+    const fragments=element.textContent.match(/\s+|[^\s]+/g)||[];
     const fragment=document.createDocumentFragment();
     let index=0;
     for(const part of fragments){
-      if(/^\\s+$/.test(part))fragment.append(document.createTextNode(part));
+      if(/^\s+$/.test(part))fragment.append(document.createTextNode(part));
       else{
         const word=document.createElement("span");
         word.className="reveal-word";
@@ -36,7 +36,7 @@ export function initEditorialEffects(){
   });
   document.querySelectorAll("[data-reveal='counter']").forEach(element=>{
     const digits=element.textContent.trim();
-    if(!/^\\d+$/.test(digits)||element.querySelector(".counter-window"))return;
+    if(!/^\d+$/.test(digits)||element.querySelector(".counter-window"))return;
     const fragment=document.createDocumentFragment();
     for(const digit of digits){
       const windowElement=document.createElement("span");
