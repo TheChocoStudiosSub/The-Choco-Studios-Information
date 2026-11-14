@@ -45,17 +45,10 @@ export function initEditorialEffects(){
   cursor.className="cursor-orbit";
   cursor.setAttribute("aria-hidden","true");
   document.body.append(cursor);
-  let pointerX=-100,pointerY=-100,frame=0;
-  const moveCursor=()=>{
-    cursor.style.setProperty("--cursor-x",pointerX+"px");
-    cursor.style.setProperty("--cursor-y",pointerY+"px");
-    frame=0;
-  };
   document.addEventListener("pointermove",event=>{
-    pointerX=event.clientX;pointerY=event.clientY;
+    cursor.style.transform="translate3d("+event.clientX+"px,"+event.clientY+"px,0) translate(-50%,-50%)";
     cursor.classList.add("is-visible");
     document.body.classList.add("has-custom-cursor");
-    if(!frame)frame=requestAnimationFrame(moveCursor);
   },{passive:true});
   document.addEventListener("pointerout",event=>{
     if(!event.relatedTarget)cursor.classList.remove("is-visible");
