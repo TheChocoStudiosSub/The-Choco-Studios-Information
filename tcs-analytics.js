@@ -1,6 +1,6 @@
 (() => {
 "use strict";
-const ENDPOINT="https://choco-ai-independent-seven.vercel.app/api/license?feature=tcs-public";
+const ENDPOINT="https://tcs-choco-ai.vercel.app/api/license?feature=tcs-public";
 const SITE=document.currentScript?.dataset.site||"tcs-website";
 function sessionId(key){
  try{let value=sessionStorage.getItem(key);if(!value){value=crypto.randomUUID();sessionStorage.setItem(key,value);}return value;}
@@ -9,7 +9,7 @@ function sessionId(key){
 const visitorId=sessionId("tcs_analytics_visitor_v1");
 const session=sessionId("tcs_analytics_session_v1");
 function send(payload){
- const data=JSON.stringify({siteKey:SITE,visitorId,sessionId:session,...payload});
+ const data=JSON.stringify({action:"track",siteKey:SITE,visitorId,sessionId:session,...payload});
  try{if(navigator.sendBeacon&&navigator.sendBeacon(ENDPOINT,new Blob([data],{type:"application/json"})))return;}catch{}
  fetch(ENDPOINT,{method:"POST",mode:"cors",credentials:"omit",keepalive:true,headers:{"Content-Type":"application/json"},body:data}).catch(()=>{});
 }
