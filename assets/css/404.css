@@ -11,3 +11,5 @@ body.error-page{min-height:100svh;display:flex;flex-direction:column;background:
 .error-footer{padding:25px 0;border-top:1px solid var(--rule);color:var(--muted);font-size:14px}
 .error-footer-inner{width:min(var(--content),calc(100% - 96px));margin:auto}
 @media(max-width:560px){.error-header-inner,.error-main,.error-footer-inner{width:calc(100% - 36px)}.error-content{margin-left:0}.error-code{font-size:130px}.error-content h1{font-size:52px}}
+.error-actions .primary{display:inline-flex;min-height:52px;align-items:center;justify-content:center;padding:0 22px;border:1px solid var(--accent);color:var(--accent);font-size:15px}
+.error-actions .primary:hover{background:var(--accent);color:var(--bg)}
