@@ -99,7 +99,7 @@
 .contact-method-copy strong{font-family:var(--serif);font-size:clamp(27px,3vw,40px);font-weight:400}
 .contact-method-copy small{color:var(--muted);font-size:16px;overflow-wrap:anywhere}
 @supports ((-webkit-background-clip:text) or (background-clip:text)){
- .contact-method-copy strong,.contact-method-copy small{--contact-copy-color:var(--text);display:inline-block;background-image:linear-gradient(var(--accent-bright),var(--accent-bright)),linear-gradient(var(--accent-bright),var(--accent-bright)),linear-gradient(var(--contact-copy-color),var(--contact-copy-color));background-repeat:no-repeat;background-size:0% 100%,0% 100%,100% 100%;background-position:left center,right center,center;background-clip:text;-webkit-background-clip:text;color:transparent;-webkit-text-fill-color:transparent;transition:background-size 680ms cubic-bezier(.76,0,.24,1)}
+ .contact-method-copy strong,.contact-method-copy small{--contact-copy-color:var(--text);display:inline-block;width:max-content;max-width:100%;justify-self:start;background-image:linear-gradient(var(--accent-bright),var(--accent-bright)),linear-gradient(var(--accent-bright),var(--accent-bright)),linear-gradient(var(--contact-copy-color),var(--contact-copy-color));background-repeat:no-repeat;background-size:0% 100%,0% 100%,100% 100%;background-position:left center,right center,center;background-clip:text;-webkit-background-clip:text;color:transparent;-webkit-text-fill-color:transparent;transition:background-size 680ms cubic-bezier(.76,0,.24,1)}
  .contact-method-copy small{--contact-copy-color:var(--muted)}
  .contact-method:is(:hover,:focus-visible) .contact-method-copy strong,.contact-method:is(:hover,:focus-visible) .contact-method-copy small{background-size:50% 100%,50% 100%,100% 100%}
 }
