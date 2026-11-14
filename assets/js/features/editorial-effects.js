@@ -141,6 +141,68 @@ export function initEditorialEffects(){
       button.style.setProperty("--magnet-y","0px");
     });
   });
+  const trail=document.createElement("canvas");
+  trail.id="tcs-cursor-trail";
+  trail.setAttribute("aria-hidden","true");
+  document.body.append(trail);
+  const context=trail.getContext("2d",{alpha:true});
+  const points=[];
+  const trailLifetime=760;
+  const maxPoints=40;
+  let trailFrame=0;
+  let pixelRatio=1;
+  let viewportWidth=window.innerWidth;
+  let viewportHeight=window.innerHeight;
+  const resizeTrail=()=>{
+    pixelRatio=Math.min(window.devicePixelRatio||1,2);
+    viewportWidth=window.innerWidth;
+    viewportHeight=window.innerHeight;
+    trail.width=Math.round(viewportWidth*pixelRatio);
+    trail.height=Math.round(viewportHeight*pixelRatio);
+    trail.style.width=viewportWidth+"px";
+    trail.style.height=viewportHeight+"px";
+    if(context)context.setTransform(pixelRatio,0,0,pixelRatio,0,0);
+  };
+  const drawTrail=now=>{
+    trailFrame=0;
+    if(!context||document.hidden)return;
+    while(points.length&&now-points[0].time>trailLifetime)points.shift();
+    context.clearRect(0,0,viewportWidth,viewportHeight);
+    context.globalCompositeOperation="lighter";
+    context.lineCap="round";
+    context.lineJoin="round";
+    for(let index=1;index<points.length;index++){
+      const previous=points[index-1];
+      const current=points[index];
+      const age=Math.max(0,Math.min(1,(now-current.time)/trailLifetime));
+      const opacity=(1-age)*(current.hover?.18:.105);
+      if(opacity<=.002)continue;
+      context.beginPath();
+      context.moveTo(previous.x,previous.y);
+      context.lineTo(current.x,current.y);
+      context.lineWidth=Math.max(.35,2.2*(1-age));
+      context.strokeStyle="rgba(200,169,106,"+opacity+")";
+      context.shadowColor="rgba(227,203,148,"+(opacity*.72)+")";
+      context.shadowBlur=4*(1-age);
+      context.stroke();
+    }
+    context.globalCompositeOperation="source-over";
+    context.shadowBlur=0;
+    if(points.length)trailFrame=requestAnimationFrame(drawTrail);
+  };
+  const scheduleTrail=()=>{
+    if(!trailFrame&&!document.hidden)trailFrame=requestAnimationFrame(drawTrail);
+  };
+  resizeTrail();
+  window.addEventListener("resize",resizeTrail,{passive:true});
+  document.addEventListener("visibilitychange",()=>{
+    if(document.hidden){
+      if(trailFrame)cancelAnimationFrame(trailFrame);
+      trailFrame=0;
+      points.length=0;
+      if(context)context.clearRect(0,0,viewportWidth,viewportHeight);
+    }
+  });
   const cursor=document.createElement("span");
   cursor.className="cursor-orbit";
   cursor.setAttribute("aria-hidden","true");
@@ -149,6 +211,18 @@ export function initEditorialEffects(){
     cursor.style.transform="translate3d("+event.clientX+"px,"+event.clientY+"px,0) translate(-50%,-50%)";
     cursor.classList.add("is-visible");
     document.body.classList.add("has-custom-cursor");
+    if(!context||document.hidden||event.pointerType==="touch")return;
+    const interactive=Boolean(event.target?.closest?.("a,button,summary"));
+    let samples=[event];
+    if(typeof event.getCoalescedEvents==="function"){
+      try{const coalesced=event.getCoalescedEvents();if(coalesced.length)samples=coalesced.slice(-5);}catch{}
+    }
+    const now=performance.now();
+    for(const sample of samples){
+      points.push({x:sample.clientX,y:sample.clientY,time:now,hover:interactive});
+      if(points.length>maxPoints)points.splice(0,points.length-maxPoints);
+    }
+    scheduleTrail();
   },{passive:true});
   document.addEventListener("pointerout",event=>{if(!event.relatedTarget)cursor.classList.remove("is-visible");});
   document.querySelectorAll("a,button,summary").forEach(element=>{
