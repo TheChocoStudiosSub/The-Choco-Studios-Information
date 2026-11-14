@@ -184,7 +184,7 @@ html.ornament-ready [data-ornament-draw] use{stroke-dasharray:1000;stroke-dashof
 html.ornament-ready [data-ornament-draw].is-drawn use{stroke-dashoffset:0;transition:stroke-dashoffset 2200ms cubic-bezier(.22,.72,.25,1)}
 .hero-ornament-cloud{position:absolute;width:clamp(390px,57vw,760px);height:auto;opacity:.29;translate:0 var(--cloud-shift,0px);animation:tcs-cloud-drift 54s ease-in-out infinite alternate}
 .hero-ornament-cloud--upper{top:-5%;right:-13%}
-.hero-ornament-cloud--lower{bottom:1%;left:-24%;width:clamp(340px,43vw,590px);opacity:.19;animation-duration:68s;animation-direction:alternate-reverse}
+.hero-ornament-cloud--lower{bottom:1%;left:-24%;width:clamp(340px,43vw,590px);opacity:.25;animation-duration:68s;animation-direction:alternate-reverse}
 .hero-bird-pair{position:absolute;top:35%;right:clamp(28px,7vw,112px);width:clamp(118px,15vw,190px);height:auto;opacity:.42;animation:tcs-bird-drift 10s ease-in-out infinite}
 .hero-corner{position:absolute;width:clamp(66px,9vw,112px);height:auto;opacity:.43}
 .hero-corner--tl{top:24px;left:24px}

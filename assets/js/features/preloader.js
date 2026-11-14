@@ -4,12 +4,13 @@
   const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let seen=false;
   try{seen=sessionStorage.getItem("tcs-information-preloader-v1")==="seen";}catch{}
-  const remove=()=>{
+  const remove=(skipped=false)=>{
     loader.remove();
     document.body.classList.remove("preloader-active");
-    document.body.classList.add("preloader-skip");
+    if(skipped)document.body.classList.add("preloader-skip");
+    else document.body.classList.add("preloader-done");
   };
-  if(seen||reduced){remove();return;}
+  if(seen||reduced){remove(true);return;}
   try{sessionStorage.setItem("tcs-information-preloader-v1","seen");}catch{}
   loader.classList.add("is-managed");
   let closed=false;
@@ -36,7 +37,7 @@
     closed=true;
     clearTimeout(minimumTimer);
     clearTimeout(maximumTimer);
-    remove();
+    remove(true);
   };
   const checkReady=()=>{if(minimumElapsed&&siteReady)finish();};
   minimumTimer=window.setTimeout(()=>{minimumElapsed=true;checkReady();},1900);
