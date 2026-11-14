@@ -1,15 +1,33 @@
-:root {
-  color-scheme: dark;
-  --bg: #0b0f17;
-  --sidebar: #0e131d;
-  --panel: #121925;
-  --panel-hover: #182130;
-  --border: rgba(192, 204, 229, .12);
-  --text: #f0f3fa;
-  --muted: #9aa5ba;
-  --blue: #8aa8ff;
-  --purple: #b39bff;
-  --gradient: linear-gradient(120deg, #82a5ff, #b39aff);
-  --content: 1160px;
-  --radius-card: 18px;
+@font-face{
+  font-family:"Cormorant Garamond";
+  src:url("../fonts/cormorant-garamond-latin-wght-normal.woff2") format("woff2");
+  font-style:normal;
+  font-weight:300 700;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Jost";
+  src:url("../fonts/jost-latin-wght-normal.woff2") format("woff2");
+  font-style:normal;
+  font-weight:100 900;
+  font-display:swap;
+}
+:root{
+  color-scheme:dark;
+  --bg:#050505;
+  --surface:#0b0b0b;
+  --surface-raised:#111111;
+  --text:#ece6d8;
+  --muted:#9a9484;
+  --accent:#c8a96a;
+  --accent-bright:#e3cb94;
+  --rule:rgba(200,169,106,.17);
+  --rule-strong:rgba(200,169,106,.32);
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"Jost",Arial,sans-serif;
+  --content:1320px;
+  --reading:560px;
+  --section-space:clamp(120px,16vw,260px);
+  --header-height:84px;
+  --ease-luxury:cubic-bezier(.76,0,.24,1);
 }

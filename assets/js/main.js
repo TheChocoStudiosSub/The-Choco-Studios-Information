@@ -5,6 +5,7 @@ import { renderMissions } from "./features/missions.js";
 import { renderNavigation } from "./features/navigation.js";
 import { initActiveNavigation } from "./features/active-navigation.js";
 import { applySiteLinks } from "./features/links.js";
+import { initEditorialEffects } from "./features/editorial-effects.js";
 import { products } from "../../data/products.js";
 import { navigation } from "../../data/navigation.js";
 import { site } from "../../data/site.js";
@@ -22,31 +23,6 @@ const components = [
   { mount: "contact", file: "components/contact.html" },
   { mount: "site-footer", file: "components/footer.html" }
 ];
-
-function initEditorialMotion() {
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const targets = document.querySelectorAll(
-    ".hero-content, .hero-route-panel, .section-head, .intro-fact, .about-fact-card, .about-purpose-card, .about-bottom-card, .overview-card, .product-card, .project-row, .technology-card, .safety-card, .contact-card"
-  );
-  if (reduceMotion || !("IntersectionObserver" in window)) {
-    targets.forEach(element => element.classList.add("is-visible"));
-    return;
-  }
-
-  const observer = new IntersectionObserver((entries, currentObserver) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-visible");
-      currentObserver.unobserve(entry.target);
-    });
-  }, { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
-
-  targets.forEach((element, index) => {
-    element.classList.add("motion-reveal");
-    element.style.setProperty("--reveal-delay", `${Math.min(index % 5, 4) * 65}ms`);
-    observer.observe(element);
-  });
-}
 
 function createLoadError(message, details = {}) {
   const error = new Error(message, details.cause ? { cause: details.cause } : undefined);
@@ -102,7 +78,6 @@ async function loadComponents() {
           }
         );
       }
-
       const markup = await response.text();
       return { component, mount, markup };
     } catch (error) {
@@ -134,6 +109,10 @@ async function loadComponents() {
   for (const item of loaded) item.mount.innerHTML = item.markup;
 }
 
+function announceSiteReady() {
+  document.dispatchEvent(new Event("tcs:site-ready"));
+}
+
 try {
   await loadComponents();
   applySiteContent(site);
@@ -143,20 +122,21 @@ try {
   renderCatalog(products);
   renderMissions(site.missions);
   applySiteLinks(site);
-  initEditorialMotion();
+  initEditorialEffects();
 
-  // Navigasi ke anchor dari halaman detail harus menunggu komponen berisi target selesai dimuat.
   const initialHash = window.location.hash.slice(1);
   const initialTarget = initialHash ? document.getElementById(initialHash) : null;
   if (initialTarget) initialTarget.scrollIntoView({ block: "start" });
 
   const year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
+  announceSiteReady();
 } catch (error) {
   reportDiagnostic(error, "assets/js/main.js · inisialisasi");
   console.error("Inisialisasi situs TCS gagal:", error);
-  const main = document.getElementById("site-main");
-  if (main) {
-    main.innerHTML = '<section class="section"><div class="container"><h2>Halaman belum dapat dimuat</h2><p class="section-intro">Panel diagnostik menampilkan jenis kesalahan, sumber, status HTTP jika tersedia, dan langkah pemeriksaan. Muat ulang halaman setelah pemeriksaan.</p></div></section>';
+  const mainElement = document.getElementById("site-main");
+  if (mainElement) {
+    mainElement.innerHTML = '<section class="section"><div class="container"><h2>Halaman belum dapat dimuat</h2><p class="section-intro">Panel diagnostik menampilkan jenis kesalahan, sumber, status HTTP jika tersedia, dan langkah pemeriksaan. Muat ulang halaman setelah pemeriksaan.</p></div></section>';
   }
+  announceSiteReady();
 }

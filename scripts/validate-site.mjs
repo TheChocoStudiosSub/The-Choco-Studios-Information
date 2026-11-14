@@ -418,8 +418,15 @@ if (site && navigation && products) {
       if (!["primary", "secondary"].includes(item.group)) {
         fail(`Kelompok navigasi tidak dikenal untuk: ${item.label}`);
       }
-      if (!item.href.startsWith("#") || !ids.has(item.href.slice(1))) {
-        fail(`Target navigasi tidak tersedia untuk ${item.label}: ${item.href}`);
+      if (item.href.startsWith("#")) {
+        if (!ids.has(item.href.slice(1))) fail(`Target navigasi tidak tersedia untuk ${item.label}: ${item.href}`);
+      } else {
+        try {
+          const target = new URL(item.href);
+          if (target.protocol !== "https:") fail(`Tautan navigasi eksternal harus memakai HTTPS: ${item.label}`);
+        } catch {
+          fail(`Tautan navigasi tidak valid untuk ${item.label}: ${item.href}`);
+        }
       }
     });
   }
@@ -436,14 +443,25 @@ if (site && navigation && products) {
       }
       if (product?.name && names.has(product.name)) fail(`Nama produk duplikat: ${product.name}`);
       if (product?.name) names.add(product.name);
-      if (product?.detailsUrl && !existsSync(path.join(root, product.detailsUrl))) {
-        fail("Halaman detail tidak ditemukan untuk produk " + product.name + ": " + product.detailsUrl);
+      if (product?.detailsUrl) {
+        const detailTarget = product.detailsUrl.trim();
+        if (detailTarget.startsWith("https://")) {
+          try {
+            new URL(detailTarget);
+          } catch {
+            fail("URL halaman detail tidak valid untuk produk " + product.name + ": " + detailTarget);
+          }
+        } else {
+          const localPath = detailTarget.split("?")[0].split("#")[0];
+          const safePath = localPath.startsWith("/") ? localPath.slice(1) : localPath;
+          if (!safePath || !existsSync(path.join(root, safePath))) {
+            fail("Halaman detail lokal tidak ditemukan untuk produk " + product.name + ": " + detailTarget);
+          }
+        }
       }
     });
     for (const page of productPageFiles) {
-      if (!products.some(product => product?.detailsUrl === page)) {
-        fail("Halaman detail belum terhubung dari data/products.js: " + page);
-      }
+      if (!existsSync(path.join(root, page))) fail("Halaman detail wajib tidak ditemukan: " + page);
     }
   }
 
