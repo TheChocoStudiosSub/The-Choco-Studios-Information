@@ -488,3 +488,5 @@ body.error-page>.error-main,body.error-page>.error-footer{background:rgba(5,5,5,
 /* Visible TCS identity mark on the Information home screen. */
 #site-main>[data-panel="home"] .hero-tcs-logo{display:block;width:clamp(76px,8vw,112px);height:auto;max-height:112px;object-fit:contain;margin:0 0 clamp(22px,3vh,34px);filter:drop-shadow(0 0 22px rgba(200,169,106,.2));opacity:.98}
 @media(max-width:650px){#site-main>[data-panel="home"] .hero-tcs-logo{width:72px;max-height:72px;margin-bottom:20px}}
+
+.sidebar-bottom a.choco-ai-cta{display:inline-flex;align-items:center;justify-content:center;width:max-content;padding:9px 13px;border:1px solid currentColor;border-radius:4px;font-weight:700;text-decoration:none;transition:background .2s,color .2s}.sidebar-bottom a.choco-ai-cta:hover{background:var(--text-primary,#fff);color:var(--bg-primary,#101827)}
