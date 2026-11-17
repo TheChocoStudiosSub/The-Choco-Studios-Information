@@ -77,9 +77,11 @@ const requiredFiles = [
   "assets/css/layout.css",
   "assets/css/components.css",
   "assets/css/diagnostics.css",
+  "assets/css/space-background.css",
   "assets/css/product-pages.css",
   "assets/css/responsive.css",
   "assets/js/diagnostics.js",
+  "assets/js/features/space-background.js",
   "assets/js/main.js",
   "assets/js/menu.js",
   "assets/js/features/catalog.js",
@@ -117,6 +119,24 @@ for (const file of requiredFiles) {
   if (!existsSync(path.join(root, file))) fail(`File wajib hilang: ${file}`);
 }
 if (failures.length === 0) pass(`${requiredFiles.length} file wajib tersedia`);
+
+const spaceBackgroundScript = read("assets/js/features/space-background.js");
+const spaceBackgroundStyles = read("assets/css/space-background.css");
+const buildSource = read("scripts/build-site.mjs");
+if (
+  spaceBackgroundScript.includes("METEOR_OPACITY_KEYFRAMES=[0,.10,.15,.20,.40,.20,.15,.10,0]") &&
+  spaceBackgroundScript.includes("document.body.append(starsCanvas,meteorCanvas)") &&
+  spaceBackgroundScript.includes("prefers-reduced-motion") &&
+  spaceBackgroundStyles.includes("body > .tcs-space-canvas") &&
+  spaceBackgroundStyles.includes("body > .tcs-starfield-canvas") &&
+  buildSource.includes("data-tcs-space-background-style") &&
+  buildSource.includes("data-tcs-space-background-script") &&
+  buildSource.includes("collectProductHtml")
+) {
+  pass("Background global full-screen, kurva opacity meteor, reduced-motion, dan pemasangan semua halaman diperiksa");
+} else {
+  fail("Konfigurasi background global atau pemasangan otomatis ke halaman terbit belum lengkap");
+}
 
 const index = read("index.html");
 const packageJson = read("package.json");
