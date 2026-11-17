@@ -397,3 +397,89 @@ body.error-page>.error-main,body.error-page>.error-footer{background:rgba(5,5,5,
   }
   .side-nav a.is-current::before{animation:none!important}
 }
+
+
+/* Hide decorative ordinal markers throughout the public Information pages. */
+.section-number,
+.entry-index,
+.card-index,
+.entry-number {
+  display: none !important;
+}
+
+/* Reclaim the space previously reserved for the removed ordinal markers. */
+#site-main .project-row {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(16px, 3vw, 34px);
+}
+#site-main .project-copy h3 {
+  grid-column: 1;
+  grid-row: 1;
+}
+#site-main .project-copy p {
+  grid-column: 1;
+  grid-row: 2;
+}
+#site-main .project-row .button {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  justify-self: end;
+  margin: 0;
+}
+#site-main .technology-entry {
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(18px, 3vw, 34px);
+}
+#site-main .technology-entry h3 {
+  grid-column: 1;
+}
+#site-main .technology-entry p {
+  grid-column: 2;
+}
+#site-main .editorial-disclosure summary {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(16px, 3vw, 30px);
+}
+#site-main .disclosure-body {
+  margin-left: 0;
+  margin-right: 0;
+}
+#site-main .product-entry {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (max-width: 768px) {
+  #site-main .project-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+  #site-main .project-copy {
+    display: block;
+  }
+  #site-main .project-copy h3,
+  #site-main .project-copy p,
+  #site-main .project-row .button {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  #site-main .project-row .button {
+    justify-self: start;
+    margin: 0;
+  }
+  #site-main .technology-entry {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+  #site-main .technology-entry h3,
+  #site-main .technology-entry p {
+    grid-column: 1;
+  }
+  #site-main .editorial-disclosure summary {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 18px;
+  }
+  #site-main .disclosure-body {
+    margin: 0 0 26px;
+  }
+}
