@@ -622,7 +622,7 @@ if (!index.includes('src="assets/images/the-choco-studios-logo.png"') ||
   fail("Layar pembuka, favicon, dan halaman 404 harus menggunakan logo PNG resmi TCS");
 }
 for (const page of productPages) {
-  if (!page.content.includes('class="detail-brand-logo" src="assets/images/the-choco-studios-logo.png"')) {
+  if (!page.content.includes('class="detail-brand-logo" src="../assets/images/the-choco-studios-logo.png"')) {
     fail("Halaman detail produk belum menggunakan logo PNG resmi TCS: " + page.file);
   }
 }
