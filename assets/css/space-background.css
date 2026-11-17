@@ -1,0 +1,81 @@
+/* Shared full-screen TCS black-and-gold space atmosphere. */
+html {
+  background: #050505 !important;
+}
+body {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse 47% 62% at 69% 49%, rgba(116, 82, 38, .16), transparent 74%),
+    radial-gradient(ellipse 34% 42% at 86% 20%, rgba(109, 78, 39, .105), transparent 76%),
+    radial-gradient(ellipse 42% 44% at 63% 91%, rgba(83, 63, 37, .105), transparent 80%),
+    radial-gradient(ellipse 75% 90% at 78% 47%, rgba(27, 23, 17, .35), transparent 80%),
+    linear-gradient(116deg, #080807 0%, #070706 42%, #090806 100%) !important;
+  background-attachment: fixed !important;
+}
+body.product-detail-page,
+body.error-page {
+  background-color: transparent !important;
+}
+body > .tcs-space-canvas,
+body > .tcs-starfield-canvas {
+  position: fixed !important;
+  inset: 0 !important;
+  display: block;
+  width: 100vw !important;
+  height: 100vh !important;
+  margin: 0;
+  border: 0;
+  pointer-events: none !important;
+  user-select: none;
+}
+body > .tcs-space-canvas {
+  z-index: 0 !important;
+  opacity: .96;
+}
+body > .tcs-starfield-canvas {
+  z-index: 1 !important;
+  opacity: 1;
+}
+body > .site-shell,
+body > .error-header,
+body > .error-main,
+body > .error-footer,
+body.product-detail-page > .detail-header,
+body.product-detail-page > .detail-main,
+body.product-detail-page > .detail-footer {
+  position: relative;
+  z-index: 2;
+  background-color: transparent;
+}
+.topbar,
+.detail-header {
+  background: rgba(5, 5, 5, .76) !important;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+.nav {
+  background: rgba(5, 5, 5, .94) !important;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+.instagram-notice {
+  background: rgba(11, 11, 11, .64) !important;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.site-footer,
+.detail-footer {
+  background: rgba(11, 11, 11, .62) !important;
+}
+.product-detail-page,
+.detail-main,
+.error-main {
+  background: transparent !important;
+}
+@media (max-width: 650px) {
+  body > .tcs-space-canvas { opacity: .78; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body > .tcs-space-canvas { opacity: .82; }
+}
