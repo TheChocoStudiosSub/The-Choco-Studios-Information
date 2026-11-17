@@ -273,8 +273,11 @@ if (!/class="skip-link"\s+href="#site-main"/.test(index)) fail("Tautan lewati ke
 if (!header.includes('<aside class="sidebar"') ||
     !header.includes('class="side-nav"') ||
     !header.includes('data-panel-link="home"') ||
-    !header.includes('class="sidebar-brand"')) {
-  fail("Komponen navigasi harus memakai sidebar resmi TCS dengan logo dan tautan panel");
+    !header.includes('class="sidebar-brand"') ||
+    !header.includes('aria-label="Home"') ||
+    !header.includes('aria-label="Overview"') ||
+    !header.includes('aria-label="Kontak"')) {
+  fail("Sidebar harus mengikuti struktur Official dan memberi nama aksesibel untuk navigasi ikon");
 }
 if (!/import\s*\{\s*initPanelNavigation\s*\}\s*from\s*"\.\/features\/panel-navigation\.js"/.test(main) ||
     !/initPanelNavigation\(\)/.test(main)) {
