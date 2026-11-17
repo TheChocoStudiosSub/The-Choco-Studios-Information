@@ -367,6 +367,11 @@ if (failures.length === 0) pass("Metadata, landmark aksesibilitas, dan kontrol m
 const componentFiles = [...main.matchAll(/file:\s*["']([^"']+\.html)["']/g)].map(match => match[1]);
 const componentMounts = [...main.matchAll(/mount:\s*["']([^"']+)["']/g)].map(match => match[1]);
 
+if (!main.includes('const mount = document.querySelector(`[data-component="${component.mount}"]`) ||') ||
+    !main.includes("document.getElementById(component.mount)")) {
+  fail("Pemuatan komponen harus menghormati mount bertingkat agar footer tidak tertimpa komponen kontak");
+}
+
 for (const file of componentFiles) {
   if (!existsSync(path.join(root, file))) fail(`Komponen yang dirujuk main.js tidak ditemukan: ${file}`);
 }

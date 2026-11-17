@@ -50,8 +50,8 @@ function reportDiagnostic(error, source = "assets/js/main.js") {
 
 async function loadComponents() {
   const loaded = await Promise.all(components.map(async component => {
-    const mount = document.getElementById(component.mount) ||
-      document.querySelector(`[data-component="${component.mount}"]`);
+    const mount = document.querySelector(`[data-component="${component.mount}"]`) ||
+      document.getElementById(component.mount);
     if (!mount) {
       return {
         component,
