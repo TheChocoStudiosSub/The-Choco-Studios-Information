@@ -1,6 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <title>The Choco Studios</title>
-  <rect x="1" y="1" width="62" height="62" rx="2" fill="#050505" stroke="#c8a96a" stroke-width="1"/>
-  <path d="M12 16h40" stroke="#c8a96a" stroke-width="1"/>
-  <text x="32" y="43" text-anchor="middle" font-family="Georgia,serif" font-size="20" font-weight="400" letter-spacing="-1" fill="#ece6d8">TCS</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <title>Logo resmi The Choco Studios</title>
+  <image href="/assets/images/the-choco-studios-logo.png" x="0" y="0" width="128" height="128" preserveAspectRatio="xMidYMid meet"/>
 </svg>

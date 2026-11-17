@@ -605,6 +605,29 @@ for (const topic of questionTopics) {
 if (questionTopics.length === 0) fail("Bank pertanyaan tidak memiliki file kategori");
 if (failures.length === 0) pass(questionIdOwners.size + " ID pertanyaan unik dan " + questionTopics.length + " kategori terindeks di kedua indeks");
 
+
+const officialBrandLogoPath = "assets/images/the-choco-studios-logo.png";
+const officialFooter = read("components/footer.html");
+const officialFavicon = read("favicon.svg");
+if (!existsSync(path.join(root, officialBrandLogoPath))) {
+  fail("Aset PNG logo resmi The Choco Studios tidak ditemukan");
+}
+if (!header.includes('class="brand-logo" src="/assets/images/the-choco-studios-logo.png"') ||
+    !officialFooter.includes('class="brand-logo" src="/assets/images/the-choco-studios-logo.png"')) {
+  fail("Header dan footer harus menggunakan logo PNG resmi TCS");
+}
+if (!index.includes('src="assets/images/the-choco-studios-logo.png"') ||
+    !officialFavicon.includes('href="/assets/images/the-choco-studios-logo.png"') ||
+    !custom404.includes('class="error-brand-logo" src="/assets/images/the-choco-studios-logo.png"')) {
+  fail("Layar pembuka, favicon, dan halaman 404 harus menggunakan logo PNG resmi TCS");
+}
+for (const page of productPages) {
+  if (!page.content.includes('class="detail-brand-logo" src="../assets/images/the-choco-studios-logo.png"')) {
+    fail("Halaman detail produk belum menggunakan logo PNG resmi TCS: " + page.file);
+  }
+}
+if (failures.length === 0) pass("Logo resmi TCS terpasang dan tervalidasi pada seluruh halaman publik");
+
 if (failures.length) {
   console.error("\nVALIDASI GAGAL");
   for (const failure of failures) console.error(`- ${failure}`);

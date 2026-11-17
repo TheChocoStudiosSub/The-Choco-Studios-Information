@@ -24,6 +24,7 @@ const publicDirectories = [
 const requiredOutput = [
   ...publicFiles,
   "assets/js/main.js",
+  "assets/images/the-choco-studios-logo.png",
   "assets/js/diagnostics.js",
   "assets/css/space-background.css",
   "assets/js/features/space-background.js",

@@ -1,7 +1,8 @@
 body.error-page{min-height:100svh;display:flex;flex-direction:column;background:var(--bg)}
 .error-header{padding:30px 0;border-bottom:1px solid var(--rule)}
 .error-header-inner{width:min(var(--content),calc(100% - 96px));margin:auto}
-.error-wordmark{font-family:var(--serif);font-size:25px;color:var(--text)}
+.error-wordmark{display:inline-flex;align-items:center;gap:13px;font-family:var(--serif);font-size:25px;color:var(--text)}
+.error-brand-logo{display:block;width:48px;height:48px;flex:0 0 48px;object-fit:contain}
 .error-main{width:min(1160px,calc(100% - 96px));margin:auto;flex:1;display:flex;align-items:center;padding:clamp(90px,13vw,180px) 0}
 .error-content{max-width:760px;margin-left:clamp(0px,10vw,150px)}
 .error-code{margin:0 0 28px;color:var(--accent);font-family:var(--serif);font-size:clamp(110px,20vw,220px);font-weight:300;line-height:.72;letter-spacing:-.07em}

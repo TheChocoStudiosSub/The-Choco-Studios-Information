@@ -22,6 +22,7 @@
 <meta name="twitter:title" content="The Choco Studios (TCS) — Pusat Informasi Resmi">
 <meta name="twitter:description" content="Studio kreatif independen multisektor yang didirikan, dimiliki, dan dikelola secara mandiri oleh Hasby Prasetya Saprudin. Kenali arah strategis, proyek, dan inisiatif TCS.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="/assets/images/the-choco-studios-logo.png">
 <title>The Choco Studios (TCS) — Pusat Informasi Resmi</title>
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/base.css">
@@ -52,10 +53,7 @@
 #tcs-preloader .preloader-stage{position:relative;z-index:3;display:grid;justify-items:center;width:min(82vw,580px);text-align:center;pointer-events:none}
 #tcs-preloader .preloader-wordmark{opacity:0;color:var(--text,#ece6d8);font-family:var(--serif,Georgia,serif);font-size:clamp(24px,4vw,36px);font-weight:300;letter-spacing:.12em;animation:tcs-wordmark-in 700ms cubic-bezier(.2,.7,.2,1) 500ms forwards}
 #tcs-preloader .preloader-medal{display:grid;place-items:center;position:relative;width:82px;height:82px;margin-top:24px;opacity:0;transform:translateY(5px);animation:tcs-medal-in 600ms cubic-bezier(.2,.7,.2,1) 1000ms forwards}
-#tcs-preloader .preloader-medal svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-#tcs-preloader .preloader-medal circle,#tcs-preloader .preloader-medal path{fill:none;stroke:var(--accent,#c8a96a);stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420;animation:tcs-medal-draw 600ms cubic-bezier(.2,.7,.2,1) 1000ms forwards}
-#tcs-preloader .preloader-medal .medal-inner{stroke:var(--accent-bright,#e3cb94);stroke-dasharray:360;stroke-dashoffset:360}
-#tcs-preloader .preloader-monogram{position:relative;z-index:1;color:var(--accent-bright,#e3cb94);font-family:var(--sans,Arial,sans-serif);font-size:11px;letter-spacing:.18em;opacity:0;animation:tcs-monogram-in 420ms ease 1180ms forwards}
+#tcs-preloader .preloader-medal img{display:block;width:100%;height:100%;object-fit:contain}
 #tcs-preloader .preloader-stage{transition:opacity 400ms ease,transform 400ms ease}
 #tcs-preloader.is-finishing .preloader-stage{opacity:0;transform:translateY(-8px)}
 #tcs-preloader .preloader-line{transition:width 400ms cubic-bezier(.76,0,.24,1) 400ms}
@@ -71,15 +69,13 @@
 @keyframes tcs-line-draw{to{transform:translateX(-50%) scaleX(1)}}
 @keyframes tcs-wordmark-in{from{opacity:0;letter-spacing:.12em}to{opacity:1;letter-spacing:.27em}}
 @keyframes tcs-medal-in{to{opacity:1;transform:translateY(0)}}
-@keyframes tcs-medal-draw{to{stroke-dashoffset:0}}
-@keyframes tcs-monogram-in{to{opacity:1}}
 @keyframes tcs-fallback-stage-out{to{opacity:0;transform:translateY(-8px)}}
 @keyframes tcs-fallback-line-expand{to{width:100vw}}
 @keyframes tcs-fallback-line-hide{to{visibility:hidden}}
 @keyframes tcs-fallback-top{to{transform:translateY(-101%)}}
 @keyframes tcs-fallback-bottom{to{transform:translateY(101%)}}
 @keyframes tcs-fallback-hide{to{visibility:hidden;pointer-events:none}}
-@media(prefers-reduced-motion:reduce){#tcs-preloader{animation:tcs-reduced-hide 200ms ease forwards!important}#tcs-preloader .preloader-curtain{transition:none}#tcs-preloader .preloader-line,#tcs-preloader .preloader-wordmark,#tcs-preloader .preloader-medal,#tcs-preloader .preloader-monogram,#tcs-preloader .preloader-medal circle,#tcs-preloader .preloader-medal path{animation:none!important;opacity:1;stroke-dashoffset:0;transform:none}#tcs-preloader .preloader-stage{transition:none!important}}
+@media(prefers-reduced-motion:reduce){#tcs-preloader{animation:tcs-reduced-hide 200ms ease forwards!important}#tcs-preloader .preloader-curtain{transition:none}#tcs-preloader .preloader-line,#tcs-preloader .preloader-wordmark,#tcs-preloader .preloader-medal{animation:none!important;opacity:1;stroke-dashoffset:0;transform:none}#tcs-preloader .preloader-stage{transition:none!important}}
 @keyframes tcs-reduced-hide{to{opacity:0;visibility:hidden;pointer-events:none}}
 </style>
 </head>
@@ -91,13 +87,7 @@
   <div class="preloader-stage">
     <span class="preloader-wordmark">THE CHOCO STUDIOS</span>
     <span class="preloader-medal" aria-hidden="true">
-      <svg viewBox="0 0 82 82" fill="none" focusable="false">
-        <circle cx="41" cy="41" r="31"/>
-        <circle class="medal-inner" cx="41" cy="41" r="25"/>
-        <path d="M41 3c4 7 10 9 17 5-1 8 2 13 10 16-7 4-9 10-5 17-8-1-13 2-16 10-4-7-10-9-17-5 1-8-2-13-10-16 7-4 9-10 5-17 8 1 13-2 16-10Z"/>
-        <path d="M10 41c6-2 9-6 9-12 6 4 11 4 16 0-1 7 1 11 6 12-5 2-7 6-6 12-5-4-10-4-16 0 0-6-3-10-9-12Z"/>
-      </svg>
-      <span class="preloader-monogram">TCS</span>
+      <img src="assets/images/the-choco-studios-logo.png" width="82" height="82" alt="" fetchpriority="high">
     </span>
   </div>
   <button class="preloader-skip" type="button" aria-label="Lewati animasi pembuka">Lewati</button>
