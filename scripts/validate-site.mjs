@@ -262,7 +262,9 @@ for (const document of productPages) {
     if (/^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(target)) continue;
     const localTarget = target.split(/[?#]/, 1)[0];
     if (!localTarget) continue;
-    const resolved = path.resolve(path.dirname(path.join(root, document.file)), localTarget);
+    const resolved = localTarget.startsWith("/")
+      ? path.join(root, localTarget.slice(1))
+      : path.resolve(path.dirname(path.join(root, document.file)), localTarget);
     if (!existsSync(resolved)) fail("Referensi lokal tidak ditemukan pada " + document.file + ": " + target);
   }
 }
@@ -426,7 +428,9 @@ for (const document of htmlDocuments) {
     const sourceDirectory = document.file.startsWith("components/")
       ? root
       : path.dirname(path.join(root, document.file));
-    const resolved = path.resolve(sourceDirectory, relativeTarget);
+    const resolved = relativeTarget.startsWith("/")
+      ? path.join(root, relativeTarget.slice(1))
+      : path.resolve(sourceDirectory, relativeTarget);
     if (!existsSync(resolved)) fail(`Aset atau tautan lokal tidak ditemukan di ${document.file}: ${target}`);
   }
 }
@@ -655,7 +659,8 @@ const officialFavicon = read("favicon.svg");
 if (!existsSync(path.join(root, officialBrandLogoPath))) {
   fail("Aset PNG logo resmi The Choco Studios tidak ditemukan");
 }
-if (!header.includes('class="brand-logo" src="assets/images/the-choco-studios-logo.png"') ||
+if (!header.includes('class="sidebar-brand"') ||
+    !header.includes('src="assets/images/the-choco-studios-logo.png"') ||
     !officialFooter.includes('class="brand-logo" src="assets/images/the-choco-studios-logo.png"')) {
   fail("Header dan footer harus menggunakan logo PNG resmi TCS");
 }
