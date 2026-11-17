@@ -97,12 +97,12 @@ function injectGlobalSpaceBackground() {
   for (const file of pages) {
     let html = readFileSync(file, "utf8");
     if (!html.includes("data-tcs-space-background-style")) {
-      if (!/<\\/head>/i.test(html)) throw new Error(`Tag </head> tidak ditemukan pada ${path.relative(output, file)}`);
-      html = html.replace(/<\\/head>/i, `  ${stylesheet}\\n</head>`);
+      if (!/<\/head>/i.test(html)) throw new Error(`Tag </head> tidak ditemukan pada ${path.relative(output, file)}`);
+      html = html.replace(/<\/head>/i, `  ${stylesheet}\n</head>`);
     }
     if (!html.includes("data-tcs-space-background-script")) {
-      if (!/<\\/body>/i.test(html)) throw new Error(`Tag </body> tidak ditemukan pada ${path.relative(output, file)}`);
-      html = html.replace(/<\\/body>/i, `  ${script}\\n</body>`);
+      if (!/<\/body>/i.test(html)) throw new Error(`Tag </body> tidak ditemukan pada ${path.relative(output, file)}`);
+      html = html.replace(/<\/body>/i, `  ${script}\n</body>`);
     }
     if (!html.includes("data-tcs-space-background-style") || !html.includes("data-tcs-space-background-script")) {
       throw new Error(`Background global gagal dipasang pada ${path.relative(output, file)}`);
