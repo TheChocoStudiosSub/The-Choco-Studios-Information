@@ -24,6 +24,10 @@ const publicDirectories = [
 const requiredOutput = [
   ...publicFiles,
   "assets/js/main.js",
+  "assets/css/sidebar-shell.css",
+  "assets/js/features/panel-navigation.js",
+  "assets/js/features/preloader.js",
+  "components/loader.html",
   "assets/images/the-choco-studios-logo.png",
   "assets/js/diagnostics.js",
   "assets/css/space-background.css",
@@ -85,6 +89,68 @@ function collectProductHtml(directory) {
   return files;
 }
 
+function injectSharedInterface() {
+  const sidebarSource = readFileSync(path.join(root, "components/header.html"), "utf8").trim();
+  const loaderSource = readFileSync(path.join(root, "components/loader.html"), "utf8").trim();
+  const fontLinks = '<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">';
+  const pages = [
+    path.join(output, "index.html"),
+    path.join(output, "404.html"),
+    ...collectProductHtml(path.join(output, "products"))
+  ];
+  let sidebarCount = 0;
+  let loaderCount = 0;
+
+  for (const file of pages) {
+    const relative = path.relative(output, file).split(path.sep).join("/");
+    let html = readFileSync(file, "utf8");
+    const isIndex = relative === "index.html";
+    const is404 = relative === "404.html";
+    const marker = "<!-- TCS_LUXURY_LOADER -->";
+    if (html.includes(marker)) {
+      html = html.replace(marker, loaderSource);
+      loaderCount += 1;
+    }
+    if (!html.includes('id="luxury-loader"')) {
+      throw new Error(`Layar pembuka Official belum dipasang pada ${relative}`);
+    }
+
+    if (!isIndex) {
+      const sidebarMarker = "<!-- TCS_SIDEBAR -->";
+      if (!html.includes(sidebarMarker)) throw new Error(`Titik pemasangan sidebar tidak ditemukan pada ${relative}`);
+      const prefix = is404 ? "/" : "../";
+      let sidebar = sidebarSource
+        .replaceAll('src="assets/images/the-choco-studios-logo.png"', `src="${prefix}assets/images/the-choco-studios-logo.png"`)
+        .replaceAll('href="#', `href="${prefix}#`)
+        .replace(/\sdata-panel-link="[^"]*"/g, "")
+        .replace(/ class="is-current" aria-current="page"/g, "");
+      if (!is404) sidebar = sidebar.replace(`href="${prefix}#products"`, `href="${prefix}#products" class="is-current" aria-current="page"`);
+      sidebar = sidebar.replace('<aside class="sidebar"', '<aside class="sidebar" data-tcs-static-sidebar');
+      html = html.replace(sidebarMarker, sidebar);
+      sidebarCount += 1;
+    }
+
+    if (!html.includes("fonts.googleapis.com/css2?family=IBM+Plex+Mono")) {
+      if (!/<\/head>/i.test(html)) throw new Error(`Tag </head> tidak ditemukan pada ${relative}`);
+      html = html.replace(/<\/head>/i, `  ${fontLinks}\n</head>`);
+    }
+    if (!html.includes('href="/assets/css/sidebar-shell.css"') && !html.includes('href="assets/css/sidebar-shell.css"')) {
+      if (!/<\/head>/i.test(html)) throw new Error(`Tag </head> tidak ditemukan pada ${relative}`);
+      html = html.replace(/<\/head>/i, '  <link rel="stylesheet" href="/assets/css/sidebar-shell.css">\n</head>');
+    }
+    if (!html.includes("data-tcs-preloader")) {
+      if (!/<\/body>/i.test(html)) throw new Error(`Tag </body> tidak ditemukan pada ${relative}`);
+      html = html.replace(/<\/body>/i, '  <script defer src="/assets/js/features/preloader.js" data-tcs-preloader></script>\n</body>');
+    }
+    writeFileSync(file, html, "utf8");
+  }
+
+  if (loaderCount !== pages.length || sidebarCount !== pages.length - 1) {
+    throw new Error(`Pemasangan shared interface tidak lengkap: ${loaderCount}/${pages.length} loader, ${sidebarCount}/${pages.length - 1} sidebar.`);
+  }
+  console.log(`SIDEBAR & LOADER LULUS: sidebar dan loader identik dipasang pada ${sidebarCount} halaman; loader hadir pada ${loaderCount} halaman.`);
+}
+
 function injectGlobalSpaceBackground() {
   const pages = [
     path.join(output, "index.html"),
@@ -118,6 +184,7 @@ function injectGlobalSpaceBackground() {
   console.log(`BACKGROUND GLOBAL LULUS: efek bintang dan meteor dipasang pada ${injected} halaman HTML.`);
 }
 
+injectSharedInterface();
 injectGlobalSpaceBackground();
 
 const forbiddenPaths = ["README.md", "package.json", "docs", "scripts", ".github", "netlify.toml"];

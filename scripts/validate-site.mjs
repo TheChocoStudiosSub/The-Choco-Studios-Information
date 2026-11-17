@@ -62,6 +62,7 @@ const requiredFiles = [
   "scripts/validate-site.mjs",
   ".github/workflows/validate-site.yml",
   "components/header.html",
+  "components/loader.html",
   "components/hero.html",
   "components/overview.html",
   "components/about.html",
@@ -78,10 +79,13 @@ const requiredFiles = [
   "assets/css/components.css",
   "assets/css/diagnostics.css",
   "assets/css/space-background.css",
+  "assets/css/sidebar-shell.css",
   "assets/css/product-pages.css",
   "assets/css/responsive.css",
   "assets/js/diagnostics.js",
   "assets/js/features/space-background.js",
+  "assets/js/features/panel-navigation.js",
+  "assets/js/features/preloader.js",
   "assets/js/main.js",
   "assets/js/menu.js",
   "assets/js/features/catalog.js",
@@ -112,7 +116,17 @@ const productPageFiles = [
   "products/kasirkita.html",
   "products/chocoscan.html",
   "products/chocobot-guardian.html",
-  "products/privacy-guardian.html"
+  "products/privacy-guardian.html",
+  "products/tcs-admin-dashboard-ui-kit.html",
+  "products/tcs-business-document-kit.html",
+  "products/tcs-business-management-system.html",
+  "products/tcs-business-presentation-kit.html",
+  "products/tcs-complete-umkm-suite.html",
+  "products/tcs-finance-cashflow-pro.html",
+  "products/tcs-professional-cv-kit.html",
+  "products/tcs-social-media-business-kit.html",
+  "products/tcs-umkm-stock-sales-tracker.html",
+  "products/tcs-umkm-website-kit.html"
 ];
 
 for (const file of requiredFiles) {
@@ -154,6 +168,9 @@ const header = read("components/header.html");
 const responsive = read("assets/css/responsive.css");
 const componentStyles = read("assets/css/components.css");
 const menu = read("assets/js/menu.js");
+const panelNavigation = read("assets/js/features/panel-navigation.js");
+const sidebarStyles = read("assets/css/sidebar-shell.css");
+const loaderComponent = read("components/loader.html");
 
 if (!netlifyConfig.includes('command = "npm run build"') ||
     !netlifyConfig.includes('publish = "dist"')) {
@@ -251,23 +268,41 @@ for (const document of productPages) {
 }
 if (!/id="site-main"/.test(index)) fail("Landmark konten utama #site-main tidak ditemukan");
 if (!/class="skip-link"\s+href="#site-main"/.test(index)) fail("Tautan lewati ke konten utama tidak ditemukan");
-if (!/id="site-nav"/.test(header) || !/aria-controls="site-nav"/.test(header)) {
-  fail("Kontrol menu tidak terhubung dengan elemen navigasi");
+if (!header.includes('<aside class="sidebar"') ||
+    !header.includes('class="side-nav"') ||
+    !header.includes('data-panel-link="home"') ||
+    !header.includes('class="sidebar-brand"')) {
+  fail("Komponen navigasi harus memakai sidebar resmi TCS dengan logo dan tautan panel");
 }
-if (!/renderNavigation\(navigation\)/.test(main)) fail("Data navigasi belum dirender oleh main.js");
-if (!main.includes("const initialHash = window.location.hash.slice(1)") || !main.includes("initialTarget.scrollIntoView")) {
-  fail("Tautan anchor dari halaman detail belum dipulihkan setelah komponen dimuat");
+if (!/import\s*\{\s*initPanelNavigation\s*\}\s*from\s*"\.\/features\/panel-navigation\.js"/.test(main) ||
+    !/initPanelNavigation\(\)/.test(main)) {
+  fail("Mekanisme navigasi sidebar/panel belum diinisialisasi oleh main.js");
 }
-if (!/import\s*\{\s*initActiveNavigation\s*\}\s*from\s*"\.\/features\/active-navigation\.js"/.test(main) ||
-    !/initActiveNavigation\(\)/.test(main)) {
-  fail("Perilaku navigasi aktif belum dihubungkan di main.js");
+if (!panelNavigation.includes('document.querySelectorAll("#site-main > [data-panel]")') ||
+    !panelNavigation.includes('aria-hidden') ||
+    !panelNavigation.includes('history.replaceState') ||
+    !panelNavigation.includes('inert')) {
+  fail("Navigasi panel harus mengelola state aktif, hash, fokus, dan inert");
+}
+if (!index.includes('id="home" class="view-panel') ||
+    !index.includes('id="overview" class="view-panel') ||
+    !index.includes('id="contact" class="view-panel') ||
+    !index.includes('<div data-component="contact"></div>') ||
+    !index.includes('data-component="site-footer"') ||
+    index.includes('id="footer" class="view-panel')) {
+  fail("Kerangka index.html belum memakai panel penuh layar dan footer di panel kontak");
 }
 if (!/import\s*\{\s*applySiteContent\s*\}\s*from\s*"\.\/features\/site-content\.js"/.test(main) ||
     !/applySiteContent\(site\)/.test(main)) {
   fail("Konten berbasis data belum diterapkan setelah komponen dimuat");
 }
-if (!/import\s*\{\s*navigation\s*\}\s*from\s*["']\.\.\/\.\.\/data\/navigation\.js["']/.test(main)) {
-  fail("main.js belum mengimpor data/navigation.js");
+if (/renderNavigation\(navigation\)/.test(main) || /initActiveNavigation\(\)/.test(main)) {
+  fail("main.js masih mengaktifkan navigasi header horizontal lama");
+}
+if (!buildSource.includes("function injectSharedInterface()") ||
+    !buildSource.includes("injectSharedInterface();") ||
+    !buildSource.includes("SIDEBAR & LOADER LULUS")) {
+  fail("Build produksi belum memastikan sidebar dan loader bersama terpasang pada setiap halaman");
 }
 if (index.indexOf('src="assets/js/diagnostics.js"') < 0 ||
     index.indexOf('src="assets/js/diagnostics.js"') > index.indexOf('src="assets/js/main.js"')) {
@@ -306,16 +341,24 @@ if (!main.includes("window.TCSDiagnostics") ||
 }
 if (failures.length === 0) pass("Pelaporan detail error client, HTTP, dan koneksi dikonfigurasi");
 
-if (!responsive.includes("@media (max-width: 1040px)") ||
-    !responsive.includes(".nav.open { display: flex; }") ||
-    !responsive.includes(".nav .nav-secondary { display: block; }")) {
-  fail("Navigasi responsif tidak memenuhi pemeriksaan breakpoint tablet");
+if (!sidebarStyles.includes("--tcs-sidebar-width:258px") ||
+    !sidebarStyles.includes("@media(max-width:1000px)") ||
+    !sidebarStyles.includes("@media(max-width:650px)") ||
+    !sidebarStyles.includes("#site-main>[data-panel].is-active") ||
+    !sidebarStyles.includes(".side-nav a.is-current") ||
+    !sidebarStyles.includes(".tcs-ornament--orbital") ||
+    !sidebarStyles.includes("tcs-constellation-twinkle") ||
+    !panelNavigation.includes("mountPanelOrnaments")) {
+  fail("Sidebar, panel responsif, dan ornamen animasi Official belum lengkap");
 }
-if (!/window\.innerWidth\s*>\s*1040/.test(menu)) fail("Breakpoint menu.js tidak sinkron dengan CSS");
-if (!/event\.key === ["']Escape["']/.test(menu)) fail("Menu belum mendukung tombol Escape");
-if (!header.includes('class="menu-icon-lines"') || !header.includes('class="menu-icon-close"') ||
-    !componentStyles.includes('.menu-toggle[aria-expanded="true"] .menu-icon-close { display: block; }')) {
-  fail("Ikon menu tidak mengikuti status aria-expanded");
+if (!panelNavigation.includes('event.key') && !panelNavigation.includes('location.hash')) {
+  fail("Pengendali navigasi panel tidak menangani navigasi hash");
+}
+if (!loaderComponent.includes('id="luxury-loader"') ||
+    !loaderComponent.includes("luxury-loader-orbit") ||
+    !sidebarStyles.includes(".luxury-loader.is-dismissed") ||
+    !sidebarStyles.includes("@media(prefers-reduced-motion:reduce)")) {
+  fail("Layar pembuka Official atau dukungan reduced-motion belum terpasang");
 }
 if (failures.length === 0) pass("Metadata, landmark aksesibilitas, dan kontrol menu diperiksa");
 
@@ -616,14 +659,19 @@ if (!header.includes('class="brand-logo" src="assets/images/the-choco-studios-lo
     !officialFooter.includes('class="brand-logo" src="assets/images/the-choco-studios-logo.png"')) {
   fail("Header dan footer harus menggunakan logo PNG resmi TCS");
 }
-if (!index.includes('src="assets/images/the-choco-studios-logo.png"') ||
+if (!header.includes('src="assets/images/the-choco-studios-logo.png"') ||
+    !loaderComponent.includes("THE CHOCO") ||
+    !index.includes("TCS_LUXURY_LOADER") ||
     !officialFavicon.includes('href="/assets/images/the-choco-studios-logo.png"') ||
-    !custom404.includes('class="error-brand-logo" src="/assets/images/the-choco-studios-logo.png"')) {
-  fail("Layar pembuka, favicon, dan halaman 404 harus menggunakan logo PNG resmi TCS");
+    !custom404.includes("TCS_SIDEBAR") ||
+    !custom404.includes("TCS_LUXURY_LOADER")) {
+  fail("Logo resmi, loader, favicon, dan pemasangan sidebar 404 harus tersedia");
 }
 for (const page of productPages) {
-  if (!page.content.includes('class="detail-brand-logo" src="../assets/images/the-choco-studios-logo.png"')) {
-    fail("Halaman detail produk belum menggunakan logo PNG resmi TCS: " + page.file);
+  if (!page.content.includes("TCS_SIDEBAR") ||
+      !page.content.includes("TCS_LUXURY_LOADER") ||
+      !page.content.includes('href="/assets/css/sidebar-shell.css"')) {
+    fail("Halaman detail produk belum memasang sidebar dan loader bersama: " + page.file);
   }
 }
 if (failures.length === 0) pass("Logo resmi TCS terpasang dan tervalidasi pada seluruh halaman publik");

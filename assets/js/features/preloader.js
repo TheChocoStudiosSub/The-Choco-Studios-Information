@@ -1,49 +1,36 @@
-(() => {
-  const loader=document.getElementById("tcs-preloader");
+(()=>{
+  const loader=document.getElementById("luxury-loader");
   if(!loader)return;
   const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let seen=false;
-  try{seen=sessionStorage.getItem("tcs-information-preloader-v2")==="seen";}catch{}
-  const remove=(skipped=false)=>{
+  const pageHasDynamicComponents=Boolean(document.getElementById("site-main"));
+  const started=performance.now();
+  let siteReady=!pageHasDynamicComponents;
+  let loadReady=document.readyState==="complete";
+  let dismissed=false;
+  let minimumTimer=0;
+  let maximumTimer=0;
+
+  const remove=()=>{
+    if(!loader.isConnected)return;
     loader.remove();
-    document.body.classList.remove("preloader-active");
-    if(skipped)document.body.classList.add("preloader-skip");
-    else document.body.classList.add("preloader-done");
   };
-  if(seen||reduced){remove(true);return;}
-  try{sessionStorage.setItem("tcs-information-preloader-v2","seen");}catch{}
-  loader.classList.add("is-managed");
-  let closed=false;
-  let minimumElapsed=false;
-  let siteReady=false;
-  let minimumTimer;
-  let maximumTimer;
-  const openingDelay=800;
-  const timeout=760;
   const finish=()=>{
-    if(closed)return;
-    closed=true;
-    clearTimeout(minimumTimer);
-    clearTimeout(maximumTimer);
-    loader.classList.add("is-finishing");
-    window.setTimeout(()=>{
-      if(!loader.isConnected)return;
-      loader.classList.add("is-opening");
-      window.setTimeout(remove,timeout);
-    },openingDelay);
+    if(dismissed)return;
+    dismissed=true;
+    window.clearTimeout(minimumTimer);
+    window.clearTimeout(maximumTimer);
+    loader.classList.add("is-dismissed");
+    loader.setAttribute("aria-hidden","true");
+    window.setTimeout(remove,reduced?180:1200);
   };
-  const bypass=()=>{
-    if(closed)return;
-    closed=true;
-    clearTimeout(minimumTimer);
-    clearTimeout(maximumTimer);
-    remove(true);
+  const check=()=>{
+    if(!dismissed&&siteReady&&loadReady&&performance.now()-started>=(reduced?100:1050))finish();
   };
-  const checkReady=()=>{if(minimumElapsed&&siteReady)finish();};
-  minimumTimer=window.setTimeout(()=>{minimumElapsed=true;checkReady();},1900);
-  maximumTimer=window.setTimeout(finish,1980);
-  document.addEventListener("tcs:site-ready",()=>{siteReady=true;checkReady();},{once:true});
-  const skip=loader.querySelector(".preloader-skip");
-  skip?.addEventListener("click",event=>{event.preventDefault();event.stopPropagation();bypass();});
-  document.addEventListener("keydown",event=>{if(event.key==="Escape")bypass();});
+  minimumTimer=window.setTimeout(check,reduced?120:1100);
+  maximumTimer=window.setTimeout(finish,4800);
+  if(document.documentElement.dataset.tcsSiteReady==="true")siteReady=true;
+  document.addEventListener("tcs:site-ready",()=>{siteReady=true;check();},{once:true});
+  if(loadReady)check();
+  else window.addEventListener("load",()=>{loadReady=true;check();},{once:true});
+  document.addEventListener("keydown",event=>{if(event.key==="Escape")finish();});
 })();

@@ -1,13 +1,10 @@
-import { initMenu } from "./menu.js";
+import { initPanelNavigation } from "./features/panel-navigation.js";
 import { applySiteContent } from "./features/site-content.js";
 import { renderCatalog } from "./features/catalog.js";
 import { renderMissions } from "./features/missions.js";
-import { renderNavigation } from "./features/navigation.js";
-import { initActiveNavigation } from "./features/active-navigation.js";
 import { applySiteLinks } from "./features/links.js";
 import { initEditorialEffects } from "./features/editorial-effects.js";
 import { products } from "../../data/products.js";
-import { navigation } from "../../data/navigation.js";
 import { site } from "../../data/site.js";
 
 const components = [
@@ -110,23 +107,18 @@ async function loadComponents() {
 }
 
 function announceSiteReady() {
+  document.documentElement.dataset.tcsSiteReady = "true";
   document.dispatchEvent(new Event("tcs:site-ready"));
 }
 
 try {
   await loadComponents();
   applySiteContent(site);
-  renderNavigation(navigation);
-  initMenu();
-  initActiveNavigation();
+  initPanelNavigation();
   renderCatalog(products);
   renderMissions(site.missions);
   applySiteLinks(site);
   initEditorialEffects();
-
-  const initialHash = window.location.hash.slice(1);
-  const initialTarget = initialHash ? document.getElementById(initialHash) : null;
-  if (initialTarget) initialTarget.scrollIntoView({ block: "start" });
 
   const year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
