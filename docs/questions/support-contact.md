@@ -1,7 +1,7 @@
 # Dukungan dan Kontak
 
 ## Terkonfirmasi
-- [x] Email tim: thechocostudio@gmail.com.
+- [x] Email tim: thechocostudios@gmail.com.
 - [x] Nomor telepon ditampilkan pada halaman kontak.
 - [x] Sara AI/Help Center: https://choco-ai-help-center.netlify.app/.
 - [x] Waktu respons yang disampaikan kepada publik: paling lama 3 hari.
