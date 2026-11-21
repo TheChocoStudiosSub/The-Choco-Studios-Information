@@ -47,5 +47,5 @@ Setelah build, periksa halaman utama, seluruh komponen, tautan, pencarian naviga
 
 ## Kontak
 
-thechocostudio@gmail.com
+thechocostudios@gmail.com
 https://www.linkedin.com/in/hasby-prasetya-tcs/
