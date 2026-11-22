@@ -11,7 +11,7 @@
   let copyStatus;
   let totalEntries = 0;
   const currentScript = document.currentScript;
-  const reportEndpoint = currentScript?.dataset.endpoint || "https://tcs-choco-ai.vercel.app/api/license?feature=tcs-public";
+  const reportEndpoint = currentScript?.dataset.endpoint || "https://choco-ai-independent-seven.vercel.app/api/license?feature=tcs-public";
   const reportSite = currentScript?.dataset.site || "tcs-information";
   let visitorId;
   let sessionId;
