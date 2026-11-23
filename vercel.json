@@ -26,5 +26,18 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "the-choco-studios-information.vercel.app"
+        }
+      ],
+      "destination": "https://information.thechocostudios.bond/:path*",
+      "permanent": true
+    }
   ]
 }
