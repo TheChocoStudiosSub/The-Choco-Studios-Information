@@ -21,7 +21,7 @@ Sheeblink merupakan inisiatif handmade yang terintegrasi ke dalam ekosistem TCS 
 - **Vornika+-:** unit pengembangan game dalam ekosistem TCS.
 - **Sheeblink:** inisiatif handmade yang terintegrasi dalam ekosistem TCS.
 
-Katalog historis 16 aplikasi tidak lagi menjadi direktori produk aktif. Nama atau aset proyek lama dapat tetap tersimpan di repository untuk kepentingan sejarah dan pemeliharaan, tetapi tidak boleh dipresentasikan sebagai portofolio aktif tanpa verifikasi baru.
+Katalog historis 16 aplikasi tidak lagi menjadi direktori produk aktif. Halaman lama tetap dipertahankan dalam riwayat repository, tetapi URL publiknya diarahkan ke halaman utama agar tidak tampil sebagai portofolio aktif.
 
 ## Kontribusi dan open-source
 
