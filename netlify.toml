@@ -11,3 +11,100 @@
     Strict-Transport-Security = "max-age=31536000"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
     Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://the-choco-studios-official.vercel.app; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://tcs-choco-ai.vercel.app; upgrade-insecure-requests"
+
+# Retired product pages are preserved in Git history but no longer served as active portfolio entries.
+[[redirects]]
+  from = "/products/choco-ai.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/choco-ai-help-center.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/kasirkita.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/chocoscan.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/chocobot-guardian.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/privacy-guardian.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/tcs-admin-dashboard-ui-kit.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/tcs-business-document-kit.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/tcs-business-management-system.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/tcs-business-presentation-kit.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/tcs-complete-umkm-suite.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/tcs-finance-cashflow-pro.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/tcs-professional-cv-kit.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/tcs-social-media-business-kit.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/tcs-umkm-stock-sales-tracker.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/tcs-umkm-website-kit.html"
+  to = "/"
+  status = 301
+  force = true
