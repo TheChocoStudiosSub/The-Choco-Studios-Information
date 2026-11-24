@@ -77,7 +77,7 @@ export const products = [
     symbol: "V",
     logo: "vornika",
     logoUrl: "",
-    status: "Unit pengembangan game TCS",
+    status: "Unit pengembangan game TCS · situs resmi",
     description: "Unit pengembangan game dalam ekosistem TCS yang meneruskan identitas sebelumnya, Prism Gaming Studios.",
     productUrl: "https://vornika.thechocostudios.bond/",
     actionLabel: "Lihat Vornika+-",
