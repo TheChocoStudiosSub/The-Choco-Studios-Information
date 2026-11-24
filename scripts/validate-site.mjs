@@ -386,7 +386,10 @@ const retiredDomains = [
   "tcs-linkguard.vercel.app",
   "sheeblink.vercel.app",
   "choco-ai-platform.netlify.app",
-  "aikepribadian-seven.vercel.app"
+  "aikepribadian-seven.vercel.app",
+  "vornika-games.vercel.app",
+  "vornikastudios.vercel.app",
+  "prism-gaming-studios.vercel.app"
 ];
 for (const domain of retiredDomains) {
   if (allActiveReferences.includes(domain)) fail("Domain lama masih direferensikan oleh halaman atau konfigurasi aktif: " + domain);
