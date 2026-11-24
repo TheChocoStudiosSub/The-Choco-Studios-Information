@@ -185,7 +185,10 @@ const legacyDomains = [
   "tcs-information-hub.vercel.app",
   "the-choco-studios-official.vercel.app",
   "choco-ai-independent-seven.vercel.app",
-  "choco-ai-help-center.vercel.app"
+  "choco-ai-help-center.vercel.app",
+  "the-choco-studios-officials.vercel.app",
+  "tcs-choco-ai.vercel.app",
+  "tcs-chocoai.vercel.app"
 ];
 if (!index.includes('<link rel="canonical" href="' + canonicalInfoBase + '/">')) {
   fail("Canonical homepage harus menggunakan domain Information TCS");
