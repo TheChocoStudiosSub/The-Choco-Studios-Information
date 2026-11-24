@@ -17,7 +17,7 @@ Sheeblink adalah inisiatif handmade yang telah diintegrasikan ke dalam ekosistem
 - **Choco AI Help Center / Sara:** pusat bantuan TCS dengan Sara sebagai asisten dukungan yang terpisah dari Choco AI.
 - **Sheeblink:** inisiatif handmade yang terintegrasi ke dalam ekosistem TCS.
  
-Katalog lama berisi 16 aplikasi tidak lagi menjadi direktori publik. Catatan historis dapat tetap berada di repositori untuk audit, tetapi tidak dipresentasikan sebagai portofolio aktif.
+Katalog lama berisi 16 aplikasi tidak lagi menjadi direktori publik. Catatan historis dapat tetap berada di repositori untuk audit, tetapi tidak dipresentasikan sebagai portofolio aktif. Halaman detail lama dipertahankan hanya untuk kompatibilitas tautan historis, diberi `noindex`, dan dikeluarkan dari sitemap; halaman tersebut bukan bagian dari katalog aktif.
 
 ## Kontribusi dan open-source
 
