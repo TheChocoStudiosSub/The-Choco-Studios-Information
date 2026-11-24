@@ -227,6 +227,7 @@ const publicMarkupForSeo = [
   read("data/site.js"),
   read("data/navigation.js"),
   read("data/products.js"),
+  read("netlify.toml"),
   ...walkFiles("assets/js", [".js"]).map(read)
 ].join("\n");
 for (const domain of legacyDomains) {
