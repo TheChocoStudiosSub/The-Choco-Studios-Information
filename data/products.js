@@ -40,7 +40,7 @@ export const products = [
     category: "Aplikasi Windows · Utilitas gambar",
     symbol: "UF",
     logo: "uploadfit",
-    logoUrl: "https://thechocostudios.bond/logos/tcs-uploadfit.svg",
+    logoUrl: "",
     status: "Tersedia · Pemrosesan lokal",
     description: "Menyiapkan ukuran dan format gambar secara lokal sebelum diunggah ke layanan lain. Isi gambar diproses di perangkat.",
     productUrl: "https://tcs-uploadfit.vercel.app/",
@@ -61,7 +61,7 @@ export const products = [
   },
   {
     name: "TCS Engine",
-    category: "Open-source · Game development",
+    category: "Game development · JavaScript runtime",
     symbol: "TE",
     logo: "engine",
     logoUrl: "",
