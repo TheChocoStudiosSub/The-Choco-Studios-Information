@@ -372,15 +372,24 @@ const htmlDocuments = [
 ];
 const allComponentMarkup = htmlDocuments.slice(1).map(document => document.content).join("\n");
 const allMarkup = htmlDocuments.map(document => document.content).join("\n");
+const allActiveReferences = [allMarkup, read("data/site.js"), read("data/products.js"), read("tcs-analytics.js"), read("assets/js/diagnostics.js")].join("\n");
 const retiredDomains = [
   "the-choco-studios-official.vercel.app",
   "the-choco-studios-officials.vercel.app",
   "the-choco-studios-information.vercel.app",
   "the-choco-studio-information.netlify.app",
-  "choco-ai-independent-seven.vercel.app"
+  "choco-ai-independent-seven.vercel.app",
+  "tcs-chocoai.vercel.app",
+  "tcs-choco-ai.vercel.app",
+  "choco-ai-help-center.vercel.app",
+  "choco-ai-help-center.netlify.app",
+  "tcs-linkguard.vercel.app",
+  "sheeblink.vercel.app",
+  "choco-ai-platform.netlify.app",
+  "aikepribadian-seven.vercel.app"
 ];
 for (const domain of retiredDomains) {
-  if (allMarkup.includes(domain)) fail("Domain lama masih direferensikan oleh halaman aktif: " + domain);
+  if (allActiveReferences.includes(domain)) fail("Domain lama masih direferensikan oleh halaman atau konfigurasi aktif: " + domain);
 }
 
 const idOwners = new Map();
