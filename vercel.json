@@ -29,6 +29,86 @@
   ],
   "redirects": [
     {
+      "source": "/products/choco-ai.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products/choco-ai-help-center.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products/kasirkita.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products/chocoscan.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products/chocobot-guardian.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products/privacy-guardian.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products/tcs-admin-dashboard-ui-kit.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products/tcs-business-document-kit.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products/tcs-business-management-system.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products/tcs-business-presentation-kit.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products/tcs-complete-umkm-suite.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products/tcs-finance-cashflow-pro.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products/tcs-professional-cv-kit.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products/tcs-social-media-business-kit.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products/tcs-umkm-stock-sales-tracker.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products/tcs-umkm-website-kit.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {

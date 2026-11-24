@@ -1,51 +1,61 @@
 # The Choco Studios Information
 
-Pusat informasi publik The Choco Studios (TCS), diselaraskan dengan arah open-source dan ekosistem multisektor terbaru.
+Pusat informasi publik The Choco Studios (TCS), diselaraskan dengan identitas, arah open-source, dan ekosistem TCS saat ini.
 
 ## Identitas TCS
 
-The Choco Studios (TCS) adalah studio kreatif independen multisektor yang didirikan, dimiliki, dan dikelola secara mandiri oleh Hasby Prasetya Saprudin. TCS bukan kolektif yang menaungi seluruh kreator independen, bukan marketplace, dan bukan platform umum untuk memamerkan karya pihak lain.
+The Choco Studios (TCS) adalah studio kreatif independen multisektor yang didirikan, dimiliki, dan dikelola secara mandiri oleh Hasby Prasetya Saprudin. TCS bukan kolektif yang menaungi seluruh kreator independen dan bukan marketplace umum.
 
-Fokus utama TCS adalah open-source, pengembangan teknologi, dokumentasi, pemeliharaan proyek, dan kolaborasi terstruktur. Aplikasi tetap dapat dikembangkan, tetapi produksi aplikasi bukan lagi pusat utama strategi.
+Fokus strategis TCS adalah open-source, pengembangan teknologi, dokumentasi, pemeliharaan proyek, dan kolaborasi terstruktur. Aplikasi tetap dapat dikembangkan, tetapi bukan lagi pusat utama strategi.
 
-Sheeblink adalah inisiatif handmade yang telah diintegrasikan ke dalam ekosistem TCS sebagai perluasan aktivitas ke bidang non-teknologi, dengan tetap menjaga identitas kreatifnya. Proyek awal TCS yang dahulu bernama Chocobot Guardian kini bernama TCS LinkGuard.
+Sheeblink merupakan inisiatif handmade yang terintegrasi ke dalam ekosistem TCS dan tetap mempertahankan identitas kreatifnya. Vornika+- adalah unit pengembangan game TCS yang meneruskan identitas sebelumnya, Prism Gaming Studios.
 
-## Komponen utama
+## Komponen ekosistem
 
-- TCS LinkGuard: proyek awal TCS, sebelumnya bernama Chocobot Guardian; pemeriksa manual tautan dan kualitas halaman website, berstatus demo fungsional/pra-produksi.
-- Choco AI: asisten AI utama dan representasi digital Choco, diarahkan menjadi asisten virtual serbaguna lintas kebutuhan TCS.
-- Choco AI Help Center / Sara: pusat bantuan TCS dengan Sara sebagai asisten dukungan yang terpisah dari Choco AI.
-- Sheeblink: inisiatif kreatif handmade yang terintegrasi ke dalam ekosistem TCS.
+- **Choco AI:** asisten AI utama dan representasi digital Choco dalam ekosistem TCS.
+- **Choco AI Help Center / Sara:** pusat bantuan TCS; Sara merupakan asisten dukungan yang terpisah dari Choco AI.
+- **TCS LinkGuard:** pemeriksa manual tautan, resource, dan sinyal kualitas halaman website dengan batas pemindaian yang terdokumentasi.
+- **TCS UploadFit:** aplikasi Windows untuk mempersiapkan gambar secara lokal sebelum diunggah ke layanan lain.
+- **Learn with TCS:** proyek pembelajaran Bahasa Indonesia bagi penutur dari berbagai bahasa.
+- **TCS Engine:** fondasi runtime game JavaScript untuk proyek 2D Canvas dan 3D Three.js.
+- **Vornika+-:** unit pengembangan game dalam ekosistem TCS.
+- **Sheeblink:** inisiatif handmade yang terintegrasi dalam ekosistem TCS.
 
-Katalog lama berisi 16 aplikasi tidak lagi menjadi direktori publik. Catatan historis dapat tetap berada di repositori untuk audit, tetapi tidak dipresentasikan sebagai portofolio aktif.
+Katalog historis 16 aplikasi tidak lagi menjadi direktori produk aktif. Halaman lama tetap dipertahankan dalam riwayat repository, tetapi URL publiknya diarahkan ke halaman utama agar tidak tampil sebagai portofolio aktif.
 
 ## Kontribusi dan open-source
 
-Kontribusi publik hanya diterima pada repositori yang secara eksplisit ditetapkan terbuka. Lisensi, panduan kontribusi, standar keamanan, dan proses review ditentukan per proyek. Lisensi kode tidak otomatis memberi hak atas merek, logo, identitas visual, atau kewenangan rilis resmi TCS.
+Kontribusi publik hanya diterima pada repository yang secara eksplisit ditetapkan terbuka untuk kontribusi. Lisensi, panduan kontribusi, standar keamanan, dan proses review ditentukan per proyek. Lisensi kode tidak otomatis memberikan hak atas merek, logo, identitas visual, atau kewenangan rilis resmi TCS.
 
-Panduan kontribusi: https://the-choco-studios-officials.vercel.app/bergabung/
+Panduan kontribusi: https://thechocostudios.bond/bergabung/
 
-## Hosting
+## Situs resmi dan layanan
 
-- Situs resmi: https://the-choco-studios-officials.vercel.app/
-- Profil pendiri: https://the-choco-studios-officials.vercel.app/about/hasby-prasetya-saprudin/
-- Profil Sheeblink: https://the-choco-studios-officials.vercel.app/ecosystem/sheeblink/
-- Pusat informasi: https://the-choco-studios-information.vercel.app/
-- Help Center: https://choco-ai-help-center.vercel.app/
-- Choco AI: https://choco-ai-independent-seven.vercel.app/
+- Situs resmi TCS: https://thechocostudios.bond/
+- Profil pendiri: https://thechocostudios.bond/about/hasby-prasetya-saprudin/
+- Profil The Choco Studios: https://thechocostudios.bond/about/the-choco-studios/
+- Profil Sheeblink: https://thechocostudios.bond/ecosystem/sheeblink/
+- Situs Sheeblink: https://sheeblink.thechocostudios.bond/
+- Vornika+-: https://vornika.thechocostudios.bond/
+- Pusat informasi ini: https://information.thechocostudios.bond/
+- Help Center / Sara: https://helpcenter.thechocostudios.bond/
+- Choco AI: https://chocoai.thechocostudios.bond/
+- TCS LinkGuard: https://linkguard.thechocostudios.bond/
 
-Situs informasi menggunakan HTML, CSS, dan JavaScript modular. Komponen halaman dimuat dari components/; data identitas, navigasi, dan komponen ekosistem disimpan pada data/; skrip build menghasilkan dist/.
+Situs informasi menggunakan HTML, CSS, dan JavaScript modular. Komponen halaman dimuat dari `components/`; data identitas, navigasi, dan komponen ekosistem disimpan pada `data/`; skrip build menghasilkan `dist/`.
 
 ## Validasi dan build
 
 Gunakan Node.js 20 atau lebih baru:
 
-    npm run validate
-    npm run build
+```bash
+npm run validate
+npm run build
+```
 
-Setelah build, periksa halaman utama, seluruh komponen, tautan, pencarian navigasi, tampilan responsif, metadata, sitemap, dan hasil deployment.
+Validator memeriksa struktur komponen, tautan dan aset lokal, katalog aktif, URL kanonis, sitemap/robots, serta redirect untuk 16 URL katalog historis. Setelah build, periksa halaman utama, navigasi, tampilan responsif, metadata, dan hasil deployment.
 
 ## Kontak
 
-thechocostudios@gmail.com
+thechocostudios@gmail.com  
 https://www.linkedin.com/in/hasby-prasetya-tcs/

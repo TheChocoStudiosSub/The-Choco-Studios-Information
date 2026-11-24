@@ -34,21 +34,6 @@ const requiredFiles = [
   "index.html",
   "404.html",
   "products/tcs-linkguard.html",
-  "products/choco-ai.html",
-  "products/kasirkita.html",
-  "products/chocobot-guardian.html",
-  "products/privacy-guardian.html",
-  "products/choco-ai-help-center.html",
-  "products/chocoscan.html",
-  "products/tcs-business-document-kit.html",
-  "products/tcs-professional-cv-kit.html",
-  "products/tcs-social-media-business-kit.html",
-  "products/tcs-business-presentation-kit.html",
-  "products/tcs-finance-cashflow-pro.html",
-  "products/tcs-umkm-website-kit.html",
-  "products/tcs-admin-dashboard-ui-kit.html",
-  "products/tcs-business-management-system.html",
-  "products/tcs-complete-umkm-suite.html",
   "favicon.svg",
   "robots.txt",
   "sitemap.xml",
@@ -110,23 +95,7 @@ const requiredFiles = [
 ];
 
 const productPageFiles = [
-  "products/tcs-linkguard.html",
-  "products/choco-ai.html",
-  "products/choco-ai-help-center.html",
-  "products/kasirkita.html",
-  "products/chocoscan.html",
-  "products/chocobot-guardian.html",
-  "products/privacy-guardian.html",
-  "products/tcs-admin-dashboard-ui-kit.html",
-  "products/tcs-business-document-kit.html",
-  "products/tcs-business-management-system.html",
-  "products/tcs-business-presentation-kit.html",
-  "products/tcs-complete-umkm-suite.html",
-  "products/tcs-finance-cashflow-pro.html",
-  "products/tcs-professional-cv-kit.html",
-  "products/tcs-social-media-business-kit.html",
-  "products/tcs-umkm-stock-sales-tracker.html",
-  "products/tcs-umkm-website-kit.html"
+  "products/tcs-linkguard.html"
 ];
 
 for (const file of requiredFiles) {
@@ -155,6 +124,7 @@ if (
 const index = read("index.html");
 const packageJson = read("package.json");
 const netlifyConfig = read("netlify.toml");
+const vercelConfig = read("vercel.json");
 const buildScript = read("scripts/build-site.mjs");
 const custom404 = read("404.html");
 const robots = read("robots.txt");
@@ -170,6 +140,10 @@ const componentStyles = read("assets/css/components.css");
 const menu = read("assets/js/menu.js");
 const panelNavigation = read("assets/js/features/panel-navigation.js");
 const sidebarStyles = read("assets/css/sidebar-shell.css");
+if (existsSync(path.join(root, "deploy-bundle.tmp.json"))) {
+  fail("Generated deployment bundle must not be committed; use source files and build output instead");
+}
+
 const loaderComponent = read("components/loader.html");
 
 if (!netlifyConfig.includes('command = "npm run build"') ||
@@ -192,6 +166,13 @@ if (!buildScript.includes("BUILD LULUS") ||
 }
 if (failures.length === 0) pass("Konfigurasi Netlify dan batas file produksi diperiksa");
 
+if (!index.includes('<link rel="canonical" href="https://information.thechocostudios.bond/">')) {
+  fail("Canonical Information harus menggunakan domain resmi information.thechocostudios.bond");
+}
+if (!robots.includes("https://information.thechocostudios.bond/sitemap.xml") ||
+    !read("sitemap.xml").includes("https://information.thechocostudios.bond/")) {
+  fail("robots.txt dan sitemap.xml harus menggunakan domain kanonis Information");
+}
 if (!/<html\s+lang="id"/i.test(index)) fail("index.html harus menetapkan Bahasa Indonesia sebagai bahasa utama");
 if (!/<title>[^<]+<\/title>/i.test(index)) fail("Judul halaman tidak ditemukan");
 if (!/<meta\s+name="description"\s+content="[^"]+"/i.test(index)) fail("Deskripsi metadata halaman tidak ditemukan");
@@ -395,6 +376,29 @@ const htmlDocuments = [
 ];
 const allComponentMarkup = htmlDocuments.slice(1).map(document => document.content).join("\n");
 const allMarkup = htmlDocuments.map(document => document.content).join("\n");
+const allActiveReferences = [allMarkup, read("data/site.js"), read("data/products.js"), read("tcs-analytics.js"), read("assets/js/diagnostics.js")].join("\n");
+const retiredDomains = [
+  "the-choco-studios-official.vercel.app",
+  "the-choco-studios-officials.vercel.app",
+  "the-choco-studios-information.vercel.app",
+  "the-choco-studio-information.netlify.app",
+  "choco-ai-independent-seven.vercel.app",
+  "tcs-chocoai.vercel.app",
+  "tcs-choco-ai.vercel.app",
+  "choco-ai-help-center.vercel.app",
+  "choco-ai-help-center.netlify.app",
+  "tcs-linkguard.vercel.app",
+  "sheeblink.vercel.app",
+  "choco-ai-platform.netlify.app",
+  "aikepribadian-seven.vercel.app",
+  "vornika-games.vercel.app",
+  "vornikastudios.vercel.app",
+  "prism-gaming-studios.vercel.app"
+];
+for (const domain of retiredDomains) {
+  if (allActiveReferences.includes(domain)) fail("Domain lama masih direferensikan oleh halaman atau konfigurasi aktif: " + domain);
+}
+
 const idOwners = new Map();
 
 for (const document of htmlDocuments) {
@@ -459,6 +463,11 @@ try {
 }
 
 if (site && navigation && products) {
+const retiredCatalogNames = ["KasirKita", "ChocoScan", "Chocobot Guardian", "Privacy Guardian", "TCS UMKM Stock & Sales Tracker"];
+if (products.some(product => retiredCatalogNames.includes(product.name))) {
+  fail("Katalog aktif masih memuat nama dari portofolio historis yang sudah dihentikan");
+}
+
   if (!/^\S+@\S+\.\S+$/.test(site.email || "")) fail("Alamat email di data/site.js tidak valid");
   for (const key of ["chocoAiUrl", "helpCenterUrl", "contactFormUrl"]) {
     try {
@@ -518,6 +527,23 @@ if (site && navigation && products) {
       }
       if (product?.name && names.has(product.name)) fail(`Nama produk duplikat: ${product.name}`);
       if (product?.name) names.add(product.name);
+      if (product?.productUrl) {
+        try {
+          const productUrl = new URL(product.productUrl);
+          if (productUrl.protocol !== "https:") fail("URL produk harus memakai HTTPS: " + product.name);
+        } catch {
+          fail("URL produk tidak valid: " + product.name);
+        }
+      }
+      if (typeof product?.logoUrl === "string" && product.logoUrl.trim()) {
+        const logoUrl = product.logoUrl.trim();
+        if (/^https:\/\//i.test(logoUrl)) {
+          try { new URL(logoUrl); } catch { fail("URL logo tidak valid: " + product.name); }
+        } else {
+          const localLogo = logoUrl.startsWith("/") ? logoUrl.slice(1) : logoUrl;
+          if (!existsSync(path.join(root, localLogo))) fail("Aset logo lokal tidak ditemukan: " + product.name + " (" + logoUrl + ")");
+        }
+      }
       if (product?.detailsUrl) {
         const detailTarget = product.detailsUrl.trim();
         if (detailTarget.startsWith("https://")) {
