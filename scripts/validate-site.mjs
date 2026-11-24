@@ -223,7 +223,8 @@ const publicMarkupForSeo = [
   ...productPages.map(page => page.content),
   read("data/site.js"),
   read("data/navigation.js"),
-  read("data/products.js")
+  read("data/products.js"),
+  ...walkFiles("assets/js", [".js"]).map(read)
 ].join("\n");
 for (const domain of legacyDomains) {
   if (publicMarkupForSeo.includes(domain)) fail("Domain lama masih direferensikan pada halaman/data publik: " + domain);
