@@ -5,7 +5,7 @@ export const products = [
     symbol: "LG",
     logo: "linkguard",
     logoUrl: "https://thechocostudios.bond/logos/tcs-linkguard.svg",
-    status: "Tersedia · Pemindaian manual terbatas",
+    status: "Demo fungsional · Pra-produksi",
     description: "Pemeriksa tautan, resource, dan sinyal kualitas halaman website. Pemindaian dibatasi dan bukan sertifikasi keamanan atau pemantauan otomatis.",
     productUrl: "https://linkguard.thechocostudios.bond/",
     actionLabel: "Buka TCS LinkGuard",
