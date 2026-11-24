@@ -34,21 +34,6 @@ const requiredFiles = [
   "index.html",
   "404.html",
   "products/tcs-linkguard.html",
-  "products/choco-ai.html",
-  "products/kasirkita.html",
-  "products/chocobot-guardian.html",
-  "products/privacy-guardian.html",
-  "products/choco-ai-help-center.html",
-  "products/chocoscan.html",
-  "products/tcs-business-document-kit.html",
-  "products/tcs-professional-cv-kit.html",
-  "products/tcs-social-media-business-kit.html",
-  "products/tcs-business-presentation-kit.html",
-  "products/tcs-finance-cashflow-pro.html",
-  "products/tcs-umkm-website-kit.html",
-  "products/tcs-admin-dashboard-ui-kit.html",
-  "products/tcs-business-management-system.html",
-  "products/tcs-complete-umkm-suite.html",
   "favicon.svg",
   "robots.txt",
   "sitemap.xml",
@@ -110,23 +95,7 @@ const requiredFiles = [
 ];
 
 const productPageFiles = [
-  "products/tcs-linkguard.html",
-  "products/choco-ai.html",
-  "products/choco-ai-help-center.html",
-  "products/kasirkita.html",
-  "products/chocoscan.html",
-  "products/chocobot-guardian.html",
-  "products/privacy-guardian.html",
-  "products/tcs-admin-dashboard-ui-kit.html",
-  "products/tcs-business-document-kit.html",
-  "products/tcs-business-management-system.html",
-  "products/tcs-business-presentation-kit.html",
-  "products/tcs-complete-umkm-suite.html",
-  "products/tcs-finance-cashflow-pro.html",
-  "products/tcs-professional-cv-kit.html",
-  "products/tcs-social-media-business-kit.html",
-  "products/tcs-umkm-stock-sales-tracker.html",
-  "products/tcs-umkm-website-kit.html"
+  "products/tcs-linkguard.html"
 ];
 
 for (const file of requiredFiles) {
@@ -192,6 +161,13 @@ if (!buildScript.includes("BUILD LULUS") ||
 }
 if (failures.length === 0) pass("Konfigurasi Netlify dan batas file produksi diperiksa");
 
+if (!index.includes('<link rel="canonical" href="https://information.thechocostudios.bond/">')) {
+  fail("Canonical Information harus menggunakan domain resmi information.thechocostudios.bond");
+}
+if (!robots.includes("https://information.thechocostudios.bond/sitemap.xml") ||
+    !read("sitemap.xml").includes("https://information.thechocostudios.bond/")) {
+  fail("robots.txt dan sitemap.xml harus menggunakan domain kanonis Information");
+}
 if (!/<html\s+lang="id"/i.test(index)) fail("index.html harus menetapkan Bahasa Indonesia sebagai bahasa utama");
 if (!/<title>[^<]+<\/title>/i.test(index)) fail("Judul halaman tidak ditemukan");
 if (!/<meta\s+name="description"\s+content="[^"]+"/i.test(index)) fail("Deskripsi metadata halaman tidak ditemukan");
@@ -214,6 +190,10 @@ for (const header of ["X-Content-Type-Options: nosniff", "Referrer-Policy: stric
 }
 if (!robots.includes("User-agent: *") || !robots.includes("Allow: /")) {
   fail("robots.txt belum memiliki aturan perayapan dasar");
+}
+const retiredCatalogNames = ["KasirKita", "ChocoScan", "Chocobot Guardian", "Privacy Guardian", "TCS UMKM Stock & Sales Tracker"];
+if (products.some(product => retiredCatalogNames.includes(product.name))) {
+  fail("Katalog aktif masih memuat nama dari portofolio historis yang sudah dihentikan");
 }
 if (!catalog.includes("product.detailsUrl") || !catalog.includes('textContent = "Lihat detail"')) {
   fail("Kartu produk belum menyediakan tautan ke halaman detail");
