@@ -140,6 +140,10 @@ const componentStyles = read("assets/css/components.css");
 const menu = read("assets/js/menu.js");
 const panelNavigation = read("assets/js/features/panel-navigation.js");
 const sidebarStyles = read("assets/css/sidebar-shell.css");
+if (existsSync(path.join(root, "deploy-bundle.tmp.json"))) {
+  fail("Generated deployment bundle must not be committed; use source files and build output instead");
+}
+
 const loaderComponent = read("components/loader.html");
 
 if (!netlifyConfig.includes('command = "npm run build"') ||
