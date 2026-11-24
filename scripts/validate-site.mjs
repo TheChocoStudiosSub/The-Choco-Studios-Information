@@ -192,10 +192,6 @@ for (const header of ["X-Content-Type-Options: nosniff", "Referrer-Policy: stric
 if (!robots.includes("User-agent: *") || !robots.includes("Allow: /")) {
   fail("robots.txt belum memiliki aturan perayapan dasar");
 }
-const retiredCatalogNames = ["KasirKita", "ChocoScan", "Chocobot Guardian", "Privacy Guardian", "TCS UMKM Stock & Sales Tracker"];
-if (products.some(product => retiredCatalogNames.includes(product.name))) {
-  fail("Katalog aktif masih memuat nama dari portofolio historis yang sudah dihentikan");
-}
 if (!catalog.includes("product.detailsUrl") || !catalog.includes('textContent = "Lihat detail"')) {
   fail("Kartu produk belum menyediakan tautan ke halaman detail");
 }
@@ -451,6 +447,11 @@ try {
 }
 
 if (site && navigation && products) {
+const retiredCatalogNames = ["KasirKita", "ChocoScan", "Chocobot Guardian", "Privacy Guardian", "TCS UMKM Stock & Sales Tracker"];
+if (products.some(product => retiredCatalogNames.includes(product.name))) {
+  fail("Katalog aktif masih memuat nama dari portofolio historis yang sudah dihentikan");
+}
+
   if (!/^\S+@\S+\.\S+$/.test(site.email || "")) fail("Alamat email di data/site.js tidak valid");
   for (const key of ["chocoAiUrl", "helpCenterUrl", "contactFormUrl"]) {
     try {
