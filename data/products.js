@@ -19,9 +19,9 @@ export const products = [
     logoUrl: "/assets/images/choco-app-icon.png",
     status: "Tersedia",
     description: "Asisten AI utama dan representasi digital Choco dalam ekosistem TCS.",
-    productUrl: "https://tcs-chocoai.vercel.app/",
+    productUrl: "https://chocoai.thechocostudios.bond/",
     actionLabel: "Buka Choco AI",
-    detailsUrl: "https://tcs-chocoai.vercel.app/"
+    detailsUrl: "https://chocoai.thechocostudios.bond/"
   },
   {
     name: "Choco AI Help Center · Sara",
@@ -31,9 +31,9 @@ export const products = [
     logoUrl: "https://thechocostudios.bond/logos/choco-ai-help-center.svg",
     status: "Tersedia",
     description: "Pusat bantuan TCS dengan Sara sebagai asisten dukungan yang terpisah dari Choco AI.",
-    productUrl: "https://choco-ai-help-center.vercel.app/",
+    productUrl: "https://helpcenter.thechocostudios.bond/",
     actionLabel: "Buka Help Center",
-    detailsUrl: "https://choco-ai-help-center.vercel.app/"
+    detailsUrl: "https://helpcenter.thechocostudios.bond/"
   },
   {
     name: "TCS UploadFit",
