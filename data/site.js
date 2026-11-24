@@ -9,7 +9,7 @@ export const site = {
   instagramUrl:"https://www.instagram.com/thechocostudios/",
   linkedinUrl:"https://www.linkedin.com/in/hasby-prasetya-tcs/",
   founderLinkedinUrl:"https://www.linkedin.com/in/hasby-prasetya-tcs/",
-  chocoAiUrl:"https://choco-ai-independent-seven.vercel.app/",
+  chocoAiUrl:"https://tcs-chocoai.vercel.app/",
   helpCenterUrl:"https://choco-ai-help-center.vercel.app/",
   contactFormUrl:"https://forms.gle/LUtY9cyFQKVizA1A6",
   languages:{primary:"Bahasa Indonesia",secondary:"Bahasa Inggris",future:"Dukungan bahasa tambahan akan dikembangkan secara bertahap."},
