@@ -79,9 +79,9 @@ export const products = [
     logoUrl: "",
     status: "Unit pengembangan game TCS",
     description: "Unit pengembangan game dalam ekosistem TCS yang meneruskan identitas sebelumnya, Prism Gaming Studios.",
-    productUrl: "https://vornika-games.vercel.app/",
+    productUrl: "https://vornika.thechocostudios.bond/",
     actionLabel: "Lihat Vornika+-",
-    detailsUrl: "https://vornika-games.vercel.app/"
+    detailsUrl: "https://vornika.thechocostudios.bond/"
   },
   {
     name: "Sheeblink",
