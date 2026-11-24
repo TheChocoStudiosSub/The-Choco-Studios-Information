@@ -375,7 +375,17 @@ const htmlDocuments = [
   ...componentFiles.map(file => ({ file, content: read(file) }))
 ];
 const allComponentMarkup = htmlDocuments.slice(1).map(document => document.content).join("\n");
-const allMarkup = htmlDocuments.map(document => document.content).join("\n");
+const allMarkup = htmlDocuments.map(document => document.content).join("\n");\nconst retiredDomains = [
+  "the-choco-studios-official.vercel.app",
+  "the-choco-studios-officials.vercel.app",
+  "the-choco-studios-information.vercel.app",
+  "the-choco-studio-information.netlify.app",
+  "choco-ai-independent-seven.vercel.app"
+];
+for (const domain of retiredDomains) {
+  if (allMarkup.includes(domain)) fail("Domain lama masih direferensikan oleh halaman aktif: " + domain);
+}
+
 const idOwners = new Map();
 
 for (const document of htmlDocuments) {
@@ -499,6 +509,23 @@ if (site && navigation && products) {
       }
       if (product?.name && names.has(product.name)) fail(`Nama produk duplikat: ${product.name}`);
       if (product?.name) names.add(product.name);
+      if (product?.productUrl) {
+        try {
+          const productUrl = new URL(product.productUrl);
+          if (productUrl.protocol !== "https:") fail("URL produk harus memakai HTTPS: " + product.name);
+        } catch {
+          fail("URL produk tidak valid: " + product.name);
+        }
+      }
+      if (typeof product?.logoUrl === "string" && product.logoUrl.trim()) {
+        const logoUrl = product.logoUrl.trim();
+        if (/^https:\/\//i.test(logoUrl)) {
+          try { new URL(logoUrl); } catch { fail("URL logo tidak valid: " + product.name); }
+        } else {
+          const localLogo = logoUrl.startsWith("/") ? logoUrl.slice(1) : logoUrl;
+          if (!existsSync(path.join(root, localLogo))) fail("Aset logo lokal tidak ditemukan: " + product.name + " (" + logoUrl + ")");
+        }
+      }
       if (product?.detailsUrl) {
         const detailTarget = product.detailsUrl.trim();
         if (detailTarget.startsWith("https://")) {
