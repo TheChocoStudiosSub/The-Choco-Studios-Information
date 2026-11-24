@@ -375,7 +375,8 @@ const htmlDocuments = [
   ...componentFiles.map(file => ({ file, content: read(file) }))
 ];
 const allComponentMarkup = htmlDocuments.slice(1).map(document => document.content).join("\n");
-const allMarkup = htmlDocuments.map(document => document.content).join("\n");\nconst retiredDomains = [
+const allMarkup = htmlDocuments.map(document => document.content).join("\n");
+const retiredDomains = [
   "the-choco-studios-official.vercel.app",
   "the-choco-studios-officials.vercel.app",
   "the-choco-studios-information.vercel.app",
