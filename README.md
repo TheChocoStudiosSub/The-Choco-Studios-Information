@@ -53,7 +53,7 @@ npm run validate
 npm run build
 ```
 
-Setelah build, periksa halaman utama, komponen, tautan internal, pencarian navigasi, tampilan responsif, metadata, sitemap, dan hasil deployment. Pastikan domain kanonis dan tautan publik tetap konsisten.
+Validator memeriksa struktur komponen, tautan dan aset lokal, katalog aktif, URL kanonis, sitemap/robots, serta redirect untuk 16 URL katalog historis. Setelah build, periksa halaman utama, navigasi, tampilan responsif, metadata, dan hasil deployment.
 
 ## Kontak
 
