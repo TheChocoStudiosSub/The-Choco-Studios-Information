@@ -124,6 +124,7 @@ if (
 const index = read("index.html");
 const packageJson = read("package.json");
 const netlifyConfig = read("netlify.toml");
+const vercelConfig = read("vercel.json");
 const buildScript = read("scripts/build-site.mjs");
 const custom404 = read("404.html");
 const robots = read("robots.txt");
