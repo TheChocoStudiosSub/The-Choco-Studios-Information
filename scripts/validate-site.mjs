@@ -170,6 +170,69 @@ const componentStyles = read("assets/css/components.css");
 const menu = read("assets/js/menu.js");
 const panelNavigation = read("assets/js/features/panel-navigation.js");
 const sidebarStyles = read("assets/css/sidebar-shell.css");
+
+const canonicalInfoBase = "https://information.thechocostudios.bond";
+const sitemap = read("sitemap.xml");
+const activeProductPages = new Set([
+  "products/tcs-linkguard.html",
+  "products/choco-ai.html",
+  "products/choco-ai-help-center.html"
+]);
+const legacyProductPages = productPageFiles.filter(file => !activeProductPages.has(file));
+const legacyDomains = [
+  "the-choco-studios-information.vercel.app",
+  "the-choco-studio-information.netlify.app",
+  "tcs-information-hub.vercel.app",
+  "the-choco-studios-official.vercel.app",
+  "choco-ai-independent-seven.vercel.app",
+  "choco-ai-help-center.vercel.app"
+];
+if (!index.includes('<link rel="canonical" href="' + canonicalInfoBase + '/">')) {
+  fail("Canonical homepage harus menggunakan domain Information TCS");
+}
+if (!robots.includes("Sitemap: " + canonicalInfoBase + "/sitemap.xml")) {
+  fail("robots.txt harus menunjuk sitemap pada domain Information kanonis");
+}
+for (const file of activeProductPages) {
+  if (!sitemap.includes("<loc>" + canonicalInfoBase + "/" + file + "</loc>")) {
+    fail("Halaman produk aktif belum tercantum pada sitemap: " + file);
+  }
+}
+for (const file of legacyProductPages) {
+  if (sitemap.includes("<loc>" + canonicalInfoBase + "/" + file + "</loc>")) {
+    fail("Halaman produk historis tidak boleh masuk sitemap: " + file);
+  }
+}
+for (const page of productPages) {
+  const expectedCanonical = '<link rel="canonical" href="' + canonicalInfoBase + "/" + page.file + '">';
+  if (!page.content.includes(expectedCanonical)) {
+    fail("Canonical halaman produk tidak sesuai domain/path: " + page.file);
+  }
+  const noindex = /<meta[^>]+name=["']robots["'][^>]+content=["']noindex/i.test(page.content);
+  if (legacyProductPages.includes(page.file) && !noindex) {
+    fail("Halaman produk historis wajib noindex: " + page.file);
+  }
+  if (activeProductPages.has(page.file) && noindex) {
+    fail("Halaman produk aktif tidak boleh noindex: " + page.file);
+  }
+}
+const componentMarkupForSeo = walkFiles("components", [".html"]).map(read).join("\n");
+const publicMarkupForSeo = [
+  index,
+  componentMarkupForSeo,
+  ...productPages.map(page => page.content),
+  read("data/site.js"),
+  read("data/navigation.js"),
+  read("data/products.js")
+].join("\n");
+for (const domain of legacyDomains) {
+  if (publicMarkupForSeo.includes(domain)) fail("Domain lama masih direferensikan pada halaman/data publik: " + domain);
+}
+if (existsSync(path.join(root, "deploy-bundle.tmp.json"))) {
+  fail("Bundle deployment sementara dan usang tidak boleh tersimpan di root repositori");
+}
+if (failures.length === 0) pass("Canonical domain, sitemap, noindex arsip, dan referensi URL publik diperiksa");
+
 const loaderComponent = read("components/loader.html");
 
 if (!netlifyConfig.includes('command = "npm run build"') ||
@@ -509,6 +572,10 @@ if (site && navigation && products) {
   if (!Array.isArray(products) || products.length === 0) {
     fail("data/products.js harus memiliki minimal satu produk");
   } else {
+    const expectedCurrentCatalog = ["TCS LinkGuard", "Choco AI", "Choco AI Help Center · Sara", "Sheeblink"];
+    if (JSON.stringify(products.map(product => product.name)) !== JSON.stringify(expectedCurrentCatalog)) {
+      fail("Katalog aktif harus tetap terbatas pada empat komponen ekosistem yang disetujui; arsip historis tidak boleh masuk katalog");
+    }
     const names = new Set();
     products.forEach((product, index) => {
       for (const field of ["name", "category", "symbol", "status", "description", "detailsUrl"]) {
