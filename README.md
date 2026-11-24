@@ -36,6 +36,7 @@ Panduan kontribusi: https://thechocostudios.bond/bergabung/
 - Profil The Choco Studios: https://thechocostudios.bond/about/the-choco-studios/
 - Profil Sheeblink: https://thechocostudios.bond/ecosystem/sheeblink/
 - Situs Sheeblink: https://sheeblink.thechocostudios.bond/
+- Vornika+-: https://vornika.thechocostudios.bond/
 - Pusat informasi ini: https://information.thechocostudios.bond/
 - Help Center / Sara: https://helpcenter.thechocostudios.bond/
 - Choco AI: https://chocoai.thechocostudios.bond/
