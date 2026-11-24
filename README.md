@@ -37,9 +37,9 @@ Panduan kontribusi: https://thechocostudios.bond/bergabung/
 - Profil Sheeblink: https://thechocostudios.bond/ecosystem/sheeblink/
 - Situs Sheeblink: https://sheeblink.thechocostudios.bond/
 - Pusat informasi ini: https://information.thechocostudios.bond/
-- Help Center / Sara: https://choco-ai-help-center.vercel.app/
-- Choco AI: https://tcs-chocoai.vercel.app/
-- TCS LinkGuard: https://tcs-linkguard.vercel.app/
+- Help Center / Sara: https://helpcenter.thechocostudios.bond/
+- Choco AI: https://chocoai.thechocostudios.bond/
+- TCS LinkGuard: https://linkguard.thechocostudios.bond/
 
 Situs informasi menggunakan HTML, CSS, dan JavaScript modular. Komponen halaman dimuat dari `components/`; data identitas, navigasi, dan komponen ekosistem disimpan pada `data/`; skrip build menghasilkan `dist/`.
 
