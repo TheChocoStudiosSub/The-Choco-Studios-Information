@@ -38,6 +38,28 @@
       ],
       "destination": "https://information.thechocostudios.bond/:path*",
       "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "the-choco-studios-information-the-choco-corporation.vercel.app"
+        }
+      ],
+      "destination": "https://information.thechocostudios.bond/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "the-choco-studios-information-git-main-the-choco-corporation.vercel.app"
+        }
+      ],
+      "destination": "https://information.thechocostudios.bond/:path*",
+      "permanent": true
     }
   ]
 }
