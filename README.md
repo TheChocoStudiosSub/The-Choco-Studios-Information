@@ -8,7 +8,7 @@ The Choco Studios (TCS) adalah studio kreatif independen multisektor yang didiri
 
 Fokus utama TCS adalah open-source, pengembangan teknologi, dokumentasi, pemeliharaan proyek, dan kolaborasi terstruktur. Aplikasi tetap dapat dikembangkan, tetapi produksi aplikasi bukan lagi pusat utama strategi.
 
-Sheeblink adalah inisiatif handmade yang telah diintegrasikan ke dalam ekosistem TCS sebagai perluasan aktivitas ke bidang non-teknologi, dengan tetap menjaga identitas kreatifnya. Proyek awal TCS yang dahulu bernama Chocobot Guardian kini bernama TCS LinkGuard.
+Sheeblink adalah inisiatif handmade yang telah diintegrasikan ke dalam ekosistem TCS sebagai perluasan aktivitas ke bidang non-teknologi, dengan tetap menjaga identitas kreatifnya. Eji Design menambah bidang desain grafis melalui kolaborasi dengan brand yang tetap memiliki identitas dan kanal pemesanan sendiri. TCS Gaming Store menjadi kanal toko digital untuk top up game, voucher digital, dan layanan PPOB. Proyek awal TCS yang dahulu bernama Chocobot Guardian kini bernama TCS LinkGuard.
 
 ## Komponen utama
 
@@ -16,6 +16,8 @@ Sheeblink adalah inisiatif handmade yang telah diintegrasikan ke dalam ekosistem
 - Choco AI: asisten AI utama dan representasi digital Choco, diarahkan menjadi asisten virtual serbaguna lintas kebutuhan TCS.
 - Choco AI Help Center / Sara: pusat bantuan TCS dengan Sara sebagai asisten dukungan yang terpisah dari Choco AI.
 - Sheeblink: inisiatif kreatif handmade yang terintegrasi ke dalam ekosistem TCS.
+- TCS Gaming Store: toko digital untuk top up game, voucher digital, dan layanan PPOB.
+- Eji Design: brand desain grafis yang terhubung melalui kolaborasi; layanan mencakup poster, spanduk, feed Instagram, dan undangan digital.
 
 Katalog lama berisi 16 aplikasi tidak lagi menjadi direktori publik. Catatan historis dapat tetap berada di repositori untuk audit, tetapi tidak dipresentasikan sebagai portofolio aktif.
 
@@ -23,14 +25,16 @@ Katalog lama berisi 16 aplikasi tidak lagi menjadi direktori publik. Catatan his
 
 Kontribusi publik hanya diterima pada repositori yang secara eksplisit ditetapkan terbuka. Lisensi, panduan kontribusi, standar keamanan, dan proses review ditentukan per proyek. Lisensi kode tidak otomatis memberi hak atas merek, logo, identitas visual, atau kewenangan rilis resmi TCS.
 
-Panduan kontribusi: https://the-choco-studios-officials.vercel.app/bergabung/
+Panduan kontribusi: https://the-choco-studios-official.vercel.app/bergabung/
 
 ## Hosting
 
-- Situs resmi: https://the-choco-studios-officials.vercel.app/
-- Profil pendiri: https://the-choco-studios-officials.vercel.app/about/hasby-prasetya-saprudin/
-- Profil Sheeblink: https://the-choco-studios-officials.vercel.app/ecosystem/sheeblink/
-- Pusat informasi: https://the-choco-studios-information.vercel.app/
+- Situs resmi: https://thechocostudios.bond/
+- Profil pendiri: https://thechocostudios.bond/about/hasby-prasetya-saprudin/
+- Profil Sheeblink: https://thechocostudios.bond/ecosystem/sheeblink/
+- Pusat informasi: https://information.thechocostudios.bond/
+- TCS Gaming Store: https://thechocostudiosgames.areno.id/
+- Eji Design: https://ejidesign.thechocostudios.bond/
 - Help Center: https://choco-ai-help-center.vercel.app/
 - Choco AI: https://choco-ai-independent-seven.vercel.app/
 
