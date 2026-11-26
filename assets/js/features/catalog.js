@@ -67,6 +67,7 @@ export function renderCatalog(products){
     if(product.productUrl)actions.append(createProductAction(product.actionLabel||"Buka produk",product.productUrl,product.name,true));
     if(product.detailsUrl && product.detailsUrl !== product.productUrl){
       const detailsLink=createProductAction("Lihat detail",product.detailsUrl,product.name);
+      detailsLink.textContent = "Lihat detail";
       actions.append(detailsLink);
     }
     footer.append(status,actions);
