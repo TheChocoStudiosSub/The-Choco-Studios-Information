@@ -65,9 +65,10 @@ export function renderCatalog(products){
     const actions=document.createElement("div");
     actions.className="product-actions";
     if(product.productUrl)actions.append(createProductAction(product.actionLabel||"Buka produk",product.productUrl,product.name,true));
-    const detailsLink=createProductAction("Lihat detail",product.detailsUrl,product.name);
-    detailsLink.textContent = "Lihat detail";
-    actions.append(detailsLink);
+    if(product.detailsUrl && product.detailsUrl !== product.productUrl){
+      const detailsLink=createProductAction("Lihat detail",product.detailsUrl,product.name);
+      actions.append(detailsLink);
+    }
     footer.append(status,actions);
     disclosure.append(summary,description,footer);
     main.append(identity);
