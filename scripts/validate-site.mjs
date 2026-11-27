@@ -309,7 +309,7 @@ if (/renderNavigation\(navigation\)/.test(main) || /initActiveNavigation\(\)/.te
 }
 if (!buildSource.includes("function injectSharedInterface()") ||
     !buildSource.includes("injectSharedInterface();") ||
-    !buildSource.includes("SIDEBAR & LOADER LULUS")) {
+    !buildSource.includes("OFFICIAL SHELL LULUS")) {
   fail("Build produksi belum memastikan sidebar dan loader bersama terpasang pada setiap halaman");
 }
 if (index.indexOf('src="assets/js/diagnostics.js"') < 0 ||
