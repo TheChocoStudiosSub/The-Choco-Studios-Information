@@ -154,7 +154,7 @@ function injectSharedInterface() {
   if (loaderCount !== pages.length || sidebarCount !== pages.length - 1 || languageCount !== pages.length) {
     throw new Error(`Pemasangan shared interface tidak lengkap: ${loaderCount}/${pages.length} loader, ${sidebarCount}/${pages.length - 1} sidebar.`);
   }
-  console.log(`SIDEBAR, LOADER & BAHASA LULUS: sidebar dipasang pada ${sidebarCount} halaman; loader dan pemilih bahasa hadir pada ${loaderCount} dan ${languageCount} halaman.`);
+  console.log(`SIDEBAR & LOADER LULUS: sidebar dipasang pada ${sidebarCount} halaman; loader dan pemilih bahasa hadir pada ${loaderCount} dan ${languageCount} halaman.`);
 }
 
 injectSharedInterface();
