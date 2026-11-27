@@ -57,7 +57,15 @@
   }
 
   if (!init()) {
-    document.addEventListener("tcs:site-ready", init, { once: true });
-    document.addEventListener("DOMContentLoaded", init, { once: true });
+    const retry = () => {
+      if (init()) observer?.disconnect();
+    };
+    document.addEventListener("tcs:site-ready", retry, { once: true });
+    document.addEventListener("DOMContentLoaded", retry, { once: true });
+    if (document.documentElement.dataset.tcsSiteReady === "true") requestAnimationFrame(retry);
+
+    const mount = document.getElementById("site-header");
+    const observer = mount ? new MutationObserver(retry) : null;
+    if (observer && mount) observer.observe(mount, { childList: true, subtree: true });
   }
 })();
