@@ -10,7 +10,70 @@ function skip(n){const p=n.parentElement;return !p||p.closest('script,style,nosc
 function translate(n){const cur=n.nodeValue||'';if(last.has(n)&&last.get(n)===cur)return;if(last.has(n)&&last.get(n)!==cur)source.set(n,cur);if(!source.has(n))source.set(n,cur);const raw=source.get(n),v=MAP[norm(raw)]?.[language]||norm(raw);n.nodeValue=(raw.match(/^\s*/)||[''])[0]+v+(raw.match(/\s*$/)||[''])[0];last.set(n,n.nodeValue);}
 function attr(el,a){const cur=el.getAttribute(a);if(cur===null)return;let o=sourceAttrs.get(el)||{},l=lastAttrs.get(el)||{};if(Object.hasOwn(l,a)&&l[a]!==cur)o[a]=cur;if(!Object.hasOwn(o,a))o[a]=cur;sourceAttrs.set(el,o);const v=MAP[norm(o[a])]?.[language]||norm(o[a]);el.setAttribute(a,v);l[a]=v;lastAttrs.set(el,l);}
 function scan(root=document.body){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode())if(!skip(n))translate(n);root.querySelectorAll?.('[placeholder],[aria-label],[title],[alt]').forEach(e=>['placeholder','aria-label','title','alt'].forEach(a=>attr(e,a)));}
-function set(code){language=['id','en','zh'].includes(code)?code:'id';try{localStorage.setItem(KEY,language)}catch{}document.documentElement.lang=language==='zh'?'zh-CN':language;const s=document.getElementById('tcs-information-language');if(s)s.value=language;scan();}
-function init(){if(document.getElementById('tcs-global-language'))return;const box=document.createElement('div');box.id='tcs-global-language';box.innerHTML='<label for="tcs-information-language">Bahasa</label><select id="tcs-information-language" aria-label="Pilih bahasa"><option value="id">ID · Indonesia</option><option value="en">EN · English</option><option value="zh">中文 · Mandarin</option></select>';const css=document.createElement('style');css.textContent='#tcs-global-language{position:fixed;top:16px;right:18px;z-index:99999;display:flex;align-items:center;gap:8px;padding:8px 11px;border:1px solid rgba(200,169,106,.36);border-radius:999px;background:rgba(9,9,8,.96);color:#eee7d8;box-shadow:0 8px 28px rgba(0,0,0,.35);font:500 10px/1.2 \"IBM Plex Mono\",ui-monospace,monospace;backdrop-filter:blur(12px)}#tcs-global-language label{color:#c8a96a;white-space:nowrap}#tcs-global-language select{max-width:145px;border:0;outline:0;background:transparent;color:inherit;font:inherit;cursor:pointer}#tcs-global-language option{background:#111;color:#eee7d8}@media(max-width:640px){#tcs-global-language{top:8px;right:8px;padding:6px 8px}#tcs-global-language label{display:none}}';document.head.append(css);document.body.append(box);box.querySelector('select').addEventListener('change',e=>set(e.target.value));let saved='id';try{const v=localStorage.getItem(KEY);if(['id','en','zh'].includes(v))saved=v}catch{}set(saved);new MutationObserver(rs=>rs.forEach(r=>{if(r.type==='characterData'){if(!skip(r.target))translate(r.target)}else if(r.type==='attributes')attr(r.target,r.attributeName);else r.addedNodes.forEach(n=>{if(n.nodeType===Node.TEXT_NODE){if(!source.has(n))source.set(n,n.nodeValue||'');if(!skip(n))translate(n)}else if(n.nodeType===Node.ELEMENT_NODE)scan(n)})})).observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','aria-label','title','alt']});}
+const cleanDisplay=s=>String(s||'').replace(/\s*[·•]\s*/g,' ').replace(/\s+[—–]\s+/g,', ').replace(/[✦✧✳✿★☆↗↘→←↑↓]/g,'').replace(/\s+/g,' ').trim();
+function translate(n){
+ const cur=n.nodeValue||'';
+ if(last.has(n)&&last.get(n)===cur)return;
+ if(last.has(n)&&last.get(n)!==cur)source.set(n,cur);
+ if(!source.has(n))source.set(n,cur);
+ const raw=source.get(n),translated=cleanDisplay(MAP[norm(raw)]?.[language]||norm(raw));
+ n.nodeValue=(raw.match(/^\s*/)||[''])[0]+translated+(raw.match(/\s*$/)||[''])[0];
+ last.set(n,n.nodeValue);
+}
+function attr(el,a){
+ const cur=el.getAttribute(a);if(cur===null)return;
+ let o=sourceAttrs.get(el)||{},l=lastAttrs.get(el)||{};
+ if(Object.hasOwn(l,a)&&l[a]!==cur)o[a]=cur;
+ if(!Object.hasOwn(o,a))o[a]=cur;
+ sourceAttrs.set(el,o);
+ const translated=cleanDisplay(MAP[norm(o[a])]?.[language]||norm(o[a]));
+ el.setAttribute(a,translated);l[a]=translated;lastAttrs.set(el,l);
+}
+function scan(root=document.body){
+ const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;
+ while(n=w.nextNode())if(!skip(n))translate(n);
+ if(root instanceof Element&&root.matches('[placeholder],[aria-label],[title],[alt]')&&!root.closest('#tcs-global-language'))['placeholder','aria-label','title','alt'].forEach(a=>attr(root,a));
+ root.querySelectorAll?.('[placeholder],[aria-label],[title],[alt]').forEach(e=>{
+  if(!e.closest('#tcs-global-language'))['placeholder','aria-label','title','alt'].forEach(a=>attr(e,a));
+ });
+}
+function set(code){
+ language=['id','en','zh'].includes(code)?code:'id';
+ try{localStorage.setItem(KEY,language)}catch{}
+ document.documentElement.lang=language==='zh'?'zh-CN':language;
+ const toggle=document.getElementById('tcs-information-language-toggle'),menu=document.getElementById('tcs-information-language-menu');
+ if(toggle){
+  toggle.textContent=({id:'Bahasa',en:'Language',zh:'语言'})[language];
+  toggle.setAttribute('aria-label',({id:'Ganti bahasa',en:'Change language',zh:'切换语言'})[language]);
+ }
+ if(menu)menu.setAttribute('aria-label',({id:'Pilih bahasa',en:'Choose language',zh:'选择语言'})[language]);
+ document.querySelectorAll('#tcs-global-language [data-language]').forEach(option=>option.setAttribute('aria-pressed',String(option.dataset.language===language)));
+ document.title=({id:'The Choco Studios (TCS): Pusat Informasi Resmi',en:'The Choco Studios (TCS): Official Information Centre',zh:'The Choco Studios (TCS)：官方信息中心'})[language];
+ scan();
+}
+function init(){
+ if(document.getElementById('tcs-global-language'))return;
+ const box=document.createElement('div');box.id='tcs-global-language';
+ box.innerHTML='<button class="language-toggle" id="tcs-information-language-toggle" type="button" aria-label="Ganti bahasa" aria-controls="tcs-information-language-menu" aria-expanded="false">Bahasa</button><div class="language-menu" id="tcs-information-language-menu" role="group" aria-label="Pilih bahasa" hidden><button class="language-option" type="button" data-language="id" aria-pressed="true">Indonesia</button><button class="language-option" type="button" data-language="en" aria-pressed="false">English</button><button class="language-option" type="button" data-language="zh" aria-pressed="false">Mandarin</button></div>';
+ const css=document.createElement('style');
+ css.textContent='#tcs-global-language{position:fixed;top:16px;right:18px;z-index:99999;display:inline-flex;color:#eee7d8;font:600 11px/1.2 "IBM Plex Mono",ui-monospace,monospace}#tcs-global-language .language-toggle{min-height:37px;padding:0 12px;border:1px solid rgba(200,169,106,.36);border-radius:8px;background:rgba(9,9,8,.92);color:inherit;font:inherit;cursor:pointer}#tcs-global-language .language-toggle:hover,#tcs-global-language .language-toggle[aria-expanded="true"]{border-color:#c8a96a;color:#c8a96a}#tcs-global-language .language-menu{position:absolute;z-index:120;top:calc(100% + 7px);right:0;display:grid;min-width:142px;gap:2px;padding:5px;border:1px solid rgba(200,169,106,.28);border-radius:8px;background:#111;color:#eee7d8}#tcs-global-language .language-menu[hidden]{display:none!important}#tcs-global-language .language-option{min-height:35px;padding:8px 10px;border:0;border-radius:5px;background:transparent;color:inherit;font:500 11px/1.2 "IBM Plex Mono",ui-monospace,monospace;text-align:left;cursor:pointer}#tcs-global-language .language-option:hover,#tcs-global-language .language-option[aria-pressed="true"]{background:#211c12;color:#c8a96a}#tcs-global-language .language-option[aria-pressed="true"]{font-weight:700}@media(max-width:640px){#tcs-global-language{top:8px;right:8px}#tcs-global-language .language-toggle{min-height:35px;padding:0 10px}}';
+ document.head.append(css);document.body.append(box);
+ const toggle=box.querySelector('#tcs-information-language-toggle'),menu=box.querySelector('#tcs-information-language-menu');
+ const close=restore=>{menu.hidden=true;toggle.setAttribute('aria-expanded','false');if(restore)toggle.focus()};
+ toggle.addEventListener('click',()=>{const opening=menu.hidden;menu.hidden=!opening;toggle.setAttribute('aria-expanded',String(opening))});
+ box.querySelectorAll('[data-language]').forEach(option=>option.addEventListener('click',()=>{set(option.dataset.language);close(true)}));
+ document.addEventListener('pointerdown',event=>{if(!box.contains(event.target)&&!menu.hidden)close(false)},true);
+ document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!menu.hidden)close(true)});
+ let saved='id';try{const v=localStorage.getItem(KEY);if(['id','en','zh'].includes(v))saved=v}catch{}
+ set(saved);
+ new MutationObserver(records=>records.forEach(record=>{
+  if(record.type==='characterData'){if(!skip(record.target))translate(record.target)}
+  else if(record.type==='attributes'){if(!record.target.closest('#tcs-global-language'))attr(record.target,record.attributeName)}
+  else record.addedNodes.forEach(node=>{
+   if(node.nodeType===Node.TEXT_NODE){if(!source.has(node))source.set(node,node.nodeValue||'');if(!skip(node))translate(node)}
+   else if(node.nodeType===Node.ELEMENT_NODE)scan(node);
+  });
+ })).observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','aria-label','title','alt']});
+}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
