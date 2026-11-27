@@ -96,7 +96,22 @@ function collectProductHtml(directory) {
 function injectSharedInterface() {
   const sidebarSource = readFileSync(path.join(root, "components/header.html"), "utf8").trim();
   const loaderSource = readFileSync(path.join(root, "components/loader.html"), "utf8").trim();
-  const fontLinks = '<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">';
+  const fontLinks = [
+    '<link rel="preconnect" href="https://fonts.googleapis.com">',
+    '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
+    '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">'
+  ].join("\n");
+  const officialStyles = [
+    '<link rel="stylesheet" href="/assets/css/official/tcs-site.css">',
+    '<link rel="stylesheet" href="/assets/css/official/tcs-paper-treatment.css">',
+    '<link rel="stylesheet" href="/assets/css/official/information-adapter.css">'
+  ].join("\n");
+  const menuControls = [
+    '<button id="tcs-menu-toggle" class="tcs-menu-toggle" type="button" aria-label="Buka navigasi" aria-expanded="false" aria-controls="tcs-sidebar">',
+    '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="5" cy="12" r="1.55" fill="currentColor"/><circle cx="12" cy="12" r="1.55" fill="currentColor"/><circle cx="19" cy="12" r="1.55" fill="currentColor"/></svg>',
+    '</button>',
+    '<button id="tcs-menu-backdrop" class="tcs-menu-backdrop" type="button" aria-label="Tutup navigasi" hidden></button>'
+  ].join("\n");
   const pages = [
     path.join(output, "index.html"),
     path.join(output, "404.html"),
@@ -104,6 +119,7 @@ function injectSharedInterface() {
   ];
   let sidebarCount = 0;
   let loaderCount = 0;
+  let shellCount = 0;
 
   for (const file of pages) {
     const relative = path.relative(output, file).split(path.sep).join("/");
@@ -111,56 +127,77 @@ function injectSharedInterface() {
     const isIndex = relative === "index.html";
     const is404 = relative === "404.html";
     const marker = "<!-- TCS_LUXURY_LOADER -->";
+
     if (html.includes(marker)) {
       html = html.replace(marker, loaderSource);
       loaderCount += 1;
     }
     if (!html.includes('id="tcs-intro-loader"')) {
-      throw new Error(`Layar pembuka Official belum dipasang pada ${relative}`);
+      throw new Error("Layar pembuka Official belum dipasang pada " + relative);
     }
 
     if (!isIndex) {
       const sidebarMarker = "<!-- TCS_SIDEBAR -->";
-      if (!html.includes(sidebarMarker)) throw new Error(`Titik pemasangan sidebar tidak ditemukan pada ${relative}`);
+      if (!html.includes(sidebarMarker)) {
+        throw new Error("Titik pemasangan sidebar tidak ditemukan pada " + relative);
+      }
       const prefix = is404 ? "/" : "../";
       let sidebar = sidebarSource
-        .replaceAll('src="assets/images/the-choco-studios-logo.png"', `src="${prefix}assets/images/the-choco-studios-logo.png"`)
-        .replaceAll('href="#', `href="${prefix}#`)
+        .replaceAll('src="assets/images/the-choco-studios-logo.png"', 'src="' + prefix + 'assets/images/the-choco-studios-logo.png"')
+        .replaceAll('href="#', 'href="' + prefix + '#')
         .replace(/\sdata-panel-link="[^"]*"/g, "")
         .replace(/ class="is-current" aria-current="page"/g, "");
-      if (!is404) sidebar = sidebar.replace(`href="${prefix}#products"`, `href="${prefix}#products" class="is-current" aria-current="page"`);
-      sidebar = sidebar.replace('<aside class="sidebar"', '<aside class="sidebar" data-tcs-static-sidebar');
-      const menuControls = '<button id="tcs-menu-toggle" class="tcs-menu-toggle" type="button" aria-label="Buka navigasi" aria-expanded="false" aria-controls="tcs-sidebar"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="5" cy="12" r="1.55" fill="currentColor"/><circle cx="12" cy="12" r="1.55" fill="currentColor"/><circle cx="19" cy="12" r="1.55" fill="currentColor"/></svg></button>\\n<button id="tcs-menu-backdrop" class="tcs-menu-backdrop" type="button" aria-label="Tutup navigasi" hidden></button>\\n';
-      html = html.replace(sidebarMarker, menuControls + sidebar);
+      sidebar = sidebar.replace('<aside id="tcs-sidebar" class="sidebar"', '<aside id="tcs-sidebar" class="sidebar" data-tcs-static-sidebar');
+      html = html.replace(sidebarMarker, menuControls + "\n" + sidebar);
       sidebarCount += 1;
     }
 
     if (!html.includes("fonts.googleapis.com/css2?family=Cormorant+Garamond")) {
-      if (!/<\/head>/i.test(html)) throw new Error(`Tag </head> tidak ditemukan pada ${relative}`);
-      html = html.replace(/<\/head>/i, `  ${fontLinks}\n</head>`);
+      if (!/<\/head>/i.test(html)) {
+        throw new Error("Tag </head> tidak ditemukan pada " + relative);
+      }
+      html = html.replace(/<\/head>/i, "  " + fontLinks + "\n</head>");
     }
-    const officialStyles = '<link rel="stylesheet" href="/assets/css/official/tcs-site.css">\\n<link rel="stylesheet" href="/assets/css/official/tcs-paper-treatment.css">\\n<link rel="stylesheet" href="/assets/css/official/information-adapter.css">';
+
     if (!html.includes('href="/assets/css/official/tcs-site.css"')) {
-      if (!/<\\/head>/i.test(html)) throw new Error(`Tag </head> tidak ditemukan saat memasang desain Official pada ${relative}`);
-      html = html.replace(/<\\/head>/i, `  ${officialStyles}\\n</head>`);
+      if (!/<\/head>/i.test(html)) {
+        throw new Error("Tag </head> tidak ditemukan saat memasang desain Official pada " + relative);
+      }
+      html = html.replace(/<\/head>/i, "  " + officialStyles + "\n</head>");
     }
-    html = html.replace(/<meta name="theme-color" content="[^"]*">/i, '<meta name="theme-color" content="#eee6d8">');
 
     if (!html.includes('href="/assets/css/sidebar-shell.css"') && !html.includes('href="assets/css/sidebar-shell.css"')) {
-      if (!/<\/head>/i.test(html)) throw new Error(`Tag </head> tidak ditemukan pada ${relative}`);
+      if (!/<\/head>/i.test(html)) {
+        throw new Error("Tag </head> tidak ditemukan saat memasang shared shell pada " + relative);
+      }
       html = html.replace(/<\/head>/i, '  <link rel="stylesheet" href="/assets/css/sidebar-shell.css">\n</head>');
     }
+
+    html = html.replace(/<meta name="theme-color" content="[^"]*">/i, '<meta name="theme-color" content="#eee6d8">');
+
     if (!html.includes("data-tcs-preloader")) {
-      if (!/<\/body>/i.test(html)) throw new Error(`Tag </body> tidak ditemukan pada ${relative}`);
+      if (!/<\/body>/i.test(html)) {
+        throw new Error("Tag </body> tidak ditemukan saat memasang loader pada " + relative);
+      }
       html = html.replace(/<\/body>/i, '  <script defer src="/assets/js/features/preloader.js" data-tcs-preloader></script>\n</body>');
     }
+
+    if (!html.includes("data-tcs-shell")) {
+      if (!/<\/body>/i.test(html)) {
+        throw new Error("Tag </body> tidak ditemukan saat memasang menu pada " + relative);
+      }
+      html = html.replace(/<\/body>/i, '  <script defer src="/assets/js/features/tcs-shell.js" data-tcs-shell></script>\n</body>');
+      shellCount += 1;
+    }
+
     writeFileSync(file, html, "utf8");
   }
 
-  if (loaderCount !== pages.length || sidebarCount !== pages.length - 1) {
-    throw new Error(`Pemasangan shared interface tidak lengkap: ${loaderCount}/${pages.length} loader, ${sidebarCount}/${pages.length - 1} sidebar.`);
+  if (loaderCount !== pages.length || sidebarCount !== pages.length - 1 || shellCount !== pages.length) {
+    throw new Error("Pemasangan shared interface tidak lengkap: " + loaderCount + "/" + pages.length +
+      " loader, " + sidebarCount + "/" + (pages.length - 1) + " sidebar, " + shellCount + "/" + pages.length + " menu.");
   }
-  console.log(`SIDEBAR & LOADER LULUS: sidebar dan loader identik dipasang pada ${sidebarCount} halaman; loader hadir pada ${loaderCount} halaman.`);
+  console.log("OFFICIAL SHELL LULUS: loader, typography, paper theme, sidebar dan mobile navigation terpasang pada semua halaman publik.");
 }
 
 injectSharedInterface();
