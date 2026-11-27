@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b0f17">
+<meta name="theme-color" content="#eee6d8">
 <meta name="description" content="The Choco Studios (TCS) adalah studio kreatif independen multisektor yang didirikan, dimiliki, dan dikelola secara mandiri oleh Hasby Prasetya Saprudin. Fokus utama TCS adalah open-source, teknologi terapan, dokumentasi, dan kolaborasi lintas bidang.">
 <meta name="author" content="Hasby Prasetya Saprudin">
 <meta name="google-site-verification" content="NNQ28b3_3a1lDEicczUcK51MTS2XNSqzureyIlAjH8w">
@@ -27,7 +27,7 @@
 <link rel="apple-touch-icon" href="/assets/images/the-choco-studios-logo.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <title>The Choco Studios (TCS) — Pusat Informasi Resmi</title>
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/base.css">
@@ -36,6 +36,9 @@
 <link rel="stylesheet" href="assets/css/diagnostics.css">
 <link rel="stylesheet" href="assets/css/responsive.css">
 <link rel="stylesheet" href="/assets/css/sidebar-shell.css">
+<link rel="stylesheet" href="/assets/css/official/tcs-site.css">
+<link rel="stylesheet" href="/assets/css/official/tcs-paper-treatment.css">
+<link rel="stylesheet" href="/assets/css/official/information-adapter.css">
 <link rel="preload" href="assets/fonts/cormorant-garamond-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/jost-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 
@@ -53,26 +56,26 @@
 <!-- TCS_LUXURY_LOADER -->
 <a class="skip-link" href="#site-main">Lewati ke konten utama</a>
 <div class="site-shell">
+  <button id="tcs-menu-toggle" class="tcs-menu-toggle" type="button" aria-label="Buka navigasi" aria-expanded="false" aria-controls="tcs-sidebar">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="5" cy="12" r="1.55" fill="currentColor"/><circle cx="12" cy="12" r="1.55" fill="currentColor"/><circle cx="19" cy="12" r="1.55" fill="currentColor"/></svg>
+  </button>
   <div id="site-header"></div>
+  <button id="tcs-menu-backdrop" class="tcs-menu-backdrop" type="button" aria-label="Tutup navigasi" hidden></button>
   <main id="site-main" tabindex="-1">
-    <div id="home" class="view-panel is-active" data-panel="home" data-component="hero" aria-hidden="false">
-      <aside class="instagram-notice" aria-labelledby="instagram-notice-title">
-        <div class="instagram-notice-inner">
-          <span class="instagram-notice-label">PEMBARUAN KANAL RESMI</span>
-          <div class="instagram-notice-copy">
-            <h2 id="instagram-notice-title">Akun Instagram resmi TCS telah berganti.</h2>
-            <p>Akun Instagram TCS yang lama telah diblokir oleh Instagram dan tidak lagi digunakan sebagai kanal resmi. Untuk mendapatkan informasi dan pembaruan terbaru, ikuti akun Instagram resmi TCS yang baru.</p>
-            <a href="https://www.instagram.com/thechocostudios/" target="_blank" rel="noopener noreferrer">@thechocostudios</a>
-          </div>
+    <div id="home" class="hero view-panel is-active" data-panel="home" data-component="hero" aria-hidden="false">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <p class="eyebrow">THE CHOCO STUDIOS / PUSAT INFORMASI</p>
+          <h1 class="hero-title" id="hero-title">
+            <span class="hero-title-line"><span>INFORMATION</span></span>
+            <span class="hero-title-line"><span>CENTER.</span></span>
+          </h1>
+          <div class="hero-double-rule" aria-hidden="true"><span></span><span></span></div>
+          <p class="hero-lead">Pusat informasi resmi The Choco Studios. Kenali identitas TCS, arah open-source, ekosistem, teknologi, keamanan, dokumentasi, dan pembaruan proyek.</p>
+          <a class="hero-cta" href="#overview"><span>Jelajahi pusat informasi</span></a>
+          <p class="hero-footnote">Kanal Instagram resmi TCS: @thechocostudios.</p>
         </div>
-      </aside>
-      <section class="hero fallback-hero" aria-label="The Choco Studios">
-        <div class="container hero-layout"><div class="hero-content">
-          <p class="eyebrow">THE CHOCO STUDIOS <span aria-hidden="true">/</span> STUDIO KREATIF INDEPENDEN</p>
-          <h1>Gagasan terbuka.<br><span class="fallback-accent">Kontribusi nyata.</span></h1>
-          <p class="hero-description">The Choco Studios (TCS) adalah studio kreatif independen multisektor yang didirikan, dimiliki, dan dikelola secara mandiri oleh Hasby Prasetya Saprudin. Fokus TCS adalah open-source, teknologi terapan, dokumentasi, pemeliharaan proyek, dan kolaborasi lintas bidang.</p>
-        </div></div>
-      </section>
+      </div>
     </div>
     <div id="overview" class="view-panel" data-panel="overview" data-component="overview" aria-hidden="true" inert></div>
     <div id="about" class="view-panel" data-panel="about" data-component="about" aria-hidden="true" inert></div>
