@@ -53,3 +53,8 @@ Setelah build, periksa halaman utama, seluruh komponen, tautan, pencarian naviga
 
 thechocostudios@gmail.com
 https://www.linkedin.com/in/hasby-prasetya-tcs/
+
+
+## Bahasa antarmuka
+
+Seluruh halaman HTML utama, halaman 404, dan halaman detail produk pada hasil build menyediakan pemilih bahasa Indonesia (utama/default), English, dan Mandarin Sederhana. Pilihan disimpan secara lokal pada browser. Skrip bersama dipasang oleh proses build agar seluruh halaman menggunakan satu selector dan preferensi yang sama. Terjemahan mencakup navigasi dan teks UI yang memiliki padanan; informasi produk panjang yang belum diterjemahkan tetap ditampilkan dalam bahasa sumbernya.

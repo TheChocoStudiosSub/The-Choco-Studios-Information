@@ -11,6 +11,7 @@ const publicFiles = [
   "robots.txt",
   "sitemap.xml",
   "tcs-analytics.js",
+  "tcs-language.js",
   "_headers"
 ];
 
@@ -100,6 +101,7 @@ function injectSharedInterface() {
   ];
   let sidebarCount = 0;
   let loaderCount = 0;
+  let languageCount = 0;
 
   for (const file of pages) {
     const relative = path.relative(output, file).split(path.sep).join("/");
@@ -138,17 +140,23 @@ function injectSharedInterface() {
       if (!/<\/head>/i.test(html)) throw new Error(`Tag </head> tidak ditemukan pada ${relative}`);
       html = html.replace(/<\/head>/i, '  <link rel="stylesheet" href="/assets/css/sidebar-shell.css">\n</head>');
     }
+    if (!html.includes("data-tcs-language")) {
+      if (!html.includes("</body>")) throw new Error(`Tag </body> tidak ditemukan saat memasang bahasa pada ${relative}`);
+      html = html.replace("</body>", '  <script defer src="/tcs-language.js" data-tcs-language></script>\\n</body>');
+    }
     if (!html.includes("data-tcs-preloader")) {
       if (!/<\/body>/i.test(html)) throw new Error(`Tag </body> tidak ditemukan pada ${relative}`);
       html = html.replace(/<\/body>/i, '  <script defer src="/assets/js/features/preloader.js" data-tcs-preloader></script>\n</body>');
     }
+    if (!html.includes("data-tcs-language")) throw new Error(`Pemilih bahasa gagal dipasang pada ${relative}`);
+    languageCount += 1;
     writeFileSync(file, html, "utf8");
   }
 
-  if (loaderCount !== pages.length || sidebarCount !== pages.length - 1) {
+  if (loaderCount !== pages.length || sidebarCount !== pages.length - 1 || languageCount !== pages.length) {
     throw new Error(`Pemasangan shared interface tidak lengkap: ${loaderCount}/${pages.length} loader, ${sidebarCount}/${pages.length - 1} sidebar.`);
   }
-  console.log(`SIDEBAR & LOADER LULUS: sidebar dan loader identik dipasang pada ${sidebarCount} halaman; loader hadir pada ${loaderCount} halaman.`);
+  console.log(`SIDEBAR, LOADER & BAHASA LULUS: sidebar dipasang pada ${sidebarCount} halaman; loader dan pemilih bahasa hadir pada ${loaderCount} dan ${languageCount} halaman.`);
 }
 
 function injectGlobalSpaceBackground() {
