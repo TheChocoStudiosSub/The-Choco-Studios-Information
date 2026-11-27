@@ -1,0 +1,79 @@
+(() => {
+'use strict';
+const KEY='tcs-information-language-v1';
+const MAP={
+'NAVIGATION':{en:'NAVIGATION',zh:'导航'},'Home':{en:'Home',zh:'首页'},'Overview':{en:'Overview',zh:'概览'},'Tentang TCS':{en:'About TCS',zh:'关于 TCS'},'Open-source':{en:'Open source',zh:'开源'},'Ekosistem':{en:'Ecosystem',zh:'生态系统'},'Teknologi':{en:'Technology',zh:'技术'},'Keamanan':{en:'Security',zh:'安全'},'Pembaruan':{en:'Updates',zh:'更新'},'Kontak':{en:'Contact',zh:'联系'},'Choco AI ↗':{en:'Choco AI ↗',zh:'Choco AI ↗'},'Situs resmi TCS ↗':{en:'Official TCS website ↗',zh:'TCS 官方网站 ↗'},'Panduan bergabung ↗':{en:'Contribution guide ↗',zh:'参与指南 ↗'},'INFORMATION CENTER':{en:'INFORMATION CENTER',zh:'信息中心'},'Studio kreatif independen':{en:'Independent creative studio',zh:'独立创意工作室'},'Studio independen yang berfokus pada open-source dan karya lintas bidang.':{en:'An independent studio focused on open source and cross-disciplinary work.',zh:'专注于开源与跨领域作品的独立工作室。'},'Jelajahi':{en:'Explore',zh:'探索'},'Kanal resmi':{en:'Official channels',zh:'官方渠道'},'Bergabung':{en:'Contribute',zh:'参与'},'LinkedIn pendiri':{en:'Founder on LinkedIn',zh:'创办人 LinkedIn'},'Beranda':{en:'Home',zh:'首页'},'Pusat Informasi':{en:'Information Centre',zh:'信息中心'},'Pusat Informasi Resmi':{en:'Official Information Centre',zh:'官方信息中心'},'Gagasan terbuka.':{en:'Open ideas.',zh:'开放的创意。'},'Kontribusi nyata.':{en:'Meaningful contributions.',zh:'有意义的贡献。'},'The Choco Studios (TCS) adalah studio kreatif independen multisektor yang didirikan, dimiliki, dan dikelola secara mandiri oleh Hasby Prasetya Saprudin. Fokus TCS adalah open-source, teknologi terapan, dokumentasi, pemeliharaan proyek, dan kolaborasi lintas bidang.':{en:'The Choco Studios (TCS) is an independent multisector creative studio founded, owned, and managed by Hasby Prasetya Saprudin. TCS focuses on open source, applied technology, documentation, project stewardship, and cross-disciplinary collaboration.',zh:'The Choco Studios (TCS) 是一家由 Hasby Prasetya Saprudin 创立、拥有并独立管理的多领域创意工作室。TCS 专注于开源、应用技术、文档、项目维护及跨领域协作。'},'Halaman belum dapat dimuat':{en:'The page could not be loaded',zh:'页面暂时无法加载'},'Panel diagnostik menampilkan jenis kesalahan, sumber, status HTTP jika tersedia, dan langkah pemeriksaan. Muat ulang halaman setelah pemeriksaan.':{en:'The diagnostics panel displays the error type, source, HTTP status when available, and troubleshooting steps. Reload the page after checking.',zh:'诊断面板会显示错误类型、来源、可用的 HTTP 状态及检查步骤。检查后请重新加载页面。'},'THE CHOCO STUDIOS':{en:'THE CHOCO STUDIOS',zh:'THE CHOCO STUDIOS'},'STUDIO KREATIF INDEPENDEN':{en:'INDEPENDENT CREATIVE STUDIO',zh:'独立创意工作室'},'Pusat informasi':{en:'Information centre',zh:'信息中心'},'Open-source, teknologi terapan, dan karya lintas bidang.':{en:'Open source, applied technology, and cross-disciplinary work.',zh:'开源、应用技术与跨领域作品。'},'Jelajahi karya TCS':{en:'Explore TCS work',zh:'探索 TCS 作品'},'Pelajari lebih lanjut':{en:'Learn more',zh:'了解更多'},'Baca selengkapnya':{en:'Read more',zh:'阅读更多'},'Lihat detail':{en:'View details',zh:'查看详情'},'Informasi produk':{en:'Product information',zh:'产品信息'},'Produk':{en:'Products',zh:'产品'},'Katalog produk':{en:'Product catalogue',zh:'产品目录'},'Proyek':{en:'Projects',zh:'项目'},'Visi':{en:'Vision',zh:'愿景'},'Misi':{en:'Mission',zh:'使命'},'Tentang':{en:'About',zh:'关于'},'Nilai':{en:'Values',zh:'价值观'},'Keamanan & Privasi':{en:'Security & Privacy',zh:'安全与隐私'},'Dukungan':{en:'Support',zh:'支持'},'Hubungi kami':{en:'Contact us',zh:'联系我们'},'Kembali ke atas':{en:'Back to top',zh:'返回顶部'},'Kembali ke beranda':{en:'Back to home',zh:'返回首页'},'Halaman tidak ditemukan':{en:'Page not found',zh:'页面不存在'},'Halaman yang Anda cari tidak tersedia.':{en:'The page you are looking for is unavailable.',zh:'您要查找的页面不可用。'},'Memuat...':{en:'Loading...',zh:'正在加载...'},'Sedang memuat...':{en:'Loading...',zh:'正在加载...'},'Tidak ditemukan':{en:'Not found',zh:'未找到'},'Belum tersedia':{en:'Not available yet',zh:'暂不可用'},'Segera hadir':{en:'Coming soon',zh:'即将推出'},'Pelajari':{en:'Learn',zh:'了解'},'Lihat proyek':{en:'View project',zh:'查看项目'},'Kunjungi situs':{en:'Visit website',zh:'访问网站'},'Kunjungi situs resmi':{en:'Visit official website',zh:'访问官方网站'},'Tentang produk':{en:'About the product',zh:'关于产品'},'Ringkasan':{en:'Overview',zh:'概述'},'Fitur utama':{en:'Key features',zh:'主要功能'},'Manfaat':{en:'Benefits',zh:'优势'},'Batasan':{en:'Limitations',zh:'限制'},'Cara menggunakan':{en:'How to use',zh:'使用方法'},'Status produk':{en:'Product status',zh:'产品状态'},'Demo':{en:'Demo',zh:'演示'},'Produk ini masih dalam tahap pengembangan.':{en:'This product is still under development.',zh:'此产品仍在开发中。'},'Informasi ini dapat berubah mengikuti pembaruan proyek.':{en:'This information may change as the project is updated.',zh:'此信息可能会随着项目更新而变化。'},'Choco AI':{en:'Choco AI',zh:'Choco AI'},'Sara':{en:'Sara',zh:'Sara'},'ChocoBot Guardian':{en:'ChocoBot Guardian',zh:'ChocoBot Guardian'},'ChocoScan':{en:'ChocoScan',zh:'ChocoScan'},'KasirKita':{en:'KasirKita',zh:'KasirKita'},'TCS LinkGuard':{en:'TCS LinkGuard',zh:'TCS LinkGuard'},'Sheeblink':{en:'Sheeblink',zh:'Sheeblink'},'Eji Design':{en:'Eji Design',zh:'Eji Design'},'TCS Gaming Store':{en:'TCS Gaming Store',zh:'TCS 游戏商店'},'Kebijakan Privasi':{en:'Privacy Policy',zh:'隐私政策'},'Syarat dan Ketentuan':{en:'Terms and Conditions',zh:'条款与条件'},'Pilih bahasa':{en:'Choose language',zh:'选择语言'}
+};
+const source=new WeakMap(),last=new WeakMap(),sourceAttrs=new WeakMap(),lastAttrs=new WeakMap();let language='id';
+const norm=s=>String(s||'').replace(/\s+/g,' ').trim();
+function skip(n){const p=n.parentElement;return !p||p.closest('script,style,noscript,input,textarea,select,option,pre,code,svg,[data-no-translate],#tcs-global-language');}
+function translate(n){const cur=n.nodeValue||'';if(last.has(n)&&last.get(n)===cur)return;if(last.has(n)&&last.get(n)!==cur)source.set(n,cur);if(!source.has(n))source.set(n,cur);const raw=source.get(n),v=MAP[norm(raw)]?.[language]||norm(raw);n.nodeValue=(raw.match(/^\s*/)||[''])[0]+v+(raw.match(/\s*$/)||[''])[0];last.set(n,n.nodeValue);}
+function attr(el,a){const cur=el.getAttribute(a);if(cur===null)return;let o=sourceAttrs.get(el)||{},l=lastAttrs.get(el)||{};if(Object.hasOwn(l,a)&&l[a]!==cur)o[a]=cur;if(!Object.hasOwn(o,a))o[a]=cur;sourceAttrs.set(el,o);const v=MAP[norm(o[a])]?.[language]||norm(o[a]);el.setAttribute(a,v);l[a]=v;lastAttrs.set(el,l);}
+function scan(root=document.body){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode())if(!skip(n))translate(n);root.querySelectorAll?.('[placeholder],[aria-label],[title],[alt]').forEach(e=>['placeholder','aria-label','title','alt'].forEach(a=>attr(e,a)));}
+const cleanDisplay=s=>String(s||'').replace(/\s*[·•]\s*/g,' ').replace(/\s+[—–]\s+/g,', ').replace(/[✦✧✳✿★☆↗↘→←↑↓]/g,'').replace(/\s+/g,' ').trim();
+function translate(n){
+ const cur=n.nodeValue||'';
+ if(last.has(n)&&last.get(n)===cur)return;
+ if(last.has(n)&&last.get(n)!==cur)source.set(n,cur);
+ if(!source.has(n))source.set(n,cur);
+ const raw=source.get(n),translated=cleanDisplay(MAP[norm(raw)]?.[language]||norm(raw));
+ n.nodeValue=(raw.match(/^\s*/)||[''])[0]+translated+(raw.match(/\s*$/)||[''])[0];
+ last.set(n,n.nodeValue);
+}
+function attr(el,a){
+ const cur=el.getAttribute(a);if(cur===null)return;
+ let o=sourceAttrs.get(el)||{},l=lastAttrs.get(el)||{};
+ if(Object.hasOwn(l,a)&&l[a]!==cur)o[a]=cur;
+ if(!Object.hasOwn(o,a))o[a]=cur;
+ sourceAttrs.set(el,o);
+ const translated=cleanDisplay(MAP[norm(o[a])]?.[language]||norm(o[a]));
+ el.setAttribute(a,translated);l[a]=translated;lastAttrs.set(el,l);
+}
+function scan(root=document.body){
+ const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;
+ while(n=w.nextNode())if(!skip(n))translate(n);
+ if(root instanceof Element&&root.matches('[placeholder],[aria-label],[title],[alt]')&&!root.closest('#tcs-global-language'))['placeholder','aria-label','title','alt'].forEach(a=>attr(root,a));
+ root.querySelectorAll?.('[placeholder],[aria-label],[title],[alt]').forEach(e=>{
+  if(!e.closest('#tcs-global-language'))['placeholder','aria-label','title','alt'].forEach(a=>attr(e,a));
+ });
+}
+function set(code){
+ language=['id','en','zh'].includes(code)?code:'id';
+ try{localStorage.setItem(KEY,language)}catch{}
+ document.documentElement.lang=language==='zh'?'zh-CN':language;
+ const toggle=document.getElementById('tcs-information-language-toggle'),menu=document.getElementById('tcs-information-language-menu');
+ if(toggle){
+  toggle.textContent=({id:'Bahasa',en:'Language',zh:'语言'})[language];
+  toggle.setAttribute('aria-label',({id:'Ganti bahasa',en:'Change language',zh:'切换语言'})[language]);
+ }
+ if(menu)menu.setAttribute('aria-label',({id:'Pilih bahasa',en:'Choose language',zh:'选择语言'})[language]);
+ document.querySelectorAll('#tcs-global-language [data-language]').forEach(option=>option.setAttribute('aria-pressed',String(option.dataset.language===language)));
+ document.title=({id:'The Choco Studios (TCS): Pusat Informasi Resmi',en:'The Choco Studios (TCS): Official Information Centre',zh:'The Choco Studios (TCS)：官方信息中心'})[language];
+ scan();
+}
+function init(){
+ if(document.getElementById('tcs-global-language'))return;
+ const box=document.createElement('div');box.id='tcs-global-language';
+ box.innerHTML='<button class="language-toggle" id="tcs-information-language-toggle" type="button" aria-label="Ganti bahasa" aria-controls="tcs-information-language-menu" aria-expanded="false">Bahasa</button><div class="language-menu" id="tcs-information-language-menu" role="group" aria-label="Pilih bahasa" hidden><button class="language-option" type="button" data-language="id" aria-pressed="true">Indonesia</button><button class="language-option" type="button" data-language="en" aria-pressed="false">English</button><button class="language-option" type="button" data-language="zh" aria-pressed="false">Mandarin</button></div>';
+ const css=document.createElement('style');
+ css.textContent='#tcs-global-language{position:fixed;top:16px;right:18px;z-index:99999;display:inline-flex;color:#eee7d8;font:600 11px/1.2 "IBM Plex Mono",ui-monospace,monospace}#tcs-global-language .language-toggle{min-height:37px;padding:0 12px;border:1px solid rgba(200,169,106,.36);border-radius:8px;background:rgba(9,9,8,.92);color:inherit;font:inherit;cursor:pointer}#tcs-global-language .language-toggle:hover,#tcs-global-language .language-toggle[aria-expanded="true"]{border-color:#c8a96a;color:#c8a96a}#tcs-global-language .language-menu{position:absolute;z-index:120;top:calc(100% + 7px);right:0;display:grid;min-width:142px;gap:2px;padding:5px;border:1px solid rgba(200,169,106,.28);border-radius:8px;background:#111;color:#eee7d8}#tcs-global-language .language-menu[hidden]{display:none!important}#tcs-global-language .language-option{min-height:35px;padding:8px 10px;border:0;border-radius:5px;background:transparent;color:inherit;font:500 11px/1.2 "IBM Plex Mono",ui-monospace,monospace;text-align:left;cursor:pointer}#tcs-global-language .language-option:hover,#tcs-global-language .language-option[aria-pressed="true"]{background:#211c12;color:#c8a96a}#tcs-global-language .language-option[aria-pressed="true"]{font-weight:700}@media(max-width:640px){#tcs-global-language{top:8px;right:8px}#tcs-global-language .language-toggle{min-height:35px;padding:0 10px}}';
+ document.head.append(css);document.body.append(box);
+ const toggle=box.querySelector('#tcs-information-language-toggle'),menu=box.querySelector('#tcs-information-language-menu');
+ const close=restore=>{menu.hidden=true;toggle.setAttribute('aria-expanded','false');if(restore)toggle.focus()};
+ toggle.addEventListener('click',()=>{const opening=menu.hidden;menu.hidden=!opening;toggle.setAttribute('aria-expanded',String(opening))});
+ box.querySelectorAll('[data-language]').forEach(option=>option.addEventListener('click',()=>{set(option.dataset.language);close(true)}));
+ document.addEventListener('pointerdown',event=>{if(!box.contains(event.target)&&!menu.hidden)close(false)},true);
+ document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!menu.hidden)close(true)});
+ let saved='id';try{const v=localStorage.getItem(KEY);if(['id','en','zh'].includes(v))saved=v}catch{}
+ set(saved);
+ new MutationObserver(records=>records.forEach(record=>{
+  if(record.type==='characterData'){if(!skip(record.target))translate(record.target)}
+  else if(record.type==='attributes'){if(!record.target.closest('#tcs-global-language'))attr(record.target,record.attributeName)}
+  else record.addedNodes.forEach(node=>{
+   if(node.nodeType===Node.TEXT_NODE){if(!source.has(node))source.set(node,node.nodeValue||'');if(!skip(node))translate(node)}
+   else if(node.nodeType===Node.ELEMENT_NODE)scan(node);
+  });
+ })).observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','aria-label','title','alt']});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();

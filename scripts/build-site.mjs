@@ -11,6 +11,7 @@ const publicFiles = [
   "robots.txt",
   "sitemap.xml",
   "tcs-analytics.js",
+  "tcs-language.js",
   "_headers"
 ];
 
@@ -30,8 +31,6 @@ const requiredOutput = [
   "components/loader.html",
   "assets/images/the-choco-studios-logo.png",
   "assets/js/diagnostics.js",
-  "assets/css/space-background.css",
-  "assets/js/features/space-background.js",
   "components/header.html",
   "components/products.html",
   "data/site.js",
@@ -100,6 +99,7 @@ function injectSharedInterface() {
   ];
   let sidebarCount = 0;
   let loaderCount = 0;
+  let languageCount = 0;
 
   for (const file of pages) {
     const relative = path.relative(output, file).split(path.sep).join("/");
@@ -138,54 +138,26 @@ function injectSharedInterface() {
       if (!/<\/head>/i.test(html)) throw new Error(`Tag </head> tidak ditemukan pada ${relative}`);
       html = html.replace(/<\/head>/i, '  <link rel="stylesheet" href="/assets/css/sidebar-shell.css">\n</head>');
     }
+    if (!html.includes("data-tcs-language")) {
+      if (!html.includes("</body>")) throw new Error(`Tag </body> tidak ditemukan saat memasang bahasa pada ${relative}`);
+      html = html.replace("</body>", '  <script defer src="/tcs-language.js" data-tcs-language></script>\\n</body>');
+    }
     if (!html.includes("data-tcs-preloader")) {
       if (!/<\/body>/i.test(html)) throw new Error(`Tag </body> tidak ditemukan pada ${relative}`);
       html = html.replace(/<\/body>/i, '  <script defer src="/assets/js/features/preloader.js" data-tcs-preloader></script>\n</body>');
     }
+    if (!html.includes("data-tcs-language")) throw new Error(`Pemilih bahasa gagal dipasang pada ${relative}`);
+    languageCount += 1;
     writeFileSync(file, html, "utf8");
   }
 
-  if (loaderCount !== pages.length || sidebarCount !== pages.length - 1) {
+  if (loaderCount !== pages.length || sidebarCount !== pages.length - 1 || languageCount !== pages.length) {
     throw new Error(`Pemasangan shared interface tidak lengkap: ${loaderCount}/${pages.length} loader, ${sidebarCount}/${pages.length - 1} sidebar.`);
   }
-  console.log(`SIDEBAR & LOADER LULUS: sidebar dan loader identik dipasang pada ${sidebarCount} halaman; loader hadir pada ${loaderCount} halaman.`);
-}
-
-function injectGlobalSpaceBackground() {
-  const pages = [
-    path.join(output, "index.html"),
-    path.join(output, "404.html"),
-    ...collectProductHtml(path.join(output, "products"))
-  ];
-  const stylesheet = '<link rel="stylesheet" href="/assets/css/space-background.css" data-tcs-space-background-style>';
-  const script = '<script type="module" src="/assets/js/features/space-background.js" data-tcs-space-background-script></script>';
-  let injected = 0;
-
-  for (const file of pages) {
-    let html = readFileSync(file, "utf8");
-    if (!html.includes("data-tcs-space-background-style")) {
-      if (!/<\/head>/i.test(html)) throw new Error(`Tag </head> tidak ditemukan pada ${path.relative(output, file)}`);
-      html = html.replace(/<\/head>/i, `  ${stylesheet}\n</head>`);
-    }
-    if (!html.includes("data-tcs-space-background-script")) {
-      if (!/<\/body>/i.test(html)) throw new Error(`Tag </body> tidak ditemukan pada ${path.relative(output, file)}`);
-      html = html.replace(/<\/body>/i, `  ${script}\n</body>`);
-    }
-    if (!html.includes("data-tcs-space-background-style") || !html.includes("data-tcs-space-background-script")) {
-      throw new Error(`Background global gagal dipasang pada ${path.relative(output, file)}`);
-    }
-    writeFileSync(file, html, "utf8");
-    injected += 1;
-  }
-
-  if (pages.length !== injected || injected < 3) {
-    throw new Error(`Pemasangan background global tidak lengkap: ${injected} dari ${pages.length} halaman.`);
-  }
-  console.log(`BACKGROUND GLOBAL LULUS: efek bintang dan meteor dipasang pada ${injected} halaman HTML.`);
+  console.log(`SIDEBAR & LOADER LULUS: sidebar dipasang pada ${sidebarCount} halaman; loader dan pemilih bahasa hadir pada ${loaderCount} dan ${languageCount} halaman.`);
 }
 
 injectSharedInterface();
-injectGlobalSpaceBackground();
 
 const forbiddenPaths = ["README.md", "package.json", "docs", "scripts", ".github", "netlify.toml"];
 const leaked = forbiddenPaths.filter(file => existsSync(path.join(output, file)));
