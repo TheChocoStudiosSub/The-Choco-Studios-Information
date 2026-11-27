@@ -24,6 +24,10 @@ const publicDirectories = [
 const requiredOutput = [
   ...publicFiles,
   "assets/js/main.js",
+  "assets/js/features/tcs-shell.js",
+  "assets/css/official/tcs-site.css",
+  "assets/css/official/tcs-paper-treatment.css",
+  "assets/css/official/information-adapter.css",
   "assets/css/sidebar-shell.css",
   "assets/js/features/panel-navigation.js",
   "assets/js/features/preloader.js",
@@ -111,7 +115,7 @@ function injectSharedInterface() {
       html = html.replace(marker, loaderSource);
       loaderCount += 1;
     }
-    if (!html.includes('id="luxury-loader"')) {
+    if (!html.includes('id="tcs-intro-loader"')) {
       throw new Error(`Layar pembuka Official belum dipasang pada ${relative}`);
     }
 
@@ -126,14 +130,22 @@ function injectSharedInterface() {
         .replace(/ class="is-current" aria-current="page"/g, "");
       if (!is404) sidebar = sidebar.replace(`href="${prefix}#products"`, `href="${prefix}#products" class="is-current" aria-current="page"`);
       sidebar = sidebar.replace('<aside class="sidebar"', '<aside class="sidebar" data-tcs-static-sidebar');
-      html = html.replace(sidebarMarker, sidebar);
+      const menuControls = '<button id="tcs-menu-toggle" class="tcs-menu-toggle" type="button" aria-label="Buka navigasi" aria-expanded="false" aria-controls="tcs-sidebar"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="5" cy="12" r="1.55" fill="currentColor"/><circle cx="12" cy="12" r="1.55" fill="currentColor"/><circle cx="19" cy="12" r="1.55" fill="currentColor"/></svg></button>\\n<button id="tcs-menu-backdrop" class="tcs-menu-backdrop" type="button" aria-label="Tutup navigasi" hidden></button>\\n';
+      html = html.replace(sidebarMarker, menuControls + sidebar);
       sidebarCount += 1;
     }
 
-    if (!html.includes("fonts.googleapis.com/css2?family=IBM+Plex+Mono")) {
+    if (!html.includes("fonts.googleapis.com/css2?family=Cormorant+Garamond")) {
       if (!/<\/head>/i.test(html)) throw new Error(`Tag </head> tidak ditemukan pada ${relative}`);
       html = html.replace(/<\/head>/i, `  ${fontLinks}\n</head>`);
     }
+    const officialStyles = '<link rel="stylesheet" href="/assets/css/official/tcs-site.css">\\n<link rel="stylesheet" href="/assets/css/official/tcs-paper-treatment.css">\\n<link rel="stylesheet" href="/assets/css/official/information-adapter.css">';
+    if (!html.includes('href="/assets/css/official/tcs-site.css"')) {
+      if (!/<\\/head>/i.test(html)) throw new Error(`Tag </head> tidak ditemukan saat memasang desain Official pada ${relative}`);
+      html = html.replace(/<\\/head>/i, `  ${officialStyles}\\n</head>`);
+    }
+    html = html.replace(/<meta name="theme-color" content="[^"]*">/i, '<meta name="theme-color" content="#eee6d8">');
+
     if (!html.includes('href="/assets/css/sidebar-shell.css"') && !html.includes('href="assets/css/sidebar-shell.css"')) {
       if (!/<\/head>/i.test(html)) throw new Error(`Tag </head> tidak ditemukan pada ${relative}`);
       html = html.replace(/<\/head>/i, '  <link rel="stylesheet" href="/assets/css/sidebar-shell.css">\n</head>');
@@ -151,41 +163,7 @@ function injectSharedInterface() {
   console.log(`SIDEBAR & LOADER LULUS: sidebar dan loader identik dipasang pada ${sidebarCount} halaman; loader hadir pada ${loaderCount} halaman.`);
 }
 
-function injectGlobalSpaceBackground() {
-  const pages = [
-    path.join(output, "index.html"),
-    path.join(output, "404.html"),
-    ...collectProductHtml(path.join(output, "products"))
-  ];
-  const stylesheet = '<link rel="stylesheet" href="/assets/css/space-background.css" data-tcs-space-background-style>';
-  const script = '<script type="module" src="/assets/js/features/space-background.js" data-tcs-space-background-script></script>';
-  let injected = 0;
-
-  for (const file of pages) {
-    let html = readFileSync(file, "utf8");
-    if (!html.includes("data-tcs-space-background-style")) {
-      if (!/<\/head>/i.test(html)) throw new Error(`Tag </head> tidak ditemukan pada ${path.relative(output, file)}`);
-      html = html.replace(/<\/head>/i, `  ${stylesheet}\n</head>`);
-    }
-    if (!html.includes("data-tcs-space-background-script")) {
-      if (!/<\/body>/i.test(html)) throw new Error(`Tag </body> tidak ditemukan pada ${path.relative(output, file)}`);
-      html = html.replace(/<\/body>/i, `  ${script}\n</body>`);
-    }
-    if (!html.includes("data-tcs-space-background-style") || !html.includes("data-tcs-space-background-script")) {
-      throw new Error(`Background global gagal dipasang pada ${path.relative(output, file)}`);
-    }
-    writeFileSync(file, html, "utf8");
-    injected += 1;
-  }
-
-  if (pages.length !== injected || injected < 3) {
-    throw new Error(`Pemasangan background global tidak lengkap: ${injected} dari ${pages.length} halaman.`);
-  }
-  console.log(`BACKGROUND GLOBAL LULUS: efek bintang dan meteor dipasang pada ${injected} halaman HTML.`);
-}
-
 injectSharedInterface();
-injectGlobalSpaceBackground();
 
 const forbiddenPaths = ["README.md", "package.json", "docs", "scripts", ".github", "netlify.toml"];
 const leaked = forbiddenPaths.filter(file => existsSync(path.join(output, file)));
@@ -205,5 +183,5 @@ const htmlPages = [
 const htmlCount = htmlPages.filter(file => existsSync(path.join(output, file))).length;
 
 console.log(`BUILD LULUS: ${requiredOutput.length} path wajib tersedia; ${htmlCount} halaman HTML utama terbit.`);
-console.log("Isi deploy: assets, components, data, products, index, 404, favicon, robots, sitemap, analytics, dan headers.");
+console.log("Isi deploy: aset desain Official, assets, components, data, products, index, 404, favicon, robots, sitemap, analytics, dan headers.");
 console.log("Dokumentasi, bank pertanyaan, script validasi, dan konfigurasi build tidak ikut diterbitkan.");
