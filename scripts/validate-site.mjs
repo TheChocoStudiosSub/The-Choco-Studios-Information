@@ -138,18 +138,19 @@ const spaceBackgroundScript = read("assets/js/features/space-background.js");
 const spaceBackgroundStyles = read("assets/css/space-background.css");
 const buildSource = read("scripts/build-site.mjs");
 if (
-  spaceBackgroundScript.includes("METEOR_OPACITY_KEYFRAMES=[0,.10,.15,.20,.40,.20,.15,.10,0]") &&
+  existsSync(path.join(root, "assets/js/features/space-background.js")) &&
+  existsSync(path.join(root, "assets/css/space-background.css")) &&
   spaceBackgroundScript.includes("document.body.append(starsCanvas,meteorCanvas)") &&
-  spaceBackgroundScript.includes("prefers-reduced-motion") &&
   spaceBackgroundStyles.includes("body > .tcs-space-canvas") &&
   spaceBackgroundStyles.includes("body > .tcs-starfield-canvas") &&
-  buildSource.includes("data-tcs-space-background-style") &&
-  buildSource.includes("data-tcs-space-background-script") &&
-  buildSource.includes("collectProductHtml")
+  buildSource.includes("collectProductHtml") &&
+  !buildSource.includes("data-tcs-space-background-style") &&
+  !buildSource.includes("data-tcs-space-background-script") &&
+  !buildSource.includes("injectGlobalSpaceBackground();")
 ) {
-  pass("Background global full-screen, kurva opacity meteor, reduced-motion, dan pemasangan semua halaman diperiksa");
+  pass("Aset efek background tetap tersedia sebagai arsip, tetapi tidak disuntikkan ke halaman produksi");
 } else {
-  fail("Konfigurasi background global atau pemasangan otomatis ke halaman terbit belum lengkap");
+  fail("Efek background ornamental masih terpasang pada build produksi atau aset sumber wajib hilang");
 }
 
 const index = read("index.html");
