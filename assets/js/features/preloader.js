@@ -6,7 +6,7 @@
   const progress = loader.querySelector("[data-intro-progress]");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const dynamicPage = Boolean(document.getElementById("site-main"));
-  let siteReady = !dynamicPage;
+  let siteReady = !dynamicPage || document.documentElement.dataset.tcsSiteReady === "true";
   let loadReady = document.readyState === "complete";
   let started = false;
   let finished = false;
