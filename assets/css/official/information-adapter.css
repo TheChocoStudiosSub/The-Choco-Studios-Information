@@ -95,3 +95,8 @@ body.product-detail-page .detail-footer,body.error-page .error-footer{background
 @media(prefers-reduced-motion:reduce){
   #site-main>.view-panel.is-entered{animation:none!important}
 }
+
+/* Remove the former dark-gold panel corner treatment; the official paper system is clean and editorial. */
+#site-main>[data-panel]::before,
+#site-main>[data-panel]::after{display:none!important;content:none!important}
+#site-main>[data-panel]:focus-visible{outline:2px solid rgba(146,90,66,.4);outline-offset:-4px}
