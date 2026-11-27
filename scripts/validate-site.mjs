@@ -689,7 +689,7 @@ if (!header.includes('class="sidebar-brand"') ||
   fail("Header dan footer harus menggunakan logo PNG resmi TCS");
 }
 if (!header.includes('src="assets/images/the-choco-studios-logo.png"') ||
-    !loaderComponent.includes("THE CHOCO") ||
+    !loaderComponent.includes('id="tcs-intro-loader"') ||
     !index.includes("TCS_LUXURY_LOADER") ||
     !officialFavicon.includes('href="/assets/images/the-choco-studios-logo.png"') ||
     !custom404.includes("TCS_SIDEBAR") ||
