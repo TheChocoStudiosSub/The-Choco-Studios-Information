@@ -16,7 +16,7 @@
   if (document.getElementById("tcs-community-widget")) return;
 
   const palettes = {
-    tcs: { bg: "#11100e", panel: "#191713", text: "#f4eee4", muted: "#aaa08f", accent: "#d8bd8d", accentText: "#17130d", border: "rgba(216,189,141,.22)" },
+    tcs: { bg: "#eee6d8", panel: "#fbfaf6", text: "#302921", muted: "#75695d", accent: "#925a42", accentText: "#fffaf6", border: "rgba(146,90,66,.22)" },
     helpcenter: { bg: "#11100e", panel: "#191713", text: "#f4eee4", muted: "#aaa08f", accent: "#d8bd8d", accentText: "#17130d", border: "rgba(216,189,141,.22)" },
     sheeblink: { bg: "#fffaf7", panel: "#fffdfb", text: "#332824", muted: "#856f68", accent: "#c28e91", accentText: "#fff", border: "#ead8d2" },
     vornika: { bg: "#111018", panel: "#1a1825", text: "#f4f0ff", muted: "#aaa4ba", accent: "#b9a3ff", accentText: "#171323", border: "rgba(185,163,255,.25)" },

@@ -82,10 +82,14 @@ const requiredFiles = [
   "assets/css/sidebar-shell.css",
   "assets/css/product-pages.css",
   "assets/css/responsive.css",
+  "assets/css/official/tcs-site.css",
+  "assets/css/official/tcs-paper-treatment.css",
+  "assets/css/official/information-adapter.css",
   "assets/js/diagnostics.js",
   "assets/js/features/space-background.js",
   "assets/js/features/panel-navigation.js",
   "assets/js/features/preloader.js",
+  "assets/js/features/tcs-shell.js",
   "assets/js/main.js",
   "assets/js/menu.js",
   "assets/js/features/catalog.js",
@@ -138,18 +142,17 @@ const spaceBackgroundScript = read("assets/js/features/space-background.js");
 const spaceBackgroundStyles = read("assets/css/space-background.css");
 const buildSource = read("scripts/build-site.mjs");
 if (
-  spaceBackgroundScript.includes("METEOR_OPACITY_KEYFRAMES=[0,.10,.15,.20,.40,.20,.15,.10,0]") &&
   spaceBackgroundScript.includes("document.body.append(starsCanvas,meteorCanvas)") &&
-  spaceBackgroundScript.includes("prefers-reduced-motion") &&
   spaceBackgroundStyles.includes("body > .tcs-space-canvas") &&
   spaceBackgroundStyles.includes("body > .tcs-starfield-canvas") &&
-  buildSource.includes("data-tcs-space-background-style") &&
-  buildSource.includes("data-tcs-space-background-script") &&
-  buildSource.includes("collectProductHtml")
+  buildSource.includes("collectProductHtml") &&
+  !buildSource.includes("data-tcs-space-background-style") &&
+  !buildSource.includes("data-tcs-space-background-script") &&
+  !buildSource.includes("injectGlobalSpaceBackground();")
 ) {
-  pass("Background global full-screen, kurva opacity meteor, reduced-motion, dan pemasangan semua halaman diperiksa");
+  pass("Aset background lama tetap tersedia sebagai arsip dan tidak dipasang pada desain paper Official");
 } else {
-  fail("Konfigurasi background global atau pemasangan otomatis ke halaman terbit belum lengkap");
+  fail("Efek background bintang/meteor masih dipasang pada halaman produksi");
 }
 
 const index = read("index.html");
@@ -270,14 +273,14 @@ for (const document of productPages) {
 }
 if (!/id="site-main"/.test(index)) fail("Landmark konten utama #site-main tidak ditemukan");
 if (!/class="skip-link"\s+href="#site-main"/.test(index)) fail("Tautan lewati ke konten utama tidak ditemukan");
-if (!header.includes('<aside class="sidebar"') ||
+if (!header.includes('<aside id="tcs-sidebar" class="sidebar"') ||
     !header.includes('class="side-nav"') ||
     !header.includes('data-panel-link="home"') ||
     !header.includes('class="sidebar-brand"') ||
-    !header.includes('aria-label="Home"') ||
-    !header.includes('aria-label="Overview"') ||
-    !header.includes('aria-label="Kontak"')) {
-  fail("Sidebar harus mengikuti struktur Official dan memberi nama aksesibel untuk navigasi ikon");
+    !header.includes('<span>Home</span>') ||
+    !header.includes('<span>Overview</span>') ||
+    !header.includes('<span>Kontak</span>')) {
+  fail("Sidebar Information harus memakai shell resmi dengan label navigasi yang jelas");
 }
 if (!/import\s*\{\s*initPanelNavigation\s*\}\s*from\s*"\.\/features\/panel-navigation\.js"/.test(main) ||
     !/initPanelNavigation\(\)/.test(main)) {
@@ -289,7 +292,7 @@ if (!panelNavigation.includes('document.querySelectorAll("#site-main > [data-pan
     !panelNavigation.includes('inert')) {
   fail("Navigasi panel harus mengelola state aktif, hash, fokus, dan inert");
 }
-if (!index.includes('id="home" class="view-panel') ||
+if (!index.includes('id="home" class="hero view-panel') ||
     !index.includes('id="overview" class="view-panel') ||
     !index.includes('id="contact" class="view-panel') ||
     !index.includes('<div data-component="contact"></div>') ||
@@ -306,7 +309,7 @@ if (/renderNavigation\(navigation\)/.test(main) || /initActiveNavigation\(\)/.te
 }
 if (!buildSource.includes("function injectSharedInterface()") ||
     !buildSource.includes("injectSharedInterface();") ||
-    !buildSource.includes("SIDEBAR & LOADER LULUS")) {
+    !buildSource.includes("OFFICIAL SHELL LULUS")) {
   fail("Build produksi belum memastikan sidebar dan loader bersama terpasang pada setiap halaman");
 }
 if (index.indexOf('src="assets/js/diagnostics.js"') < 0 ||
@@ -346,24 +349,37 @@ if (!main.includes("window.TCSDiagnostics") ||
 }
 if (failures.length === 0) pass("Pelaporan detail error client, HTTP, dan koneksi dikonfigurasi");
 
-if (!sidebarStyles.includes("--tcs-sidebar-width:258px") ||
-    !sidebarStyles.includes("@media(max-width:1000px)") ||
-    !sidebarStyles.includes("@media(max-width:650px)") ||
-    !sidebarStyles.includes("#site-main>[data-panel].is-active") ||
-    !sidebarStyles.includes(".side-nav a.is-current") ||
-    !sidebarStyles.includes(".tcs-ornament--orbital") ||
-    !sidebarStyles.includes("tcs-constellation-twinkle") ||
-    !panelNavigation.includes("mountPanelOrnaments")) {
-  fail("Sidebar, panel responsif, dan ornamen animasi Official belum lengkap");
+const officialStyles = read("assets/css/official/tcs-site.css");
+const officialPaper = read("assets/css/official/tcs-paper-treatment.css");
+const informationAdapter = read("assets/css/official/information-adapter.css");
+const shellController = read("assets/js/features/tcs-shell.js");
+if (!officialStyles.includes("--sidebar-width: 246px") ||
+    !officialStyles.includes(".tcs-menu-toggle") ||
+    !officialStyles.includes("@media (max-width: 850px)") ||
+    !officialPaper.includes("--paper:#eee6d8") ||
+    !officialPaper.includes("--accent:#925a42") ||
+    !informationAdapter.includes("#site-header{display:contents}") ||
+    !informationAdapter.includes("#site-main>.hero.view-panel.is-active") ||
+    !shellController.includes("#tcs-menu-toggle") ||
+    !shellController.includes("#tcs-menu-backdrop") ||
+    panelNavigation.includes("mountPanelOrnaments")) {
+  fail("Visual system Information belum selaras dengan tema paper, navigasi, dan responsive shell Official");
+}
+if (!buildSource.includes("data-tcs-shell") ||
+    !buildSource.includes("assets/css/official/tcs-site.css") ||
+    !buildSource.includes("OFFICIAL SHELL LULUS")) {
+  fail("Build belum memasang desain Official dan controller navigasi mobile pada semua halaman");
 }
 if (!panelNavigation.includes('event.key') && !panelNavigation.includes('location.hash')) {
   fail("Pengendali navigasi panel tidak menangani navigasi hash");
 }
-if (!loaderComponent.includes('id="luxury-loader"') ||
-    !loaderComponent.includes("luxury-loader-orbit") ||
-    !sidebarStyles.includes(".luxury-loader.is-dismissed") ||
-    !sidebarStyles.includes("@media(prefers-reduced-motion:reduce)")) {
-  fail("Layar pembuka Official atau dukungan reduced-motion belum terpasang");
+const introPreloader = read("assets/js/features/preloader.js");
+if (!loaderComponent.includes('id="tcs-intro-loader"') ||
+    !loaderComponent.includes("tcs-intro-loader__counter") ||
+    !introPreloader.includes("tcs-intro-loader") ||
+    !introPreloader.includes("prefers-reduced-motion") ||
+    !introPreloader.includes('dataset.tcsSiteReady')) {
+  fail("Layar pembuka paper-style Official atau penanganan reduced-motion/readiness belum lengkap");
 }
 if (failures.length === 0) pass("Metadata, landmark aksesibilitas, dan kontrol menu diperiksa");
 
@@ -673,7 +689,7 @@ if (!header.includes('class="sidebar-brand"') ||
   fail("Header dan footer harus menggunakan logo PNG resmi TCS");
 }
 if (!header.includes('src="assets/images/the-choco-studios-logo.png"') ||
-    !loaderComponent.includes("THE CHOCO") ||
+    !loaderComponent.includes('id="tcs-intro-loader"') ||
     !index.includes("TCS_LUXURY_LOADER") ||
     !officialFavicon.includes('href="/assets/images/the-choco-studios-logo.png"') ||
     !custom404.includes("TCS_SIDEBAR") ||
